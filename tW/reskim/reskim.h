@@ -17,6 +17,8 @@
 
 #include <iostream>
 
+#include "RoccoR.cc"
+
 class reskim {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
@@ -25,7 +27,7 @@ public :
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types
-   ULong_t          ev_event;
+   ULong_t         ev_event;
    UInt_t          ev_run;
    UInt_t          ev_luminosityBlock;
    UInt_t          ev_time;
@@ -407,6 +409,7 @@ public :
    vector<float> *mu_gt_ptError;
    vector<float> *mu_gt_etaError;
    vector<float> *mu_gt_phiError;
+   vector<float> *mu_rochester_sf;
 //Jet
    UInt_t jet_n;
 
@@ -419,6 +422,9 @@ public :
    vector<float> *jet_phi ;
    vector<float> *jet_energy ;
    vector<float> *jet_CSVv2 ;
+   vector<float> *jet_BtagSF_loose ;
+   vector<float> *jet_BtagSF_medium ;
+   vector<float> *jet_BtagSF_tight ;
 
    vector<bool> *jet_isJetIDLoose ;
    vector<bool> *jet_isJetIDTight ;
@@ -795,6 +801,7 @@ public :
    TBranch *b_mu_gt_ptError;
    TBranch *b_mu_gt_etaError;
    TBranch *b_mu_gt_phiError;
+   TBranch *b_mu_rochester_sf;
 
    TBranch *b_jet_n;
    TBranch *b_jet_px;
@@ -813,6 +820,9 @@ public :
    TBranch *b_jet_CSVv2;
    TBranch *b_jet_isJetIDLoose ;
    TBranch *b_jet_isJetIDTight ;
+   TBranch *b_jet_BtagSF_loose ;
+   TBranch *b_jet_BtagSF_medium ;
+   TBranch *b_jet_BtagSF_tight ;
 
    bool isData  ;
    bool isDY ;
@@ -828,6 +838,8 @@ public :
    float goldenLumi ;
    float silverLumi ;
    float combinedLumi ;
+
+   RoccoR *rc_;
 
    reskim(TTree *tree=0, bool isData_in=false, bool isDY_in=false, bool isTTbar_in=false, bool isWW_in=false, ULong_t No_print_in = 0, int triggerVersion_in = 0, UInt_t runNo1_in=0, UInt_t runNo2_in=999999);
    virtual ~reskim();
@@ -856,6 +868,7 @@ reskim::reskim(TTree *tree, bool isData_in, bool isDY_in, bool isTTbar_in, bool 
    runNo2 = runNo2_in ;
    No_print = No_print_in ;
    triggerVersion = triggerVersion_in ;
+   rc_  = new RoccoR("rcdata.2016.v3");
    Init(tree);
 }
 
@@ -1213,6 +1226,7 @@ void reskim::Init(TTree *tree)
    mu_gt_ptError = 0;
    mu_gt_etaError = 0;
    mu_gt_phiError = 0;
+   mu_rochester_sf = 0;
 
    jet_n = 0 ;
    jet_px = 0 ;
@@ -1227,6 +1241,10 @@ void reskim::Init(TTree *tree)
    jet_CSVv2 = 0 ;
    jet_isJetIDTight = 0 ;
    jet_isJetIDLoose = 0 ;
+
+   jet_BtagSF_loose = 0 ;
+   jet_BtagSF_medium = 0 ;
+   jet_BtagSF_tight = 0 ;
  
    // Set branch addresses and branch pointers
    if (!tree) return;
@@ -1466,6 +1484,11 @@ void reskim::Init(TTree *tree)
    fChain->SetBranchAddress("mu_gt_ptError", &mu_gt_ptError, &b_mu_gt_ptError);
    fChain->SetBranchAddress("mu_gt_etaError", &mu_gt_etaError, &b_mu_gt_etaError);
    fChain->SetBranchAddress("mu_gt_phiError", &mu_gt_phiError, &b_mu_gt_phiError);
+
+   if(!isData)
+   {
+      fChain->SetBranchAddress("mu_rochester_sf", &mu_rochester_sf, &b_mu_rochester_sf);
+   }
   
    if(!isData)
    {
@@ -1622,6 +1645,12 @@ void reskim::Init(TTree *tree)
    fChain->SetBranchAddress("jet_CSVv2", &jet_CSVv2, &b_jet_CSVv2) ;
    fChain->SetBranchAddress("jet_isJetIDLoose", &jet_isJetIDLoose, &b_jet_isJetIDLoose) ;
    fChain->SetBranchAddress("jet_isJetIDTight", &jet_isJetIDTight, &b_jet_isJetIDTight) ;
+   if(!isData)
+   {
+      fChain->SetBranchAddress("jet_BtagSF_loose", &jet_BtagSF_loose, &b_jet_BtagSF_loose);
+      fChain->SetBranchAddress("jet_BtagSF_medium", &jet_BtagSF_medium, &b_jet_BtagSF_medium);
+      fChain->SetBranchAddress("jet_BtagSF_tight", &jet_BtagSF_tight, &b_jet_BtagSF_tight);
+   }
    
    Notify();
 }
