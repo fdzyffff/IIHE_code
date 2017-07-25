@@ -92,7 +92,7 @@ struct electron_candidate{
   }
   void check_pass()
   {
-  	if(fabs(eta) < 2.5 && (fabs(eta)<=1.4442 || fabs(eta)>=1.566) && pt>20 && isTight)
+  	if(fabs(gsf_eta) < 2.4 && (fabs(eta)<=1.4442 || fabs(eta)>=1.566) && pt>20 && isTight)
   	{
 		if ((region == 1 && fabs(dxy_firstPVtx) < 0.05) || (region == 3 && fabs(dxy_firstPVtx) < 0.1))
 			if ((region == 1 && fabs(dz_firstPVtx) < 0.1) || (region == 3 && fabs(dz_firstPVtx) < 0.2))
@@ -214,6 +214,9 @@ struct jet_candidate{
   float eta    ;
   float phi    ;
   float jet_CSVv2;
+  float BtagSF_loose;
+  float BtagSF_medium;
+  float BtagSF_tight;
   int   typ ;
 
   
@@ -232,12 +235,15 @@ struct jet_candidate{
   	pt = pt_in;
   	eta = eta_in;
   	phi = phi_in;
-        E = energy_in;
-        isLoose = 0;
+    E = energy_in;
+    isLoose = 0;
   	passed = 0;
   	isbjet = 0;
-        jet_CSVv2 = 0;
-        p4.SetPtEtaPhiE(pt, eta, phi, E);
+    jet_CSVv2 = 0;
+    BtagSF_loose = 0;
+    BtagSF_medium = 0;
+    BtagSF_tight = 0;
+    p4.SetPtEtaPhiE(pt, eta, phi, E);
   }
   void check_pass()
   {
@@ -357,6 +363,9 @@ void reskim::Loop(TString fname){
    float w_PU_EF = 0;
    float w_PU_GH = 0;
    float w_top = 0;
+   float w_Btag_loose = 0;
+   float w_Btag_medium = 0;
+   float w_Btag_tight = 0;
    
    int isPrint = 0;
    float M_ll = 0;
@@ -371,6 +380,9 @@ void reskim::Loop(TString fname){
    int pass_trigger_EE = 0;
    int pass_trigger_EMu = 0;
    int pass_trigger_MuMu = 0;
+   int pass_trigger_EE_step2 = 0;
+   int pass_trigger_EMu_step2 = 0;
+   int pass_trigger_MuMu_step2 = 0;
    int pass_global = 0;
    int pass_MET_filters = 0;
    int pass_step0=0;
@@ -437,6 +449,9 @@ void reskim::Loop(TString fname){
    vector <float> jet_phi_out ;
    vector <float> jet_CSVv2_out ;
    vector <int> jet_IDLoose_out ;
+   vector <int> jet_BtagSF_loose_out ;
+   vector <int> jet_BtagSF_medium_out ;
+   vector <int> jet_BtagSF_tight_out ;
 
    tree_out.Branch("ev_event"    , &ev_event    , "ev_event/l"  ) ;
    tree_out.Branch("ev_run"      , &ev_run      , "ev_run/i"    ) ;
@@ -449,11 +464,15 @@ void reskim::Loop(TString fname){
    tree_out.Branch("w_PU_up"  , &w_PU_up_out    , "w_PU_up/F"   ) ;
    tree_out.Branch("w_PU_down", &w_PU_down_out  , "w_PU_down/F" ) ;
    tree_out.Branch("w_PU"     , &w_PU_out       , "w_PU/F"      ) ;
-   tree_out.Branch("w_PU_BCD"    , &w_PU_BCD      , "w_PU_BCD/F"      ) ;
-   tree_out.Branch("w_PU_EF"     , &w_PU_EF       , "w_PU_EF/F"      ) ;
-   tree_out.Branch("w_PU_GH"     , &w_PU_GH       , "w_PU_GH/F"      ) ;
+   tree_out.Branch("w_PU_BCD" , &w_PU_BCD       , "w_PU_BCD/F"  ) ;
+   tree_out.Branch("w_PU_EF"  , &w_PU_EF        , "w_PU_EF/F"   ) ;
+   tree_out.Branch("w_PU_GH"  , &w_PU_GH        , "w_PU_GH/F"   ) ;
    tree_out.Branch("w_top"    , &w_top          , "w_top/F"     ) ;
-   
+
+   tree_out.Branch("w_Btag_loose"	  , &w_Btag_loose			, "w_Btag_loose/F"    ) ;
+   tree_out.Branch("w_Btag_medium"	  , &w_Btag_medium			, "w_Btag_medium/F"    ) ;
+   tree_out.Branch("w_Btag_tight"	  , &w_Btag_tight			, "w_Btag_tight/F"    ) ;
+
    tree_out.Branch("M_ll"		,&M_ll			,"M_ll/F"		);
    tree_out.Branch("Pt_ll"		,&Pt_ll			,"Pt_ll/F"		);
    tree_out.Branch("MET_Et"		,&MET_Et		,"MET_Et/F"		);
@@ -521,8 +540,11 @@ void reskim::Loop(TString fname){
    tree_out.Branch("jet_pz"	,&jet_pz_out) ;
    tree_out.Branch("jet_eta"	,&jet_eta_out) ;
    tree_out.Branch("jet_phi"	,&jet_phi_out) ;
-   tree_out.Branch("jet_IDLoose"	,&jet_IDLoose_out) ;
+   tree_out.Branch("jet_IDLoose",&jet_IDLoose_out) ;
    tree_out.Branch("jet_CSVv2"	,&jet_CSVv2_out) ;
+   tree_out.Branch("jet_BtagSF_loose"	,&jet_BtagSF_loose_out) ;
+   tree_out.Branch("jet_BtagSF_medium"	,&jet_BtagSF_medium_out) ;
+   tree_out.Branch("jet_BtagSF_tight"	,&jet_BtagSF_tight_out) ;
 
    tree_out.Branch("pass_global"	,&pass_global	,"pass_global/I") ;
    tree_out.Branch("pass_MET_filters"	,&pass_MET_filters	,"pass_MET_filters/I") ;
@@ -540,6 +562,9 @@ void reskim::Loop(TString fname){
    tree_out.Branch("pass_trigger_EE"		,&pass_trigger_EE	,"pass_trigger_EE/I") ;
    tree_out.Branch("pass_trigger_EMu"		,&pass_trigger_EMu	,"pass_trigger_EMu/I") ;
    tree_out.Branch("pass_trigger_MuMu"		,&pass_trigger_MuMu	,"pass_trigger_MuMu/I") ;
+   tree_out.Branch("pass_trigger_EE_step2"	,&pass_trigger_EE_step2		,"pass_trigger_EE_step2/I") ;
+   tree_out.Branch("pass_trigger_EMu_step2"	,&pass_trigger_EMu_step2	,"pass_trigger_EMu_step2/I") ;
+   tree_out.Branch("pass_trigger_MuMu_step2"	,&pass_trigger_MuMu_step2	,"pass_trigger_MuMu_step2/I") ;
 
    tree_out.Branch("trig_DE33_fire"		,&trig_DE33_fire	,"trig_DE33_fire/I");
    tree_out.Branch("trig_Mu30_TkMu11_fire"	,&trig_Mu30_TkMu11_fire	,"trig_Mu30_TkMu11_fire/I");
@@ -597,14 +622,17 @@ void reskim::Loop(TString fname){
 	isMuMu = 0;
 	n_jet = 0;
 	n_bjet = 0;
-        isPrint = false;
+    	isPrint = false;
 
-        trig_DE33_fire = false;
-        pass_trigger_EE = 0;
-        pass_trigger_EMu = 0;
-        pass_trigger_MuMu = 0;
+    	trig_DE33_fire = false;
+    	pass_trigger_EE = 0;
+    	pass_trigger_EMu = 0;
+    	pass_trigger_MuMu = 0;
+    	pass_trigger_EE_step2 = 0;
+    	pass_trigger_EMu_step2 = 0;
+    	pass_trigger_MuMu_step2 = 0;
 	pass_global = 1;
-        pass_MET_filters = 0;
+   	 pass_MET_filters = 0;
 	pass_step0=0;
 	pass_step1=0;
 	pass_step2=0;
@@ -669,6 +697,9 @@ void reskim::Loop(TString fname){
         vector <float>().swap(jet_phi_out) ;
         vector <float>().swap(jet_CSVv2_out) ;
         vector <int>().swap(jet_IDLoose_out) ;
+        vector <int>().swap(jet_BtagSF_loose_out) ;
+        vector <int>().swap(jet_BtagSF_medium_out) ;
+        vector <int>().swap(jet_BtagSF_tight_out) ;
 
       displayProgress(jentry, nentries) ;
       
@@ -748,10 +779,10 @@ void reskim::Loop(TString fname){
         PU_true_out = -1 ;
         
         // Set weights to 1
-        w_PU_up_out     = 1.0 ;
-        w_PU_down_out   = 1.0 ;
-        w_PU_out        = 1.0 ;
-        w_PU_BCD        = 1.0 ;
+        w_PU_up_out    = 1.0 ;
+        w_PU_down_out  = 1.0 ;
+        w_PU_out       = 1.0 ;
+        w_PU_BCD       = 1.0 ;
         w_PU_EF        = 1.0 ;
         w_PU_GH        = 1.0 ;
       }
@@ -772,10 +803,19 @@ void reskim::Loop(TString fname){
       for(unsigned int iMu=0 ; iMu<mu_gt_pt->size() ; ++iMu){
         if(!int(mu_isGlobalMuon->at(iMu)))continue;
         float pt_old = mu_gt_pt->at(iMu) ;
-        float pt     = mu_gt_pt->at(iMu) ;
         float eta    = mu_gt_eta->at(iMu) ;
         float phi    = mu_gt_phi->at(iMu) ;
         int   charge = mu_gt_charge->at(iMu) ;
+
+        float pt;
+        if(isData)
+        {
+        	pt = pt_old * rc_->kScaleDT(charge, pt_old, eta, phi, 0, 0);
+        }
+        else
+        {
+        	pt = pt_old * mu_rochester_sf->at(iMu);
+        }
         muon_candidate* mu = new muon_candidate(pt_old, pt, eta, phi, charge) ;
         mu->p4_2nd.SetPtEtaPhiM(pt, eta, phi, m_mu); 
 //        mu->muon_isBad = mu_isBad->at(iMu) ;
@@ -793,6 +833,7 @@ void reskim::Loop(TString fname){
         {
           cout<<"################ Muon #################"<<endl;
           cout<<"mu pt :"<<mu->pt<<endl;
+          cout<<"mu pt (without rochester correction):"<<mu->pt_old<<endl;
           cout<<"mu eta :"<<mu->eta<<endl;
           cout<<"mu phi :"<<mu->phi<<endl;
           cout<<"mu E :"<<mu->p4.E()<<endl;
@@ -814,13 +855,6 @@ void reskim::Loop(TString fname){
 
         electron_candidate* el = new electron_candidate(pt, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
         el->p4_2nd.SetPtEtaPhiM(gsf_pt->at(iEl), eta, phi, m_el); 
-        //cout<<"before corr : "<<el->Et<<"region :"<<el->region<<endl;
-        //if(isData && el->region==1)*el=electron_candidate(Et*1.0012, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
-        //if(isData && el->region==3)*el=electron_candidate(Et*1.0089, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
-        //cout<<"after corr : "<<el->Et<<"region :"<<el->region<<endl;
-        //if(false == isData && el->region==1)*el=electron_candidate(Et*Tr.Gaus(1,0.0123), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
-        //if(false == isData && el->region==3)*el=electron_candidate(Et*Tr.Gaus(1,0.0229), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
-        
 
         if(isData){
 //          el->pass_trigger = Ele27_trig_fire;
@@ -869,6 +903,18 @@ void reskim::Loop(TString fname){
         jet_candidate* jet = new jet_candidate(pt, eta, phi, energy) ;
         jet->isLoose = int(jet_isJetIDLoose->at(ijet));
         jet->jet_CSVv2 = jet_CSVv2->at(ijet);
+        if (isData)
+        {
+        	jet->BtagSF_loose = 1.0;
+        	jet->BtagSF_medium = 1.0;
+        	jet->BtagSF_tight = 1.0;
+        }
+        else
+        {
+        	jet->BtagSF_loose = jet_BtagSF_loose->at(ijet);
+        	jet->BtagSF_medium = jet_BtagSF_medium->at(ijet);
+        	jet->BtagSF_tight = jet_BtagSF_tight->at(ijet);
+        }
         jet->check_pass();
 
      	jets.push_back(jet);
@@ -939,7 +985,7 @@ void reskim::Loop(TString fname){
           cout<<"sub_leading_lep pt : "<<sub_leading_lep->pt<<endl;
           cout<<"Mass(lepton pair) : "<<M_ll<<endl;
         }
-      	if (leading_lep->pt >25 && M_ll>20 && leading_lep->charge!=sub_leading_lep->charge)
+      	if (leading_lep->pt >25 && M_ll>20)
       	{
       		leading_lep->isLeading = true;
                 if (pass_MET_filters)pass_step1 = true;
@@ -988,12 +1034,18 @@ void reskim::Loop(TString fname){
       //end check pass3
       n_jet = 0;
       n_bjet = 0;
+      w_Btag_loose = 1.0;
+      w_Btag_medium = 1.0;
+      w_Btag_tight = 1.0;
       for (unsigned ijet = 0; ijet<jets.size(); ijet++)
       { 
         jet_candidate *jet = jets.at(ijet);
         if (jet->passed && jet->p4.DeltaR(leading_lep->p4) > 0.4 && jet->p4.DeltaR(sub_leading_lep->p4) > 0.4)
         {       
                 n_jet++;
+                w_Btag_loose *= jet->BtagSF_loose;
+                w_Btag_medium *= jet->BtagSF_medium;
+                w_Btag_tight *= jet->BtagSF_tight;
         }
         if (jet->isbjet && jet->p4.DeltaR(leading_lep->p4) > 0.4 && jet->p4.DeltaR(sub_leading_lep->p4) > 0.4)
         {       
@@ -1071,6 +1123,9 @@ void reskim::Loop(TString fname){
       if (isEE && (trig_Ele23_Ele12_fire))pass_trigger_EE = true;
       if (isEMu && (trig_Mu8_Ele23_fire || trig_Mu23_Ele12_fire))pass_trigger_EMu = true;
       if (isMuMu && (trig_Mu17_Mu8_fire || trig_Mu17_TkMu8_fire))pass_trigger_MuMu = true;
+      if(pass_trigger_EE||trig_Ele27_fire)pass_trigger_EE_step2 = true;
+      if(pass_trigger_EMu||trig_Ele27_fire||trig_Mu24_fire||trig_TkMu24_fire)pass_trigger_EMu_step2 = true;
+      if(pass_trigger_MuMu||trig_Mu24_fire||trig_TkMu24_fire)pass_trigger_MuMu_step2 = true;
       //end trigger
       //start store info
       if (pass_step1)
@@ -1127,6 +1182,9 @@ void reskim::Loop(TString fname){
             jet_phi_out.push_back(jet->p4.Phi()) ;
             jet_IDLoose_out.push_back(jet->isLoose) ;
             jet_CSVv2_out.push_back(jet->jet_CSVv2) ;
+            jet_BtagSF_loose_out.push_back(jet->BtagSF_loose) ;
+            jet_BtagSF_medium_out.push_back(jet->BtagSF_medium) ;
+            jet_BtagSF_tight_out.push_back(jet->BtagSF_tight) ;
           }
         }
       }
