@@ -45,13 +45,14 @@ def map_fill_hist(event, sample_hist_dic, hist_dic, path):
 	isProbe_fire = False
 	fill_value = -999
 
-	if path == "name":
-		pass_cut = False
+	if "pvz" in path:
+		exec 'pass_cut = %s'%(hist_dic[path]["cut_str"])
 		if not pass_cut:return
-		isTag = False
-		isProbe = False
-		isProbe_fire = False
-		fill_value = -999
+		exec 'isTag = %s'%(hist_dic[path]["isTag"])
+		exec 'isProbe = %s'%(hist_dic[path]["isProbe"])
+		exec 'isProbe_fire = %s'%(hist_dic[path]["isProbe_fire"])
+		fill_value = getattr(event,'pv_z')[0]
+		#print fill_value
 	else:
 		exec 'pass_cut = %s'%(hist_dic[path]["cut_str"])
 		if not pass_cut:return
@@ -63,6 +64,11 @@ def map_fill_hist(event, sample_hist_dic, hist_dic, path):
 		sample_hist_dic[path]["h_denominator"].Fill(fill_value)
 		if isProbe_fire:
 			sample_hist_dic[path]["h_numerator"].Fill(fill_value)
+			if "lumi" in path:
+				print fill_value
+				print getattr(event,'ev_run')
+				print getattr(event,'ev_luminosityBlock')
+				print getattr(event,'ev_event')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 x_array_1 = array('f')
 n_index = 0
@@ -294,6 +300,29 @@ hist_dic={
 	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
+#DoubleEle33 vs lumi
+"DouEle33_lumi_1":{
+	"cut_str":"(0.0 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 1.4442)",
+	"isTag":"match_trigger(event,'trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_eta','trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle33_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_eta','trig_HLT_DoubleEle33_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle33_CaloIdL_MW_hltEle33CaloIdLMWPMS2Filter_eta','trig_HLT_DoubleEle33_CaloIdL_MW_hltEle33CaloIdLMWPMS2Filter_phi','t_eta','t_phi',0.1)",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_DoubleEle33_CaloIdL_MW_hltDiEle33CaloIdLMWPMS2UnseededFilter_eta','trig_HLT_DoubleEle33_CaloIdL_MW_hltDiEle33CaloIdLMWPMS2UnseededFilter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"DouEle33_lumi_1",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
+"DouEle33_lumi_2":{
+	"cut_str":"(1.566 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 2.5)",
+	"isTag":"match_trigger(event,'trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_eta','trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle33_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_eta','trig_HLT_DoubleEle33_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle33_CaloIdL_MW_hltEle33CaloIdLMWPMS2Filter_eta','trig_HLT_DoubleEle33_CaloIdL_MW_hltEle33CaloIdLMWPMS2Filter_phi','t_eta','t_phi',0.1)",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_DoubleEle33_CaloIdL_MW_hltDiEle33CaloIdLMWPMS2UnseededFilter_eta','trig_HLT_DoubleEle33_CaloIdL_MW_hltDiEle33CaloIdLMWPMS2UnseededFilter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"DouEle33_lumi_2",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
 #DoubleEle25 trigger eff
 "DouEle25Et_11":{
 	"cut_str":"(0.0 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 0.79)",
@@ -516,6 +545,29 @@ hist_dic={
 	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
+#DouEle25 vs lumi
+"DouEle25_lumi_1":{
+	"cut_str":"(0.0 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 1.4442)",
+	"isTag":"match_trigger(event,'trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_eta','trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle25_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_eta','trig_HLT_DoubleEle25_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle25_CaloIdL_MW_hltEle25CaloIdLMWPMS2Filter_eta','trig_HLT_DoubleEle25_CaloIdL_MW_hltEle25CaloIdLMWPMS2Filter_phi','t_eta','t_phi',0.1)",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_DoubleEle25_CaloIdL_MW_hltDiEle25CaloIdLMWPMS2UnseededFilter_eta','trig_HLT_DoubleEle25_CaloIdL_MW_hltDiEle25CaloIdLMWPMS2UnseededFilter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"DouEle25_lumi_1",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
+"DouEle25_lumi_2":{
+	"cut_str":"(1.566 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 2.5)",
+	"isTag":"match_trigger(event,'trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_eta','trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle25_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_eta','trig_HLT_DoubleEle25_CaloIdL_MW_hltEGL1SingleAndDoubleEGNonIsoOrWithEG26WithJetAndTauFilter_phi','t_eta','t_phi',0.1) and match_trigger(event,'trig_HLT_DoubleEle25_CaloIdL_MW_hltEle25CaloIdLMWPMS2Filter_eta','trig_HLT_DoubleEle25_CaloIdL_MW_hltEle25CaloIdLMWPMS2Filter_phi','t_eta','t_phi',0.1)",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_DoubleEle25_CaloIdL_MW_hltDiEle25CaloIdLMWPMS2UnseededFilter_eta','trig_HLT_DoubleEle25_CaloIdL_MW_hltDiEle25CaloIdLMWPMS2UnseededFilter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"DouEle25_lumi_2",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
 #DouEle25 given DiEle27CaloOnly vs pv_z
 "DouEle25_pvz_11":{
 	"cut_str":"(0.0 < abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 0.79)",
@@ -525,7 +577,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_z')",
 	"hist_name":"DouEle25_vs_pvz_11",
 	"use_array":False,
-	"hist_para":[100,x_array_1,0,10],
+	"hist_para":[60,x_array_1,-15,15],
 	"hist":{},
 	},
 "DouEle25_pvz_12":{
@@ -536,7 +588,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_z')",
 	"hist_name":"DouEle25_vs_pvz_12",
 	"use_array":False,
-	"hist_para":[100,x_array_1,0,10],
+	"hist_para":[60,x_array_1,-15,15],
 	"hist":{},
 	},
 "DouEle25_pvz_13":{
@@ -547,7 +599,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_z')",
 	"hist_name":"DouEle25_vs_pvz_13",
 	"use_array":False,
-	"hist_para":[100,x_array_1,0,10],
+	"hist_para":[60,x_array_1,-15,15],
 	"hist":{},
 	},
 "DouEle25_pvz_21":{
@@ -558,7 +610,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_z')",
 	"hist_name":"DouEle25_vs_pvz_21",
 	"use_array":False,
-	"hist_para":[100,x_array_1,0,10],
+	"hist_para":[60,x_array_1,-15,15],
 	"hist":{},
 	},
 "DouEle25_pvz_22":{
@@ -569,7 +621,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_z')",
 	"hist_name":"DouEle25_vs_pvz_22",
 	"use_array":False,
-	"hist_para":[100,x_array_1,0,10],
+	"hist_para":[60,x_array_1,-15,15],
 	"hist":{},
 	},
 "DouEle25_pvz_23":{
@@ -580,7 +632,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_z')",
 	"hist_name":"DouEle25_vs_pvz_23",
 	"use_array":False,
-	"hist_para":[100,x_array_1,0,10],
+	"hist_para":[60,x_array_1,-15,15],
 	"hist":{},
 	},
 #HLT_Ele32_WPTight
@@ -670,6 +722,29 @@ hist_dic={
 	"hist_name":"Ele32_pvn_2",
 	"use_array":False,
 	"hist_para":[100,x_array_1,0,100],
+	"hist":{},
+	},
+#Ele32_WPTight vs lumi
+"Ele32_lumi_1":{
+	"cut_str":"(0.0 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 1.4442)",
+	"isTag":"match_trigger(event,'trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_eta','trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_phi','t_eta','t_phi',0.1)",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_Ele32_WPTight_Gsf_hltEle32WPTightGsfTrackIsoFilter_eta','trig_HLT_Ele32_WPTight_Gsf_hltEle32WPTightGsfTrackIsoFilter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"Ele32_lumi_1",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
+"Ele32_lumi_2":{
+	"cut_str":"(1.566 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 2.5)",
+	"isTag":"match_trigger(event,'trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_eta','trig_HLT_Ele35_WPTight_Gsf_hltEle35noerWPTightGsfTrackIsoFilter_phi','t_eta','t_phi',0.1)",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_Ele32_WPTight_Gsf_hltEle32WPTightGsfTrackIsoFilter_eta','trig_HLT_Ele32_WPTight_Gsf_hltEle32WPTightGsfTrackIsoFilter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"Ele32_lumi_2",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
 	"hist":{},
 	},
 #Ele23_Ele12
@@ -990,7 +1065,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_n')",
 	"hist_name":"Ele23_Ele12_Leg1_pvn_11",
 	"use_array":False,
-	"hist_para":[80,x_array_1,20,40],
+	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
 "Ele23_Ele12_Leg1_pvn_12":{
@@ -1001,7 +1076,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_n')",
 	"hist_name":"Ele23_Ele12_Leg1_pvn_12",
 	"use_array":False,
-	"hist_para":[80,x_array_1,20,40],
+	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
 "Ele23_Ele12_Leg1_pvn_13":{
@@ -1012,7 +1087,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_n')",
 	"hist_name":"Ele23_Ele12_Leg1_pvn_13",
 	"use_array":False,
-	"hist_para":[80,x_array_1,20,40],
+	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
 "Ele23_Ele12_Leg1_pvn_21":{
@@ -1023,7 +1098,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_n')",
 	"hist_name":"Ele23_Ele12_Leg1_pvn_21",
 	"use_array":False,
-	"hist_para":[80,x_array_1,20,40],
+	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
 "Ele23_Ele12_Leg1_pvn_22":{
@@ -1034,7 +1109,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_n')",
 	"hist_name":"Ele23_Ele12_Leg1_pvn_22",
 	"use_array":False,
-	"hist_para":[80,x_array_1,20,40],
+	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
 "Ele23_Ele12_Leg1_pvn_23":{
@@ -1045,7 +1120,7 @@ hist_dic={
 	"fill_value":"getattr(event,'pv_n')",
 	"hist_name":"Ele23_Ele12_Leg1_pvn_23",
 	"use_array":False,
-	"hist_para":[80,x_array_1,20,40],
+	"hist_para":[100,x_array_1,0,100],
 	"hist":{},
 	},
 "Ele23_Ele12_Leg2_pvn_11":{
@@ -1112,6 +1187,51 @@ hist_dic={
 	"hist_name":"Ele23_Ele12_Leg2_pvn_23",
 	"use_array":False,
 	"hist_para":[100,x_array_1,0,100],
+	"hist":{},
+	},
+#Ele23_Ele12 vs lumi
+"Ele23_Ele12_Leg1_lumi_1":{
+	"cut_str":"(0.0 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 1.4442)",
+	"isTag":"True",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg1Filter_eta','trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg1Filter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"Ele23_Ele12_Leg1_lumi_1",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
+"Ele23_Ele12_Leg1_lumi_2":{
+	"cut_str":"(1.566 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 2.5)",
+	"isTag":"True",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg1Filter_eta','trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg1Filter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"Ele23_Ele12_Leg1_lumi_2",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
+"Ele23_Ele12_Leg2_lumi_1":{
+	"cut_str":"(0.0 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 1.4442)",
+	"isTag":"True",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg2Filter_eta','trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg2Filter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"Ele23_Ele12_Leg2_lumi_1",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
+	"hist":{},
+	},
+"Ele23_Ele12_Leg2_lumi_2":{
+	"cut_str":"(1.566 <= abs(getattr(event,'probe_sc_eta')) and abs(getattr(event,'probe_sc_eta')) < 2.5)",
+	"isTag":"True",
+	"isProbe":"True",
+	"isProbe_fire":"match_trigger(event,'trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg2Filter_eta','trig_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg2Filter_phi','probe_eta','probe_phi',0.1)",
+	"fill_value":"getattr(event,'ev_luminosityBlock')",
+	"hist_name":"Ele23_Ele12_Leg2_lumi_2",
+	"use_array":False,
+	"hist_para":[100,x_array_1,0,1000],
 	"hist":{},
 	},
 }

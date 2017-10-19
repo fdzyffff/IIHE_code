@@ -120,4 +120,4 @@ isCheck = True
 isCheck = False
 #get_plot_dic("_EMu")
 get_plot_dic()
-make_sub("split_plot_80",10000)
+make_sub("split_plot_80",5000)

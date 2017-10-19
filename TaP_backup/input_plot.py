@@ -288,9 +288,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_DoubleEle33_CaloIdL_MW effciency ",
 		"x_title":"N_{vtx}",
@@ -325,9 +325,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_DoubleEle33_CaloIdL_MW effciency ",
 		"x_title":"N_{vtx}",
@@ -335,6 +335,37 @@ plot_dic = {
 		"x_log":False,
 		"y_log":False,
 		"plot_name":"DouEle33_pvn_endcap",
+		},
+	},
+#DouEle33 vs lumi
+"DouEle33_lumi":{
+	"hist":{
+		"DouEle33_lumi_1":{
+			"Color":2,
+			"MarkerStyle":22,
+			"legend_title":"barrel",
+			"legend_order":1,
+			"do_fit":False,
+			},
+		"DouEle33_lumi_2":{
+			"Color":4,
+			"MarkerStyle":22,
+			"legend_title":"endcap",
+			"legend_order":2,
+			"do_fit":False,
+			},
+		},
+	"para":{
+		"legend":[0.12,0.25,0.3,0.4],
+		"text":[0.12,0.6,0.3,0.7],
+		"xaxis":[0, 1000],
+		"yaxis":[0.0, 1.0],
+		"title":"HLT_DoubleEle33_CaloIdL_MW effciency ",
+		"x_title":"lumi sec",
+		"y_title":"Efficiency",
+		"x_log":False,
+		"y_log":False,
+		"plot_name":"DouEle33_lumi",
 		},
 	},
 #DouEle25
@@ -626,9 +657,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_DoubleEle25_CaloIdL_MW effciency ",
 		"x_title":"N_{vtx}",
@@ -663,9 +694,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_DoubleEle25_CaloIdL_MW effciency ",
 		"x_title":"N_{vtx}",
@@ -673,6 +704,37 @@ plot_dic = {
 		"x_log":False,
 		"y_log":False,
 		"plot_name":"DouEle25_pvn_endcap",
+		},
+	},
+#DouEle25 vs lumi
+"DouEle25_lumi":{
+	"hist":{
+		"DouEle25_lumi_1":{
+			"Color":2,
+			"MarkerStyle":22,
+			"legend_title":"barrel",
+			"legend_order":1,
+			"do_fit":False,
+			},
+		"DouEle25_lumi_2":{
+			"Color":4,
+			"MarkerStyle":22,
+			"legend_title":"endcap",
+			"legend_order":2,
+			"do_fit":False,
+			},
+		},
+	"para":{
+		"legend":[0.12,0.25,0.3,0.4],
+		"text":[0.12,0.6,0.3,0.7],
+		"xaxis":[0, 1000],
+		"yaxis":[0.0, 1.0],
+		"title":"HLT_DoubleEle25_CaloIdL_MW effciency ",
+		"x_title":"lumi sec",
+		"y_title":"Efficiency",
+		"x_log":False,
+		"y_log":False,
+		"plot_name":"DouEle25_lumi",
 		},
 	},
 #DouEle25 given DiEle27CaloOnly vs pv_z
@@ -701,12 +763,12 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[0, 10],
-		"yaxis":[0.0, 1.0],
+		"xaxis":[-15, 15],
+		"yaxis":[0.8, 1.0],
 		"title":"HLT_DoubleEle25_CaloIdL_MW effciency ",
-		"x_title":"N_{vtx}",
+		"x_title":"pv_z",
 		"y_title":"Efficiency",
 		"x_log":False,
 		"y_log":False,
@@ -738,12 +800,12 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[0, 10],
-		"yaxis":[0.0, 1.0],
+		"xaxis":[-15, 15],
+		"yaxis":[0.8, 1.0],
 		"title":"HLT_DoubleEle25_CaloIdL_MW effciency ",
-		"x_title":"N_{vtx}",
+		"x_title":"pv_z",
 		"y_title":"Efficiency",
 		"x_log":False,
 		"y_log":False,
@@ -760,8 +822,8 @@ plot_dic = {
 			"legend_order":1,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',33,125],
-				"fit_para":[0.8, 20, 16, 0.1, 35, 1],
+				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',35,125],
+				"fit_para":[0.2, 20, 20, 1.0, 30, 4],
 				"print_fit":True,
 				"position":[0.52,0.12,0.69,0.42]
 				},
@@ -773,8 +835,8 @@ plot_dic = {
 			"legend_order":2,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',33,125],
-				"fit_para":[0.8, 20, 16, 0.1, 35, 1],
+				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',35,125],
+				"fit_para":[0.2, 20, 20, 1.0, 30, 4],
 				"print_fit":True,
 				"position":[0.7,0.12,0.9,0.42]
 				},
@@ -844,8 +906,8 @@ plot_dic = {
 			"legend_order":1,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',33,125],
-				"fit_para":[0.8, 20, 16, 0.1, 35, 1],
+				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',35,125],
+				"fit_para":[0.2, 20, 20, 1.0, 30, 4],
 				"print_fit":True,
 				"position":[0.52,0.12,0.69,0.42]
 				},
@@ -857,8 +919,8 @@ plot_dic = {
 			"legend_order":2,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',33,125],
-				"fit_para":[0.8, 20, 16, 0.1, 35, 1],
+				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',35,125],
+				"fit_para":[0.2, 20, 20, 1.0, 30, 4],
 				"print_fit":True,
 				"position":[0.7,0.12,0.9,0.42]
 				},
@@ -896,9 +958,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.6,0.5,0.8,0.7],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[25, 125],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_Ele32_WPTight effciency ",
 		"x_title":"N_{vtx}",
@@ -906,6 +968,37 @@ plot_dic = {
 		"x_log":False,
 		"y_log":False,
 		"plot_name":"Ele32_pvn",
+		},
+	},
+#Ele32_WPTight vs lumi
+"Ele32_lumi":{
+	"hist":{
+		"Ele32_lumi_1":{
+			"Color":2,
+			"MarkerStyle":22,
+			"legend_title":"barrel",
+			"legend_order":1,
+			"do_fit":False,
+			},
+		"Ele32_lumi_2":{
+			"Color":4,
+			"MarkerStyle":22,
+			"legend_title":"endcap",
+			"legend_order":2,
+			"do_fit":False,
+			},
+		},
+	"para":{
+		"legend":[0.12,0.25,0.3,0.4],
+		"text":[0.12,0.6,0.3,0.7],
+		"xaxis":[0, 1000],
+		"yaxis":[0.0, 1.0],
+		"title":"HLT_Ele32_WPTight effciency ",
+		"x_title":"lumi sec",
+		"y_title":"Efficiency",
+		"x_log":False,
+		"y_log":False,
+		"plot_name":"Ele32_lumi",
 		},
 	},
 #Ele23_Ele12
@@ -956,7 +1049,7 @@ plot_dic = {
 		"text":[0.12,0.6,0.3,0.7],
 		"xaxis":[20, 35],
 		"yaxis":[0.0, 1.0],
-		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Et effciency ",
+		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 Et effciency ",
 		"x_title":"E_{T}",
 		"y_title":"Efficiency",
 		"x_log":False,
@@ -1011,7 +1104,7 @@ plot_dic = {
 		"text":[0.12,0.6,0.3,0.7],
 		"xaxis":[20, 35],
 		"yaxis":[0.0, 1.0],
-		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Et effciency ",
+		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 Et effciency ",
 		"x_title":"E_{T}",
 		"y_title":"Efficiency",
 		"x_log":False,
@@ -1053,7 +1146,7 @@ plot_dic = {
 		"text":[0.12,0.6,0.3,0.7],
 		"xaxis":[20, 100],
 		"yaxis":[0.9, 1.0],
-		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL ID effciency ",
+		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 ID effciency ",
 		"x_title":"E_{T}",
 		"y_title":"Efficiency",
 		"x_log":False,
@@ -1070,7 +1163,7 @@ plot_dic = {
 			"legend_order":1,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,35],
+				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,33],
 				"fit_para":[0.8, 23, 0.5, 0.2, 23, 2],
 				"print_fit":True,
 				"position":[0.52,0.12,0.69,0.42]
@@ -1083,7 +1176,7 @@ plot_dic = {
 			"legend_order":2,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,35],
+				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,33],
 				"fit_para":[0.8, 23, 0.5, 0.2, 23, 2],
 				"print_fit":True,
 				"position":[0.7,0.12,0.9,0.42]
@@ -1106,7 +1199,7 @@ plot_dic = {
 	"para":{
 		"legend":[0.12,0.75,0.3,0.9],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 35],
+		"xaxis":[20, 33],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 effciency ",
 		"x_title":"E_{T}",
@@ -1125,7 +1218,7 @@ plot_dic = {
 			"legend_order":1,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,35],
+				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,33],
 				"fit_para":[0.8, 23, 0.5, 0.2, 23, 2],
 				"print_fit":True,
 				"position":[0.52,0.12,0.69,0.42]
@@ -1138,7 +1231,7 @@ plot_dic = {
 			"legend_order":2,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,35],
+				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,33],
 				"fit_para":[0.8, 23, 0.5, 0.2, 23, 2],
 				"print_fit":True,
 				"position":[0.7,0.12,0.9,0.42]
@@ -1151,7 +1244,7 @@ plot_dic = {
 			"legend_order":3,
 			"do_fit":True,
 			"fit_func":{
-				"fit_function":['eff_func_3','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,35],
+				"fit_function":['eff_func_3','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',20,33],
 				"fit_para":[0.8, 23, 0.5, 0.2, 23, 2],
 				"print_fit":True,
 				"position":[0.7,0.45,0.9,0.75]
@@ -1161,7 +1254,7 @@ plot_dic = {
 	"para":{
 		"legend":[0.12,0.75,0.3,0.9],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 35],
+		"xaxis":[20, 33],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 effciency ",
 		"x_title":"E_{T}",
@@ -1178,7 +1271,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"0.0 < |#eta| < 0.79",
 			"legend_order":1,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1191,7 +1284,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"0.79 < |#eta| < 1.1",
 			"legend_order":2,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1204,7 +1297,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"1.1 < |#eta| < 1.4442",
 			"legend_order":3,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_3','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1233,7 +1326,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"1.566 < |#eta| < 1.7",
 			"legend_order":1,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1246,7 +1339,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"1.7 < |#eta| < 2.1",
 			"legend_order":2,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1259,7 +1352,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"2.1 < |#eta| < 2.5",
 			"legend_order":3,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_3','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1330,7 +1423,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"0.0 < |#eta| < 0.79",
 			"legend_order":1,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1343,7 +1436,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"0.79 < |#eta| < 1.1",
 			"legend_order":2,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1356,7 +1449,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"1.1 < |#eta| < 1.4442",
 			"legend_order":3,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_3','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1385,7 +1478,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"1.566 < |#eta| < 1.7",
 			"legend_order":1,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_1','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1398,7 +1491,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"1.7 < |#eta| < 2.1",
 			"legend_order":2,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_2','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1411,7 +1504,7 @@ plot_dic = {
 			"MarkerStyle":22,
 			"legend_title":"2.1 < |#eta| < 2.5",
 			"legend_order":3,
-			"do_fit":True,
+			"do_fit":False,
 			"fit_func":{
 				"fit_function":['eff_func_3','0.5*[0]*(1+erf((x-[1])/(1.414*[2])))+0.5*[3]*(1+erf((x-[4])/(1.414*[5])))',8,22],
 				"fit_para":[0.871, 26.106, 0.810, 0.127, 26.831, 2.014],
@@ -1459,9 +1552,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 effciency ",
 		"x_title":"N_{vtx}",
@@ -1496,9 +1589,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 effciency ",
 		"x_title":"N_{vtx}",
@@ -1533,9 +1626,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg2 effciency ",
 		"x_title":"N_{vtx}",
@@ -1570,9 +1663,9 @@ plot_dic = {
 			},
 		},
 	"para":{
-		"legend":[0.12,0.75,0.3,0.9],
+		"legend":[0.12,0.25,0.3,0.4],
 		"text":[0.12,0.6,0.3,0.7],
-		"xaxis":[20, 70],
+		"xaxis":[10, 70],
 		"yaxis":[0.0, 1.0],
 		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg2 effciency ",
 		"x_title":"N_{vtx}",
@@ -1580,6 +1673,67 @@ plot_dic = {
 		"x_log":False,
 		"y_log":False,
 		"plot_name":"Ele23_Ele12_Leg2_pvn_endcap",
+		},
+	},
+#Ele23_Ele12 vs lumi
+"Ele23_Ele12_Leg1_lumi":{
+	"hist":{
+		"Ele23_Ele12_Leg1_lumi_1":{
+			"Color":2,
+			"MarkerStyle":22,
+			"legend_title":"barrel",
+			"legend_order":2,
+			"do_fit":False,
+			},
+		"Ele23_Ele12_Leg1_lumi_2":{
+			"Color":4,
+			"MarkerStyle":22,
+			"legend_title":"endcap",
+			"legend_order":3,
+			"do_fit":False,
+			},
+		},
+	"para":{
+		"legend":[0.12,0.25,0.3,0.4],
+		"text":[0.12,0.6,0.3,0.7],
+		"xaxis":[0, 1000],
+		"yaxis":[0.0, 1.0],
+		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg1 effciency ",
+		"x_title":"lumi sec",
+		"y_title":"Efficiency",
+		"x_log":False,
+		"y_log":False,
+		"plot_name":"Ele23_Ele12_Leg1_lumi",
+		},
+	},
+"Ele23_Ele12_Leg2_lumi":{
+	"hist":{
+		"Ele23_Ele12_Leg2_lumi_1":{
+			"Color":2,
+			"MarkerStyle":22,
+			"legend_title":"barrel",
+			"legend_order":2,
+			"do_fit":False,
+			},
+		"Ele23_Ele12_Leg2_lumi_2":{
+			"Color":4,
+			"MarkerStyle":22,
+			"legend_title":"endcap",
+			"legend_order":3,
+			"do_fit":False,
+			},
+		},
+	"para":{
+		"legend":[0.12,0.25,0.3,0.4],
+		"text":[0.12,0.6,0.3,0.7],
+		"xaxis":[0, 1000],
+		"yaxis":[0.0, 1.0],
+		"title":"HLT_Ele23_Ele12_CaloIdL_TrackIdL Leg2 effciency ",
+		"x_title":"lumi sec",
+		"y_title":"Efficiency",
+		"x_log":False,
+		"y_log":False,
+		"plot_name":"Ele23_Ele12_Leg2_lumi",
 		},
 	},
 }
