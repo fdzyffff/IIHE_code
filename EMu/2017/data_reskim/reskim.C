@@ -239,13 +239,14 @@ struct muon_candidate{
   }
   void highPT_MuId(bool isTrackerMuon, bool isGlobalMuon, float dz_in, float dxy_in, float ptError_in,int numberOfMatchedStations,int numberOfValidPixelHits,int trackerLayersWithMeasurement,int numberOfValidMuonHits , float isoR03sumpt , bool Fake){
 //    printf("typ : %d ,  dz : %f , dxy : %f , ptratio : %f , Pt : %f\n", typ_in,fabs(dz_in),fabs(dxy_in),ptError_in/pt,pt);
-     if (isGlobalMuon && (numberOfMatchedStations>1) && (numberOfValidPixelHits>0) && (trackerLayersWithMeasurement>5) && (numberOfValidMuonHits>0))
-     {
-        if ((fabs(dz_in) < 0.5) && (fabs(dxy_in)<0.2) &&(ptError_in/pt < 0.3))
-        {
-            highPT_MuID = true ;
-        }
-     }
+//     if (isGlobalMuon && (numberOfMatchedStations>1) && (numberOfValidPixelHits>0) && (trackerLayersWithMeasurement>5) && (numberOfValidMuonHits>0))
+//     {
+//        if ((fabs(dz_in) < 0.5) && (fabs(dxy_in)<0.2) &&(ptError_in/pt < 0.3))
+//        {
+//            highPT_MuID = true ;
+//        }
+//     }
+     highPT_MuID = muon_isHighPtMuon;
      if (highPT_MuID && (pt >= 53.0) && (fabs(eta)<2.4) && (isoR03sumpt/pt < 0.1) )
      {
         passed_muon = true ;
@@ -319,15 +320,15 @@ struct jet_candidate{
   TLorentzVector p4 ;
   
   jet_candidate(float pt_in, float eta_in, float phi_in, float energy_in){
-  	pt = pt_in;
-  	eta = eta_in;
-  	phi = phi_in;
-        E = energy_in;
-        isLoose = 0;
-  	passed = 0;
-  	isbjet = 0;
-        jet_CSVv2 = 0;
-        p4.SetPtEtaPhiE(pt, eta, phi, E);
+    pt = pt_in;
+    eta = eta_in;
+    phi = phi_in;
+    E = energy_in;
+    isLoose = 0;
+    passed = 0;
+    isbjet = 0;
+    jet_CSVv2 = 0;
+    p4.SetPtEtaPhiE(pt, eta, phi, E);
   }
   void check_pass()
   {
@@ -342,6 +343,37 @@ struct jet_candidate{
   }
 };
 
+float top_reweighting_uncertainty(float top_pt_in){
+  float weight = 0.0;
+  if (top_pt_in < 0.0) {
+    weight = 0.0;
+  } else if (top_pt_in < 150.0) {
+    weight = 0.045;
+  } else if (top_pt_in < 1000.0) {
+    weight = 0.04 * top_pt_in/1000.0 + 0.045;
+  } else if (top_pt_in < 1100.0) {
+    weight = 0.09;
+  } else if (top_pt_in < 1200.0) {
+    weight = 0.1;
+  } else if (top_pt_in < 1400.0) {
+    weight = 0.12;
+  } else if (top_pt_in < 1600.0) {
+    weight = 0.14;
+  } else if (top_pt_in < 1800.0) {
+    weight = 0.155;
+  } else if (top_pt_in < 2000.0) {
+    weight = 0.18;
+  } else if (top_pt_in < 2200.0) {
+    weight = 0.2;
+  } else if (top_pt_in < 2600.0) {
+    weight = 0.243;
+  } else if (top_pt_in < 3000.0) {
+    weight = 0.34;
+  } else if (top_pt_in > 2999.9) {
+    weight = 0.34;
+  }
+  return weight;
+}
 
 void displayProgress(long current, long max){
   using std::cerr;
@@ -703,7 +735,6 @@ void reskim::Loop(TString fname){
         {
           if( (abs(LHE_pdgid->at(iMC)) == 6) )
           {
-            w_top = w_top*exp(0.0615-0.0005*LHE_Pt->at(iMC));
             if (!find_t1)
             {
               MC_p4_1.SetPtEtaPhiE(LHE_Pt->at(iMC),LHE_Eta->at(iMC),LHE_Phi->at(iMC),LHE_E->at(iMC)) ;
@@ -717,24 +748,14 @@ void reskim::Loop(TString fname){
           }
           if(find_t1 && find_t2)
           {
-            float M_tt = (MC_p4_1+MC_p4_2).Mag();
-            float m_t = 175.0;
-            float tmp_w = 0.0;
-            if (2*m_t < M_tt && M_tt < 500.0)
-            {
-               tmp_w = 0.05 * (M_tt - 2*m_t)/(500 - 2*m_t);
-            }
-            else if (500.0 < M_tt && M_tt < 1000.0)
-            {
-               tmp_w = 0.05 + 0.25 * (M_tt - 500.0)/(500.0);
-            }
-            else if (1000.0 < M_tt < 3000.0)
-            {
-               tmp_w = 0.3 + 0.3 * (M_tt - 1000.0)/1000.0;
-            }
-            w_ts1_up = 1.0 + tmp_w;
-            w_ts1_down = 1.0 - tmp_w; 
-            w_top = sqrt(w_top);
+            float tmp_t1 = exp(0.0615-0.0005*MC_p4_1.Pt());
+            float tmp_t2 = exp(0.0615-0.0005*MC_p4_2.Pt());
+            float tmp_t1_uncer = top_reweighting_uncertainty(MC_p4_1.Pt());
+            float tmp_t2_uncer = top_reweighting_uncertainty(MC_p4_2.Pt());
+
+            w_ts1_up = sqrt(tmp_t1*(1.0 + tmp_t1_uncer)*tmp_t2*(1.0 + tmp_t2_uncer) );
+            w_ts1_down = sqrt(tmp_t1*(1.0 - tmp_t1_uncer)*tmp_t2*(1.0 - tmp_t2_uncer) );
+            w_top = sqrt(tmp_t1 * tmp_t2);
             break;
           }
         }
@@ -835,40 +856,89 @@ void reskim::Loop(TString fname){
         int   charge = mu_ibt_charge->at(iMu) ;
         if(charge < -900)continue;
         muon_candidate* mu = new muon_candidate(pt, eta, phi, charge) ;
-        if(sys_mu_pt_scale_up && !isData)
+        if( sys_mu_pt_scale_up && !isData)
         {
           float pt_scale = 0.0;
           if (eta < -2.1){
              if (phi < -2.4){
-                pt_scale = -0.4;
+                //pt_scale = -0.025;
+                pt_scale = Tr.Gaus(-0.025, 0.096);
              } else if (phi > 2.4){
-                pt_scale = -0.24;
+                //pt_scale = 0.023;
+                pt_scale = Tr.Gaus(0.023, 0.092);
              } else {
-                pt_scale = 0.8;
+                //pt_scale = -0.15;
+                pt_scale = Tr.Gaus(-0.15, 0.086);
              }
           } else if (eta < -1.2){
              if (phi < -2.4){
-                pt_scale = -0.17;
+                //pt_scale = -0.075;
+                pt_scale = Tr.Gaus(-0.075, 0.043);
              } else if (phi > 2.4){
-                pt_scale = -0.15;
+                //pt_scale = -0.034;
+                pt_scale = Tr.Gaus(-0.034, 0.043);
              } else {
-                pt_scale = 0.066;
+                //pt_scale = -0.072;
+                pt_scale = Tr.Gaus(-0.072, 0.05);
              }
-          } else if (eta > 1.2){
+          } else if (eta < 0){
              if (phi < -2.4){
-                pt_scale = 0.095;
-             } else if (phi > 0.028){
-                pt_scale = 0.028;
+                //pt_scale = -0.019;
+                pt_scale = Tr.Gaus(-0.019, 0.033);
+             } else if (phi > 2.4){
+                //pt_scale = -0.019;
+                pt_scale = Tr.Gaus(-0.019, 0.042);
              } else {
-                pt_scale = 0.24;
+                //pt_scale = -0.0066;
+                pt_scale = Tr.Gaus(-0.0066, 0.035);
+             }
+          } else if (eta < 1.2){
+             if (phi < -2.4){
+                //pt_scale = 0.046;
+                pt_scale = Tr.Gaus(0.046, 0.036);
+             } else if (phi > 2.4){
+                //pt_scale = 0.025;
+                pt_scale = Tr.Gaus(0.025, 0.036);
+             } else {
+                //pt_scale = 0.065;
+                pt_scale = Tr.Gaus(0.065, 0.035);
+             }
+          } else if (eta < 2.1){
+             if (phi < -2.4){
+                //pt_scale = 0.051;
+                pt_scale = Tr.Gaus(0.051, 0.04);
+             } else if (phi > 2.4){
+                //pt_scale = 0.086;
+                pt_scale = Tr.Gaus(0.086, 0.06);
+             } else {
+                //pt_scale = 0.0066;
+                pt_scale = Tr.Gaus(0.0066, 0.042);
+             }
+          } else {
+             if (phi < -2.4){
+                //pt_scale = -0.38;
+                pt_scale = Tr.Gaus(-0.38, 0.078);
+             } else if (phi > 2.4){
+                //pt_scale = 0.16;
+                pt_scale = Tr.Gaus(0.16, 0.068);
+             } else {
+                //pt_scale = -0.41;
+                pt_scale = Tr.Gaus(-0.41, 0.073);
              }
           }
-          pt_scale += 1.0;
-          *mu = muon_candidate(pt * pt_scale, eta, phi, charge) ;
+          pt_scale = 1.0 + (pt_scale * pt * 0.001);
+          //https://indico.cern.ch/event/750046/contributions/3150921/attachments/1727369/2790733/TrackerAlignment.pdf
+          if ( mu->pt > 200 ) {
+            *mu = muon_candidate(pt * pt_scale, eta, phi, charge) ;
+          }
         }
         else if(sys_mu_pt_res_up && !isData)
         {
-          *mu = muon_candidate(pt*Tr.Gaus(1,0.032), eta, phi, charge) ;
+          if (fabs(eta) < 1.2) {
+            *mu = muon_candidate(pt*Tr.Gaus(1,0.01), eta, phi, charge) ;
+          } else {
+            *mu = muon_candidate(pt*Tr.Gaus(1,0.02), eta, phi, charge) ;
+          }
         }
 
         mu->muon_isHighPtMuon = mu_isHighPtMuon->at(iMu) ;
@@ -906,8 +976,8 @@ void reskim::Loop(TString fname){
 
 //        electron_candidate* el = new electron_candidate(Et * egamma::eCorr(ev_run, Et, eta, gsf_r9->at(iEl), 12, !isData), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
         electron_candidate* el = new electron_candidate(Et, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
-	float tmp_sc = 1.0;
-	if (el->region == 1) {
+	      float tmp_sc = 1.0;
+	      if (el->region == 1) {
           if (el->Et < 90) {
              tmp_sc = 0.01;
           } else if (el->Et < 1000) {
@@ -917,11 +987,11 @@ void reskim::Loop(TString fname){
           }
         } else if (el->region == 3) {
           if (el->Et < 90) {
-             tmp_sc = 0.02;
+             tmp_sc = 0.01;
           } else if (el->Et < 300) {
-             tmp_sc = 0.02 + (0.03 * el->Et/210.0);
+             tmp_sc = 0.01 + (0.03 * el->Et/210.0);
           } else {
-             tmp_sc = 0.05;
+             tmp_sc = 0.04;
           }
         }
 
@@ -929,7 +999,7 @@ void reskim::Loop(TString fname){
         {
            *el = electron_candidate(Et * (1.0 + tmp_sc), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
         }  
-	if (sys_ele_et_scale_down && !isData)
+	      if (sys_ele_et_scale_down && !isData)
         {
            *el = electron_candidate(Et * (1.0 - tmp_sc), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
         }
@@ -939,22 +1009,25 @@ void reskim::Loop(TString fname){
         
 
 //        if(!isFake_e) {
-          el->pass_trigger = true;
+//          el->pass_trigger = true;
 //        }
 //        else {
-//          TLorentzVector trigp4_dou33 ;
-//
-//          for(unsigned int itrig=0 ; itrig<trig_dou33MW_eta->size() ; ++itrig)
-//          {
-//            trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_eta->at(itrig),trig_dou33MW_phi->at(itrig),10) ;
-//            if(trigp4_dou33.DeltaR(el->p4) < 0.1)
-//            {
-//              el->pass_trigger = true;
-//              break ;
-//            }  
-//          }  
-//        }
-        
+/*        if(isData) {
+          TLorentzVector trigp4_dou33 ;
+
+          for(unsigned int itrig=0 ; itrig<trig_dou33MW_eta->size() ; ++itrig)
+          {
+            trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_eta->at(itrig),trig_dou33MW_phi->at(itrig),10) ;
+            if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+            {
+              el->pass_trigger = true;
+              break ;
+            }  
+          }  
+        } else {
+	        el->pass_trigger = trigEle33::passTrig(Et, eta);
+	      }*/
+        el->pass_trigger = true;        
         el->isHeep_online = gsf_isHeepV7->at(iEl);
         el->apply_ID_value(gsf_deltaPhiSuperClusterTrackAtVtx->at(iEl),
                            gsf_full5x5_sigmaIetaIeta->at(iEl),

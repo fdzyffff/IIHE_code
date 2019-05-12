@@ -98,7 +98,7 @@ public :
    vector<bool>  *gsf80_isHeepV7;
    UInt_t          gsf_n;
    vector<bool>    *gsf_VIDTight;
-   vector<bool>    *gsf_isHeepV7;
+   vector<int>    *gsf_isHeepV7;
    vector<int>     *gsf_classification;
    vector<float>   *gsf_energy;
    vector<float>   *gsf_p;
@@ -370,11 +370,11 @@ public :
    vector<int> *mu_numberOfValidPixelHits ;
    vector<int> *mu_numberOfValidMuonHits ;
 
-   vector<bool> *mu_isBad ;
-   vector<bool> *mu_isHighPtMuon ;
-   vector<bool> *mu_isGlobalMuon ;
-   vector<bool> *mu_isTrackerMuon ;
-   vector<bool> *mu_isTightMuon ;
+   vector<int> *mu_isBad ;
+   vector<int> *mu_isHighPtMuon ;
+   vector<int> *mu_isGlobalMuon ;
+   vector<int> *mu_isTrackerMuon ;
+   vector<int> *mu_isTightMuon ;
    UInt_t trig_Flag_duplicateMuons_accept ;
    UInt_t trig_Flag_badMuons_accept ;
    UInt_t trig_Flag_noBadMuons_accept ;
@@ -449,8 +449,8 @@ public :
    vector<float> *jet_energy ;
    vector<float> *jet_CSVv2 ;
 
-   vector<bool> *jet_isJetIDLoose ;
-   vector<bool> *jet_isJetIDTight ;
+   vector<int> *jet_isJetIDLoose ;
+   vector<int> *jet_isJetIDTight ;
 
    // List of branches
    TBranch        *b_ev_event;   //!
