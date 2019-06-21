@@ -1,0 +1,561 @@
+13d12
+< #include "fkmuon.C"
+16,17d14
+< #include "energyScaleAndSmear.C"
+< #include "PU_reWeighting.C"
+123c120
+< //    bool accept_EcalDriven = 1 ;
+---
+> //    bool accept_EcalDriven = value_EcalDriven == 1.0 ? 1 : 0 ;
+158,162d154
+<     //if(isTag)
+<     //{
+<     //  cout<<" # Heep got "<<endl;
+<     //  cout<<" # isFake :  "<<isFake<<endl;
+<     //}
+198,199d189
+<   bool passed_muon  ; 
+<   bool passed_fake  ; 
+201d190
+<   bool fake_MuID  ; 
+227d215
+<     fake_MuID = false ;
+229,230d216
+<     passed_muon = false ;
+<     passed_fake = false ;
+240c226
+<   void highPT_MuId(bool isTrackerMuon, bool isGlobalMuon, float dz_in, float dxy_in, float ptError_in,int numberOfMatchedStations,int numberOfValidPixelHits,int trackerLayersWithMeasurement,int numberOfValidMuonHits , float isoR03sumpt , bool Fake){
+---
+>   void highPT_MuId(bool isGlobalMuon, float dz_in, float dxy_in, float ptError_in,int numberOfMatchedStations,int numberOfValidPixelHits,int trackerLayersWithMeasurement,int numberOfValidMuonHits , float isoR03sumpt ){
+242c228,229
+<      pass_trigger = pass_Mu50 == 1;// || pass_TkMu50 == 1 || pass_Photon175 == 1 ;
+---
+> //    typ = typ_in ;//1: track only; 2: global
+>      pass_trigger = pass_Mu50 == 1 || pass_TkMu50 == 1 || pass_Photon175 == 1 ;
+250c237
+<      if (highPT_MuID && (pt >= 60.0) && (fabs(eta)<2.4) && (isoR03sumpt/pt < 0.1) && pass_trigger)
+---
+>      if (highPT_MuID && (pt >= 53.0) && (fabs(eta)<2.4) && (isoR03sumpt/pt < 0.1) && pass_trigger)
+252,253c239
+<         passed_muon = true ;
+< 	//if(passed_muon)cout<<"pass high pT Muon"<<endl;
+---
+>         passed = true ;
+255,276d240
+<      if (Fake && !passed_muon)
+<      {
+<         pass_trigger = pass_Mu50 == 1;// || pass_TkMu50 == 1;
+<         if (isGlobalMuon && isTrackerMuon && (trackerLayersWithMeasurement>5) && (numberOfValidMuonHits>0))
+<         {
+<            if ((fabs(dz_in) < 1.0) && (fabs(dxy_in)<0.2))
+<            {
+<                fake_MuID = true ;
+<            }
+<         }
+<         if (fake_MuID && (pt >= 60.0) && (fabs(eta)<2.4) && pass_trigger)
+<         {
+<            passed_fake = true ;
+<         }
+<      }
+<      passed = Fake?passed_fake:passed_muon;
+<      //if(passed)
+<      //{
+<      //  cout<<"pass Muon"<<endl;
+<      //  cout<<"is Fake : "<<Fake<<endl;
+<      //  cout<<"pT : "<<pt<<endl;
+<      //}
+370,380c334,335
+<    bool WW_shape = false;
+<    bool isFake_e = false;
+<    bool isFake_mu = false;
+<    bool sys_mu_pt_scale_up = false;
+<    bool sys_mu_pt_scale_down = false;
+<    bool sys_mu_pt_res_up = false;
+<    bool sys_mu_pt_res_down = false;
+<    bool sys_ele_et_scale_up = false;
+<    bool sys_ele_et_scale_down = false;
+< 
+<    if (strstr(fname,"fke_")!=NULL)
+---
+>    bool isFake = false;
+>    if (strstr(fname,"fk_")!=NULL)
+382,383c337
+<       isFake_e = true;
+<       isFake_mu = false;
+---
+>       isFake = true;
+386,391d339
+<    if (strstr(fname,"fkm_")!=NULL)
+<    {
+<       isFake_e = false;
+<       isFake_mu = true;
+<       cout<<"select fake muon"<<endl;
+<    }
+413,453d360
+<    if (strstr(fname,"WW")!=NULL)
+<    {
+<       WW_shape = true;
+<       cout<<"WW shape reweight applied"<<endl;
+<    }
+<    if (strstr(sys_str,"sys_mu_pt_scale_up")!=NULL)
+<    {
+<       sys_mu_pt_scale_up = true;
+<       cout<<"sys muon pt scale up"<<endl;
+<    }
+< 
+<    if (strstr(sys_str,"sys_mu_pt_scale_down")!=NULL)
+<    {
+<       sys_mu_pt_scale_down = true;
+<       cout<<"sys muon pt scale down"<<endl;
+<    }
+< 
+<    if (strstr(sys_str,"sys_mu_pt_res_up")!=NULL)
+<    {
+<       sys_mu_pt_res_up = true;
+<       cout<<"sys muon pt resolution up"<<endl;
+<    }
+< 
+<    if (strstr(sys_str,"sys_mu_pt_res_down")!=NULL)
+<    {
+<       sys_mu_pt_res_down = true;
+<       cout<<"sys muon pt resolution down"<<endl;
+<    }
+< 
+<    if (strstr(sys_str,"sys_ele_et_scale_up")!=NULL)
+<    {
+<       sys_ele_et_scale_up = true;
+<       cout<<"sys electron et scale up"<<endl;
+<    }
+< 
+<    if (strstr(sys_str,"sys_ele_et_scale_down")!=NULL)
+<    {
+<       sys_ele_et_scale_down = true;
+<       cout<<"sys electron et scale down"<<endl;
+<    }
+< 
+476,482d382
+<    float w_top ;
+<    float w_ts1_up ;
+<    float w_ts1_down ;
+<    float w_WW_up ;
+<    float w_WW_down ;
+<    float w_TOP1_up ;
+<    float w_TOP1_down ;
+485,487d384
+<    float ele_px ;
+<    float ele_py ;
+<    float ele_pz ;
+524,526d420
+<    int ele_MC_matched ;
+<    int muon_MC_matched ;
+< 
+551,553d444
+<    tree_out.Branch("isFake_e"	, &isFake_e	, "isFake_e/i"	) ;
+<    tree_out.Branch("isFake_mu"	, &isFake_mu	, "isFake_mu/i" ) ;
+< 
+560,562d450
+<    tree_out.Branch("w_top"    , &w_top          , "w_top/F"        ) ;
+<    tree_out.Branch("w_ts1_up"    , &w_ts1_up          , "w_ts1_up/F"        ) ;
+<    tree_out.Branch("w_ts1_down"    , &w_ts1_down          , "w_ts1_down/F"        ) ;
+565,568d452
+<    tree_out.Branch("w_WW_up"  , &w_WW_up    , "w_WW_up/F"     ) ;
+<    tree_out.Branch("w_WW_down", &w_WW_down  , "w_WW_down/F"       ) ;
+<    tree_out.Branch("w_TOP1_up"  , &w_TOP1_up    , "w_TOP1_up/F"     ) ;
+<    tree_out.Branch("w_TOP1_down", &w_TOP1_down  , "w_TOP1_down/F"       ) ;
+570,572d453
+<    tree_out.Branch("ele_px", &ele_px, "ele_px/F") ;
+<    tree_out.Branch("ele_py", &ele_py, "ele_py/F") ;
+<    tree_out.Branch("ele_pz", &ele_pz, "ele_pz/F") ;
+590d470
+<    tree_out.Branch("ele_MC_matched"    , &ele_MC_matched        , "ele_MC_matched/I"  ) ;
+597d476
+<    tree_out.Branch("muon_MC_matched"    , &muon_MC_matched        , "muon_MC_matched/I"  ) ;
+682,684d560
+<       w_top = 1.0 ;
+<       w_ts1_up = 1.0 ;
+<       w_ts1_down = 1.0 ;
+687,694d562
+<       w_WW_up = 1.0 ; 
+<       w_WW_down = 1.0 ;
+<       w_TOP1_up = 1.0 ;
+<       w_TOP1_down = 1.0 ;
+< 
+<       ele_MC_matched = false ;
+<       muon_MC_matched = false ;
+< 
+697,700d564
+<         bool find_t1 = false;
+<         bool find_t2 = false;
+<         TLorentzVector MC_p4_1(1,0,0,0);
+<         TLorentzVector MC_p4_2(1,0,0,0);
+703,738c567
+<           if( (abs(LHE_pdgid->at(iMC)) == 6) )
+<           {
+<             w_top = w_top*exp(0.0615-0.0005*LHE_Pt->at(iMC));
+<             if (!find_t1)
+<             {
+<               MC_p4_1.SetPtEtaPhiE(LHE_Pt->at(iMC),LHE_Eta->at(iMC),LHE_Phi->at(iMC),LHE_E->at(iMC)) ;
+<               find_t1 = true;
+<             }
+<             else
+<             {
+<               MC_p4_2.SetPtEtaPhiE(LHE_Pt->at(iMC),LHE_Eta->at(iMC),LHE_Phi->at(iMC),LHE_E->at(iMC)) ;
+<               find_t2 = true;
+<             }
+<           }
+<           if(find_t1 && find_t2)
+<           {
+<             float M_tt = (MC_p4_1+MC_p4_2).Mag();
+<             float m_t = 175.0;
+<             float tmp_w = 0.0;
+<             if (2*m_t < M_tt && M_tt < 500.0)
+<             {
+<                tmp_w = 0.05 * (M_tt - 2*m_t)/(500 - 2*m_t);
+<             }
+<             else if (500.0 < M_tt && M_tt < 1000.0)
+<             {
+<                tmp_w = 0.05 + 0.25 * (M_tt - 500.0)/(500.0);
+<             }
+<             else if (1000.0 < M_tt < 3000.0)
+<             {
+<                tmp_w = 0.3 + 0.3 * (M_tt - 1000.0)/1000.0;
+<             }
+<             w_ts1_up = 1.0 + tmp_w;
+<             w_ts1_down = 1.0 - tmp_w; 
+<             w_top = sqrt(w_top);
+<             break;
+<           }
+---
+>           if( (abs(LHE_pdgid->at(iMC)) == 6) )w_other = w_other*exp(0.0615-0.0005*LHE_Pt->at(iMC));
+740c569
+<         // TODO:top shape
+---
+>         w_other = sqrt(w_other);
+822,824c651,653
+<         w_PU_out       = w_sign*PU_2017_Rereco::MC_pileup_weight(PU, mc_str, "Rereco_all");
+<         w_PU_up_out    = w_sign*PU_2017_Rereco::MC_pileup_weight(PU, mc_str, "Rereco_all_scaleUp");
+<         w_PU_down_out  = w_sign*PU_2017_Rereco::MC_pileup_weight(PU, mc_str, "Rereco_all_scaleDown");
+---
+>         w_PU_out       = w_sign*PU_reReco_Morind17::MC_pileup_weight(PU,0,"all");
+>         w_PU_up_out    = w_sign*PU_reReco_Morind17::MC_pileup_weight(PU,1,"all");
+>         w_PU_down_out  = w_sign*PU_reReco_Morind17::MC_pileup_weight(PU,2,"all");
+837,872d665
+<         if(sys_mu_pt_scale_up && !isData)
+<         {
+<           float pt_scale = 0.0;
+<           if (eta < -2.1){
+<              if (phi < -2.4){
+<                 pt_scale = -0.4;
+<              } else if (phi > 2.4){
+<                 pt_scale = -0.24;
+<              } else {
+<                 pt_scale = 0.8;
+<              }
+<           } else if (eta < -1.2){
+<              if (phi < -2.4){
+<                 pt_scale = -0.17;
+<              } else if (phi > 2.4){
+<                 pt_scale = -0.15;
+<              } else {
+<                 pt_scale = 0.066;
+<              }
+<           } else if (eta > 1.2){
+<              if (phi < -2.4){
+<                 pt_scale = 0.095;
+<              } else if (phi > 0.028){
+<                 pt_scale = 0.028;
+<              } else {
+<                 pt_scale = 0.24;
+<              }
+<           }
+<           pt_scale += 1.0;
+<           *mu = muon_candidate(pt * pt_scale, eta, phi, charge) ;
+<         }
+<         else if(sys_mu_pt_res_up && !isData)
+<         {
+<           *mu = muon_candidate(pt*Tr.Gaus(1,0.032), eta, phi, charge) ;
+<         }
+< 
+875,878c668,678
+<         mu->pass_Mu50 = Muon50_trig_fire;
+<         mu->pass_TkMu50 = TkMu50_trig_fire;
+<         mu->pass_Photon175 = Photon175_trig_fire;
+<         mu->highPT_MuId(mu_isTrackerMuon->at(iMu),mu_isGlobalMuon->at(iMu),mu_ibt_dz_firstPVtx->at(iMu), mu_ibt_dxy_firstPVtx->at(iMu), mu_ibt_ptError->at(iMu), mu_numberOfMatchedStations->at(iMu),mu_numberOfValidPixelHits->at(iMu), mu_trackerLayersWithMeasurement->at(iMu),mu_numberOfValidMuonHits->at(iMu),mu_isolationR03_sumPt->at(iMu),isFake_mu) ;
+---
+>         if(isData){
+>           mu->pass_Mu50 = Muon50_trig_fire;
+>           mu->pass_TkMu50 = TkMu50_trig_fire;
+>           mu->pass_Photon175 = Photon175_trig_fire;
+>         }
+>         else{
+>           mu->pass_Mu50 = Muon50_trig_fire;
+>           mu->pass_TkMu50 = TkMu50_trig_fire;
+>           mu->pass_Photon175 = Photon175_trig_fire;
+>         }
+>         mu->highPT_MuId(mu_isGlobalMuon->at(iMu),mu_ibt_dz_firstPVtx->at(iMu), mu_ibt_dxy_firstPVtx->at(iMu), mu_ibt_ptError->at(iMu), mu_numberOfMatchedStations->at(iMu),mu_numberOfValidPixelHits->at(iMu), mu_trackerLayersWithMeasurement->at(iMu),mu_numberOfValidMuonHits->at(iMu),mu_isolationR03_sumPt->at(iMu)) ;
+905,910c705
+<         electron_candidate* el = new electron_candidate(Et * egamma::eCorr(ev_run, Et, eta, gsf_r9->at(iEl), 12, !isData), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
+<         if (sys_ele_et_scale_up && !isData)
+<         {
+<            *el = electron_candidate(Et * 1.02, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
+<         }
+< 
+---
+>         electron_candidate* el = new electron_candidate(Et, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
+912c707,711
+<         ////cout<<"after corr : "<<el->Et<<"region :"<<el->region<<endl;
+---
+>         //if(isData && el->region==1)*el=electron_candidate(Et*1.0012, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
+>         //if(isData && el->region==3)*el=electron_candidate(Et*1.0089, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
+>         //cout<<"after corr : "<<el->Et<<"region :"<<el->region<<endl;
+>         if(false == isData && el->region==1)*el=electron_candidate(Et*Tr.Gaus(1,0.0123), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
+>         if(false == isData && el->region==3)*el=electron_candidate(Et*Tr.Gaus(1,0.0229), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
+915,919c714,742
+<         if(!isFake_e) {
+<           el->pass_trigger = true;
+<         }
+<         else {
+<           TLorentzVector trigp4_dou33 ;
+---
+>         if(isData){
+>           if(!isFake)el->pass_trigger = true;
+>           else
+>           {
+>            if (276453 <= ev_run && ev_run <= 278822)
+>            {
+>              TLorentzVector trigp4_dou33 ;
+>              for(unsigned int itrig=0 ; itrig<trig_dou33_eta->size() ; ++itrig)
+>              {
+>                trigp4_dou33.SetPtEtaPhiM(100,trig_dou33_eta->at(itrig),trig_dou33_phi->at(itrig),10) ;
+>                if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+>                {
+>                  el->pass_trigger = true;
+>                  break ;
+>                }
+>              } 
+>              //for(unsigned int itrig=0 ; itrig<trig_dou33_unseeded_eta->size() ; ++itrig)
+>              //{ 
+>              //  trigp4_dou33.SetPtEtaPhiM(100,trig_dou33_unseeded_eta->at(itrig),trig_dou33_unseeded_phi->at(itrig),10) ;
+>              //  if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+>              //  { 
+>              //    el->pass_trigger = true;
+>              //    break ;
+>              //  }
+>              //}
+>            }
+>            else
+>            {
+>              TLorentzVector trigp4_dou33 ;
+921c744,768
+<           for(unsigned int itrig=0 ; itrig<trig_dou33MW_eta->size() ; ++itrig)
+---
+>              for(unsigned int itrig=0 ; itrig<trig_dou33MW_eta->size() ; ++itrig)
+>              {
+>                trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_eta->at(itrig),trig_dou33MW_phi->at(itrig),10) ;
+>                if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+>                {
+>                  el->pass_trigger = true;
+>                  break ;
+>                }  
+>              }  
+>              //for(unsigned int itrig=0 ; itrig<trig_dou33MW_unseeded_eta->size() ; ++itrig)
+>              //{ 
+>              //  trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_unseeded_eta->at(itrig),trig_dou33MW_unseeded_phi->at(itrig),10) ;
+>              //  if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+>              //  { 
+>              //    el->pass_trigger = true;
+>              //    break ;
+>              //  }
+>              //}
+>            }
+>          }
+>         }
+>         else
+>         {
+>           if(!isFake)el->pass_trigger = true;
+>           else
+923,929c770,791
+<             trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_eta->at(itrig),trig_dou33MW_phi->at(itrig),10) ;
+<             if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+<             {
+<               el->pass_trigger = true;
+<               break ;
+<             }  
+<           }  
+---
+>             el->pass_trigger = trigEle33::passTrig(Et, eta) ;
+>              //TLorentzVector trigp4_dou33 ;
+> 
+>              //for(unsigned int itrig=0 ; itrig<trig_dou33MW_eta->size() ; ++itrig)
+>              //{
+>              //  trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_eta->at(itrig),trig_dou33MW_phi->at(itrig),10) ;
+>              //  if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+>              //  {
+>              //    el->pass_trigger = true;
+>              //    break ;
+>              //  }  
+>              //}  
+>              //for(unsigned int itrig=0 ; itrig<trig_dou33MW_unseeded_eta->size() ; ++itrig)
+>              //{ 
+>              //  trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_unseeded_eta->at(itrig),trig_dou33MW_unseeded_phi->at(itrig),10) ;
+>              //  if(trigp4_dou33.DeltaR(el->p4) < 0.1)
+>              //  { 
+>              //    el->pass_trigger = true;
+>              //    break ;
+>              //  }
+>              //}
+>           }
+945c807
+<                            isFake_e) ;
+---
+>                            isFake) ;
+1054,1067c916,929
+< //      std::vector<jet_candidate*> jets ;
+< //      for(unsigned int ijet=0 ; ijet<jet_pt->size() ; ++ijet){
+< //        float pt     = jet_pt->at(ijet) ;
+< //        float eta    = jet_eta->at(ijet) ;
+< //        float phi    = jet_phi->at(ijet) ;
+< //        float energy = jet_energy->at(ijet) ;
+< //
+< //        jet_candidate* jet = new jet_candidate(pt, eta, phi, energy) ;
+< //        jet->isLoose = int(jet_isJetIDLoose->at(ijet));
+< //        jet->jet_CSVv2 = jet_CSVv2->at(ijet);
+< //        jet->check_pass();
+< //
+< //     	jets.push_back(jet);
+< //      }
+---
+>       std::vector<jet_candidate*> jets ;
+>       for(unsigned int ijet=0 ; ijet<jet_pt->size() ; ++ijet){
+>         float pt     = jet_pt->at(ijet) ;
+>         float eta    = jet_eta->at(ijet) ;
+>         float phi    = jet_phi->at(ijet) ;
+>         float energy = jet_energy->at(ijet) ;
+> 
+>         jet_candidate* jet = new jet_candidate(pt, eta, phi, energy) ;
+>         jet->isLoose = int(jet_isJetIDLoose->at(ijet));
+>         jet->jet_CSVv2 = jet_CSVv2->at(ijet);
+>         jet->check_pass();
+> 
+>      	jets.push_back(jet);
+>       }
+1073,1075d934
+<       ele_px 	      = ele->p4.Px();
+<       ele_py 	      = ele->p4.Py();
+<       ele_pz 	      = ele->p4.Pz();
+1113c972
+<       if(isFake_e)
+---
+>       if(isFake)
+1119,1122d977
+<       if(isFake_mu)
+<       {
+<         w_fake = fkmuon::FRweight(muon->eta, muon->pt) ;
+<       }
+1126,1168c981,986
+< //      for (unsigned ijet = 0; ijet<jets.size(); ijet++)
+< //      { 
+< //        jet_candidate *jet = jets.at(ijet);
+< //        if (jet->passed && jet->p4.DeltaR(ele->p4) > 0.4 && jet->p4.DeltaR(muon->p4) > 0.4)
+< //        {       
+< //                n_jet++;
+< //        }
+< //        if (jet->isbjet && jet->p4.DeltaR(ele->p4) > 0.4 && jet->p4.DeltaR(muon->p4) > 0.4)
+< //        {       
+< //                n_bjet++;
+< //        }
+< //      }
+< //
+< //      for (unsigned ijet = 0; ijet<jets.size(); ijet++)
+< //      { 
+< //        jet_candidate *jet = jets.at(ijet);
+< //        if (jet->p4.DeltaR(ele->p4) > 0.4 && jet->p4.DeltaR(muon->p4) > 0.4)
+< //        {       
+< //          jet_pt_out.push_back(jet->p4.Pt()) ;
+< //          jet_energy_out.push_back(jet->p4.E()) ;
+< //          jet_px_out.push_back(jet->p4.Px()) ;
+< //          jet_py_out.push_back(jet->p4.Py()) ;
+< //          jet_pz_out.push_back(jet->p4.Pz()) ;
+< //          jet_eta_out.push_back(jet->p4.Eta()) ;
+< //          jet_phi_out.push_back(jet->p4.Phi()) ;
+< //          jet_passed_out.push_back(jet->passed) ;
+< //          jet_isbjet_out.push_back(jet->isbjet) ;
+< //        }
+< //      }
+< 
+< //MC matching
+< 
+<       if(!isData) {
+< 
+<         TLorentzVector mc_p4(1,0,0,1);
+<         for(unsigned iMC = 0; iMC<mc_n ; ++iMC) {
+<           if ( (abs(mc_pdgId->at(iMC)) == 11) && ( (abs(mc_status->at(iMC)) == 23) || (abs(mc_status->at(iMC)) == 1) ) ) {
+<             mc_p4.SetPtEtaPhiM(1, mc_eta->at(iMC), mc_phi->at(iMC), 1);
+<             if (mc_p4.DeltaR(ele->p4) < 0.3) {
+<               ele_MC_matched = true;
+<               break;
+<             }
+<           }
+---
+>       for (unsigned ijet = 0; ijet<jets.size(); ijet++)
+>       { 
+>         jet_candidate *jet = jets.at(ijet);
+>         if (jet->passed && jet->p4.DeltaR(ele->p4) > 0.4 && jet->p4.DeltaR(muon->p4) > 0.4)
+>         {       
+>                 n_jet++;
+1170,1177c988,1007
+<         for(unsigned iMC = 0; iMC<mc_n ; ++iMC) {
+<           if ( (abs(mc_pdgId->at(iMC)) == 13) && ( (abs(mc_status->at(iMC)) == 23) || (abs(mc_status->at(iMC)) == 1) ) ) {
+<             mc_p4.SetPtEtaPhiM(1, mc_eta->at(iMC), mc_phi->at(iMC), 1);
+<             if (mc_p4.DeltaR(muon->p4) < 0.3) {
+<               muon_MC_matched = true;
+<               break;
+<             }
+<           }
+---
+>         if (jet->isbjet && jet->p4.DeltaR(ele->p4) > 0.4 && jet->p4.DeltaR(muon->p4) > 0.4)
+>         {       
+>                 n_bjet++;
+>         }
+>       }
+> 
+>       for (unsigned ijet = 0; ijet<jets.size(); ijet++)
+>       { 
+>         jet_candidate *jet = jets.at(ijet);
+>         if (jet->p4.DeltaR(ele->p4) > 0.4 && jet->p4.DeltaR(muon->p4) > 0.4)
+>         {       
+>           jet_pt_out.push_back(jet->p4.Pt()) ;
+>           jet_energy_out.push_back(jet->p4.E()) ;
+>           jet_px_out.push_back(jet->p4.Px()) ;
+>           jet_py_out.push_back(jet->p4.Py()) ;
+>           jet_pz_out.push_back(jet->p4.Pz()) ;
+>           jet_eta_out.push_back(jet->p4.Eta()) ;
+>           jet_phi_out.push_back(jet->p4.Phi()) ;
+>           jet_passed_out.push_back(jet->passed) ;
+>           jet_isbjet_out.push_back(jet->isbjet) ;
+1179,1181d1008
+<       } else {
+<         ele_MC_matched = true;  
+<         muon_MC_matched = true;
+1183a1011
+> 
+1212,1220c1040,1048
+< //      for (std::vector<jet_candidate*>::iterator it = jets.begin(); it != jets.end(); it ++){
+< //        if (NULL != *it)
+< //        { 
+< //          delete *it;
+< //          *it = NULL;
+< //          }
+< //      }
+< //      jets.clear() ;
+< //      jets.swap(jets);
+---
+>       for (std::vector<jet_candidate*>::iterator it = jets.begin(); it != jets.end(); it ++){
+>         if (NULL != *it)
+>         { 
+>           delete *it;
+>           *it = NULL;
+>           }
+>       }
+>       jets.clear() ;
+>       jets.swap(jets);
