@@ -1,0 +1,29 @@
+#include "TMath.h"
+#include "TRandom3.h"
+
+namespace fkelectron{
+
+  float frFuncData(float et,float eta)
+  {
+   if(std::abs(eta)<1.5){
+     if(et<61.9343) return 0.0627584+-0.000802931*et;
+     else if(et>=61.9343 && et<152.24) return 0.0185065+-8.84336e-05*et;
+     else if(et>=152.24 && et<408.115) return 0.00505332+-6.51215e-08*et;
+     else return 0.00181156+7.87813e-06*et;
+   }else if(std::abs(eta)<2.0){
+     if(et<78.5284) return 0.0955304+-0.000719011*et;
+     else if(et>=78.5284 && et<226.751) return 0.0393862+-4.05659e-06*et;
+     else if(et>=226.751 && et<345.405) return 0.0229133+6.85911e-05*et;
+     else return 0.046605+0*et;
+   }else if(std::abs(eta)<2.5){
+     if(et<57.3254) return 0.100134+-0.000789087*et;
+     else return 0.0512926+6.29072e-05*et;
+   }else return 0.;
+
+  }
+
+
+}
+  
+
+

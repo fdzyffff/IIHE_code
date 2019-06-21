@@ -1,0 +1,35 @@
+#include "TMath.h"
+#include "TRandom3.h"
+
+namespace trigEle33{
+
+
+  TRandom3 randNrGen;
+  float turnOnfunction(float Et, float p0, float p1, float p2, float p3, float p4, float p5){
+    float eff = 0.0;
+    eff = 0.5*p0*(1+erf((Et-p1)/(1.414*p2)))+0.5*p3*(1+erf((Et-p4)/(1.414*p5)));
+    return eff;
+  }
+  
+  float turnOn_MW(float scEt,float scEta){
+    if (0.0<=fabs(scEta) && fabs(scEta)<0.79)
+      return turnOnfunction(scEt,0.8415, 33.96, 0.4561, 0.1291, 35.01, 2.05);
+    else if (0.79<=fabs(scEta) && fabs(scEta)<1.1)
+      return turnOnfunction(scEt,0.8908, 34.14, 0.5844, 0.08305, 34.83, 2.675);
+    else if (1.1<=fabs(scEta) && fabs(scEta)<1.4442)
+      return turnOnfunction(scEt,0.8832, 34.47, 0.7515, 0.09064, 34.29, 2.597);
+    else if (1.566<=fabs(scEta) && fabs(scEta)<1.70)
+      return turnOnfunction(scEt,0.4776, 35.02, 1.989, 0.4616, 33.96, 0.6667);
+    else if (1.70<=fabs(scEta) && fabs(scEta)<2.1)
+      return turnOnfunction(scEt,0.5414, 34.35, 0.7203, 0.4353, 35.51, 1.885);
+    else if (2.1<=fabs(scEta) && fabs(scEta)<2.5)
+      return turnOnfunction(scEt,0.5271, 34.6, 1.013, 0.4449, 36.49, 2.33);
+    else
+      return -1.0;
+  }
+  
+  bool passTrig(float scEt,float scEta){return turnOn_MW(scEt,scEta)>randNrGen.Uniform(0,1);}
+  //bool passTrig(float scEt,float scEta){return turnOn_MW(scEt,scEta)>randNrGen.Uniform(0,1);}
+
+}
+  
