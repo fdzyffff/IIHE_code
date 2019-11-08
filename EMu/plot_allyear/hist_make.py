@@ -2,6 +2,7 @@ from input_card import *
 
 class hist_make():
 	def __init__(self, label = "none"):
+		self.global_label = label
 		self.ana_2016 = False
 		self.ana_2017 = False
 		self.ana_2018 = False
@@ -19,10 +20,10 @@ class hist_make():
 
 		self.error_range_dic = {"0-500":[1,500,0], "500-1000":[2,500,0], "1000-1500":[3,500,0], "1500-2000":[4,500,0]}
 	
-		self.plot_list = ["_ttbar","ST","Di_boson","Z","qcd_jet","qcd_jet_mu"]#,"fake_rate_e"],"fake_rate_m"]
+		self.plot_list = ["_ttbar","ST","Di_boson","Z","qcd_jet"]#,"qcd_jet_mu"]#,"fake_rate_e"],"fake_rate_m"]
 		self.plot_list_sys = ["_ttbar","ST","Di_boson","Z"]
 		self.plot_list_common_sys = ["qcd_jet"]
-		self.plot_list_jet = ["_ttbar","Di_boson","ST","Z"]
+		#self.plot_list_jet = ["_ttbar","Di_boson","ST","Z"]
 		self.isSplit_mode = False
 		self.input_dic = {}
 		self.cut = ""
@@ -271,7 +272,7 @@ class hist_make():
 		else:
 			return 0
 	
-	def check_trigger_2016(self,leaf_name_list,event):
+	def check_trigger_2016(self,event,leaf_name_list):
 		pass_trigger = False
 		pass_trigger_onlyMuon = False
 		if (Muon50_trig_fire) and ("Muon50_trig_fire" in leaf_name_list) and  getattr(event,"Muon50_trig_fire"):
@@ -289,9 +290,9 @@ class hist_make():
 		if (Photon175_trig_fire) and ("Photon175_trig_fire" in leaf_name_list) and  getattr(event,"Photon175_trig_fire"):
 			pass_trigger = True
 			pass_trigger_onlyMuon = False
-		return pass_trigger,pass_trigger_onlyMuon
+		return (pass_trigger,pass_trigger_onlyMuon)
 
-	def check_trigger_2017(self,leaf_name_list,event):
+	def check_trigger_2017(self,event,leaf_name_list):
 		pass_trigger = False
 		pass_trigger_onlyMuon = False
 		if (Muon50_trig_fire) and ("Muon50_trig_fire" in leaf_name_list) and  getattr(event,"Muon50_trig_fire"):
@@ -309,9 +310,9 @@ class hist_make():
 		if (Photon175_trig_fire) and ("Photon175_trig_fire" in leaf_name_list) and  getattr(event,"Photon175_trig_fire"):
 			pass_trigger = True
 			pass_trigger_MuonOnly = False
-		return pass_trigger,pass_trigger_onlyMuon
+		return (pass_trigger,pass_trigger_onlyMuon)
 
-	def check_trigger_2018(self,leaf_name_list,event):
+	def check_trigger_2018(self,event,leaf_name_list):
 		pass_trigger = False
 		pass_trigger_onlyMuon = False
 		if (Muon50_trig_fire) and ("Muon50_trig_fire" in leaf_name_list) and  getattr(event,"Muon50_trig_fire"):
@@ -329,7 +330,7 @@ class hist_make():
 		if (Photon175_trig_fire) and ("Photon175_trig_fire" in leaf_name_list) and  getattr(event,"Photon175_trig_fire"):
 			pass_trigger = True
 			pass_trigger_onlyMuon = False
-		return pass_trigger,pass_trigger_onlyMuon
+		return (pass_trigger,pass_trigger_onlyMuon)
 
 	def get_event_weight_2016(self, event):
 		MuonSF_weight = 1.0
@@ -510,7 +511,7 @@ class hist_make():
 		if "isSS" in sample_dic:
 			isSS = sample_dic["isSS"]
 	
-		print "Fill hist from file : %s, isData: %s, isFake: %s, isSS: %s, nEvent: %d"%(root_file,isData,isFake,isSS,t1.GetEntries())
+		print "(%s)Fill hist from file : %s, isData: %s, isFake: %s, isSS: %s, nEvent: %d"%(self.global_label,root_file,isData,isFake,isSS,t1.GetEntries())
 		n_process = 0
 		if self.isSplit_mode:
 			if (self.n_range_l<0):self.n_range_l=1
@@ -540,8 +541,12 @@ class hist_make():
 			pass_trigger = False
 			pass_trigger_onlyMuon = False
 
-			if ana_2016:
+			if self.ana_2016:
 				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2016(event,leaf_name_list)
+			if self.ana_2017:
+				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2017(event,leaf_name_list)
+			if self.ana_2018:
+				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2018(event,leaf_name_list)
 
 			if not pass_trigger:
 				continue
@@ -551,11 +556,11 @@ class hist_make():
 			fake_weight = 1.0
 
 			if not isData:
-				if ana_2016:
+				if self.ana_2016:
 					event_weight = self.get_event_weight_2016(event)
-				if ana_2017:
+				if self.ana_2017:
 					event_weight = self.get_event_weight_2017(event)
-				if ana_2018:
+				if self.ana_2018:
 					event_weight = self.get_event_weight_2018(event)
 				#if getattr(event,"Photon175_trig_fire") != 1:
 

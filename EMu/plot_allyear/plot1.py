@@ -474,21 +474,50 @@ def init_class(input_class, input_sys_type, set_dir = True):
 	input_class.target_sample = options.sample_name
 	if set_dir: input_class.set_dir()
 
-def Store_limit_plot(self, plot_name, root_name, input_dic, value_dic, plot_dic, hist_output_dir):
-	part = plot_name
-	root_file = "%s/%s_plot_hist_%s.root"%(hist_output_dir.split("/")[0], root_name, self.sys_type)
-	f1 = ROOT.TFile(root_file,"RECREATE")
-	for plot in plot_dic[part]:
-		tmp_plot_dic = plot_dic[part][plot]
-		for path in value_dic:
-#				if not (path in self.store_hist_plot_list):continue
-			if "_out" in tmp_plot_dic["hist"][path].GetName()[-4:]:
-				tmp_plot_dic["hist"][path].SetName(tmp_plot_dic["hist"][path].GetName()[:-4])
-			tmp_name = tmp_plot_dic["hist"][path].GetName()
-			tmp_plot_dic["hist"][path].SetName("%s_out"%(tmp_plot_dic["hist"][path].GetName()))
-			tmp_plot_dic["hist"][path].Write()
-			tmp_plot_dic["hist"][path].SetName(tmp_name)
-	f1.Close()
+def Store_limit_plot(self, plot_name, sys_class_dic):
+	name_dic={}
+	name_dic["_ttbar"] = "TTbar"
+	name_dic["Z"] = "DY"
+	name_dic["ST"] = "ST"
+	name_dic["Di_boson"] = "DiBoson"
+	name_dic["qcd_jet"] = "QCD"
+	name_dic["data"] = "Data"
+
+	for path in value_dic:
+		if not (path in self.store_hist_plot_list):continue
+		root_file = "%s/final_limit_hist_%s.root"%(plot_name, path)
+		f1 = ROOT.TFile(root_file,"RECREATE")
+
+		for tmp_sys_type in sys_class_dic:
+			tmp_class = sys_class_dic[tmp_sys_type]
+			hist_list = ["compare_2"]
+			if tmp_sys_type == "nominal":
+				for part in tmp_class.plot_dic["compare_1"]:
+					tmp_hist = tmp_class.plot_dic["compare_1"][part]["hist"][path]
+					pre_name = tmp_hist.GetName()
+					porcess = name_dic[part]
+					systematic = sys_dic[tmp_sys_type][0]
+					tmp_hist.SetName("%s_%s"%(process, systematic))
+					tmp_hist.Write()
+					tmp_hist.SetName(pre_name)
+
+			for part in tmp_class.plot_dic["compare_2"]:
+				tmp_hist = tmp_class.plot_dic["compare_2"][part]["hist"][path]
+				pre_name = tmp_hist.GetName()
+				porcess = name_dic[part]
+				systematic = sys_dic[tmp_sys_type][0]
+				tmp_hist.SetName("%s_%s"%(process, systematic))
+				tmp_hist.Write()
+				tmp_hist.SetName(pre_name)
+			for part in tmp_class.plot_dic["compare_3"]:
+				tmp_hist = tmp_class.plot_dic["compare_3"][part]["hist"][path]
+				pre_name = tmp_hist.GetName()
+				porcess = name_dic[part]
+				systematic = sys_dic[tmp_sys_type][0]
+				tmp_hist.SetName("%s_%s"%(process, systematic))
+				tmp_hist.Write()
+				tmp_hist.SetName(pre_name)
+		f1.Close()
 
 def main_plot():
 	global use_sys
@@ -516,7 +545,7 @@ def main_plot():
 	#print sys_class_dic
 
 	plot_name = cut
-	Store_limit_plot(sys_class_dic)
+	Store_limit_plot(plot_name,sys_class_dic)
 	#start plot
 
 	p_nominal.text_list = []
@@ -650,7 +679,7 @@ def main_plot_split():
 
 cut = ""
 sys_type = options.sys_type
-sys_class_dic = {}
+sys_class_dic = collections.OrderedDict()
 for cut in cut_dic:
 	if options.sample_name == "null":
 		isSplit_mode = False

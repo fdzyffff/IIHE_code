@@ -43,8 +43,8 @@ nrawevent_WZ = 3997571
 nrawevent_ZZ = 1988098
 nrawevent_ST = 8681541 + 8681495
 
-pre_plot_dic={}
-pre_plot_dic["compare_1"] = {}
+pre_plot_dic=collections.OrderedDict()
+pre_plot_dic["compare_1"] = collections.OrderedDict()
 
 pre_plot_dic["compare_1"]["data"] = {
 					"data_list":["data"],
@@ -55,7 +55,7 @@ pre_plot_dic["compare_1"]["data"] = {
 					"ABS":False,
 					}
 
-pre_plot_dic["compare_2"] = {}
+pre_plot_dic["compare_2"] = collections.OrderedDict()
 
 pre_plot_dic["compare_2"]["_ttbar"] = {
 					"data_list":["_ttbar2l2u", "_ttbar2l2u_M500to800", "_ttbar2l2u_M800to1200", "_ttbar2l2u_M1200to1800", "_ttbar2l2u_M1800toInf"],
@@ -109,7 +109,7 @@ if QCD_JET_BKG_TYPE == "same sign":
 					"weight_factor":2,
 					}
 
-pre_plot_dic["compare_3"] = {}
+pre_plot_dic["compare_3"] = collections.OrderedDict()
 
 
 pre_plot_dic["compare_3"]["QBHtoEMu_M200"] = {
