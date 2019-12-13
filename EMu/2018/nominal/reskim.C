@@ -12,6 +12,8 @@
 #include "Fake_rate_2016_2017_2018.C"
 #include "fkmuon_2018.C"
 #include "PU_reWeighting.C"
+//#include "MC_pileup_weight_2016_2017_2018.C"
+#include "turnonEle_all.C"
 
 const float m_el = 0.000511 ;
 const float m_mu = 0.10566 ;
@@ -105,38 +107,38 @@ struct electron_candidate{
   }
  
   void apply_ID_value(float value_dPhiIn, float value_Sieie, float value_missingHits, float value_dxyFirstPV, float value_HOverE, float value_caloEnergy, float value_E1x5OverE5x5, float value_E2x5OverE5x5, float value_isolEMHadDepth1, float value_IsolPtTrks, float value_EcalDriven, float value_dEtaIn, float rho, bool isFake){
-//    bool accept_HOverE = true ;
-//    if     (region==1){ accept_HOverE = value_HOverE < 0.05 + 1.0/value_caloEnergy ; }
-//    else if(region==3){ accept_HOverE = value_HOverE < 0.05 + 5.0/value_caloEnergy ; }
-//    bool accept_E1x5OverE5x5  = value_E1x5OverE5x5 > 0.83 ;
-//    bool accept_E2x5OverE5x5  = value_E2x5OverE5x5 > 0.94 ;
-//    bool accept_showershape   = (accept_E1x5OverE5x5 || accept_E2x5OverE5x5) ;
-//    if(region!=1) accept_showershape = true ;
-//    bool accept_Sieie = value_Sieie < 0.03;
-//    if(region!=3) accept_Sieie = true;
-////    bool accept_EcalDriven = 1 ;
-//    bool accept_EcalDriven = value_EcalDriven == 1.0 ? 1 : 0 ;
-//    bool accept_dEtaIn = (fabs(value_dEtaIn) < 0.004 && region==1) || (fabs(value_dEtaIn) < 0.006 && region==3) ? 1 : 0 ;
-//    bool accept_dPhiIn = (fabs(value_dPhiIn) < 0.06 && region==1) || (fabs(value_dPhiIn) < 0.06 && region==3) ? 1 : 0 ;
-////    bool accept_dPhiIn = true;
-//    bool accept_isolEMHadDepth1 = true;
-//    if     (region==1) accept_isolEMHadDepth1 = value_isolEMHadDepth1 < 2+ 0.03*Et + 0.28*rho;
-//    else if(region==3) accept_isolEMHadDepth1 = ( ((value_isolEMHadDepth1 < 2.5 + 0.28*rho) && Et<50) || ((value_isolEMHadDepth1 < 2.5 + 0.03*(Et-50) + 0.28*rho) && Et>50) ) ? 1 : 0 ;
-//    bool accept_IsolPtTrks = value_IsolPtTrks < 5 ;
-//    bool accept_missingHits = value_missingHits < 2 ;
-////    bool accept_missingHits = true ;
-//    bool accept_dxyFirstPV = (fabs(value_dxyFirstPV) < 0.02 && region==1) || (fabs(value_dxyFirstPV) < 0.05 && region==3) ;//check
-//
-//    accept_core_ID = (accept_dPhiIn && accept_Sieie && accept_missingHits && accept_dxyFirstPV && accept_HOverE && accept_showershape) ? 1 : 0 ;
-//    accept_isolation = (accept_isolEMHadDepth1 && accept_IsolPtTrks) ? 1 : 0 ;
-//    accept_heep_ID          = (accept_core_ID && accept_isolation && accept_EcalDriven && accept_dEtaIn) ? 1 : 0 ;
-//    accept_noDEtaIn_ID     = (accept_core_ID && accept_isolation && accept_EcalDriven                 ) ? 1 : 0 ;
-//    accept_noIsolation_ID  = (accept_core_ID &&                     accept_EcalDriven && accept_dEtaIn) ? 1 : 0 ;
-//    accept_nominal_ID      = (accept_heep_ID                                                           ) ? 1 : 0 ;
-//    if(region!=3) accept_noDEtaIn_ID = accept_nominal_ID ;
-//    accept_EcalDriven_ID = accept_EcalDriven ;
+    bool accept_HOverE = true ;
+    if     (region==1){ accept_HOverE = value_HOverE < 0.05 + 1.0/value_caloEnergy ; }
+    else if(region==3){ accept_HOverE = value_HOverE < 0.05 + (-0.4 + 0.4*fabs(eta)) * rho /value_caloEnergy ; }
+    bool accept_E1x5OverE5x5  = value_E1x5OverE5x5 > 0.83 ;
+    bool accept_E2x5OverE5x5  = value_E2x5OverE5x5 > 0.94 ;
+    bool accept_showershape   = (accept_E1x5OverE5x5 || accept_E2x5OverE5x5) ;
+    if(region!=1) accept_showershape = true ;
+    bool accept_Sieie = value_Sieie < 0.03;
+    if(region!=3) accept_Sieie = true;
+//    bool accept_EcalDriven = 1 ;
+    bool accept_EcalDriven = value_EcalDriven == 1.0 ? 1 : 0 ;
+    bool accept_dEtaIn = (fabs(value_dEtaIn) < 0.004 && region==1) || (fabs(value_dEtaIn) < 0.006 && region==3) ? 1 : 0 ;
+    bool accept_dPhiIn = (fabs(value_dPhiIn) < 0.06 && region==1) || (fabs(value_dPhiIn) < 0.06 && region==3) ? 1 : 0 ;
+//    bool accept_dPhiIn = true;
+    bool accept_isolEMHadDepth1 = true;
+    if     (region==1) accept_isolEMHadDepth1 = value_isolEMHadDepth1 < 2+ 0.03*Et + 0.28*rho;
+    else if(region==3) accept_isolEMHadDepth1 = ( ((value_isolEMHadDepth1 < 2.5 + (0.15 + 0.07 * fabs(eta))*rho) && Et<50) || ((value_isolEMHadDepth1 < 2.5 + 0.03*(Et-50) + (0.15 + 0.07 * fabs(eta))*rho) && Et>50) ) ? 1 : 0 ;
+    bool accept_IsolPtTrks = value_IsolPtTrks < 5 ;
+    bool accept_missingHits = value_missingHits < 2 ;
+//    bool accept_missingHits = true ;
+    bool accept_dxyFirstPV = (fabs(value_dxyFirstPV) < 0.02 && region==1) || (fabs(value_dxyFirstPV) < 0.05 && region==3) ;//check
 
-    accept_heep_ID = isHeep_online;
+    accept_core_ID = (accept_dPhiIn && accept_Sieie && accept_missingHits && accept_dxyFirstPV && accept_HOverE && accept_showershape) ? 1 : 0 ;
+    accept_isolation = (accept_isolEMHadDepth1 && accept_IsolPtTrks) ? 1 : 0 ;
+    accept_heep_ID          = (accept_core_ID && accept_isolation && accept_EcalDriven && accept_dEtaIn) ? 1 : 0 ;
+    accept_noDEtaIn_ID     = (accept_core_ID && accept_isolation && accept_EcalDriven                 ) ? 1 : 0 ;
+    accept_noIsolation_ID  = (accept_core_ID &&                     accept_EcalDriven && accept_dEtaIn) ? 1 : 0 ;
+    accept_nominal_ID      = (accept_heep_ID                                                           ) ? 1 : 0 ;
+    if(region!=3) accept_noDEtaIn_ID = accept_nominal_ID ;
+    accept_EcalDriven_ID = accept_EcalDriven ;
+
+//    accept_heep_ID = isHeep_online;
     isHeep_offline = ((region==1||region==3) && Et>35 && accept_heep_ID && pass_trigger ) ? 1 : 0 ;
     if (((region==1||region==3) && Et>35 && !accept_heep_ID && pass_trigger ))
     {
@@ -176,7 +178,7 @@ struct muon_candidate{
   int pass_trigger  ;
   int pass_Mu50 ;
   int pass_TkMu100 ;
-  int pass_Photon175 ;
+  int pass_Photon200 ;
   int pass_Ele115 ;
 
   
@@ -228,7 +230,7 @@ struct muon_candidate{
     typ = 0 ;
     pass_Mu50 = false ;
     pass_TkMu100 = false ;
-    pass_Photon175 = false ;
+    pass_Photon200 = false ;
     pass_Ele115 = false ;
     muon_isBad = false ;
     muon_isHighPtMuon = false ;
@@ -508,6 +510,10 @@ void reskim::Loop(TString fname){
    float w_TOP1_up ;
    float w_TOP1_down ;
    float w_other ;
+
+   float gen_mass;
+   float gen_leading_pt;
+   float gen_subleading_pt;
    
    float ele_px ;
    float ele_py ;
@@ -553,6 +559,8 @@ void reskim::Loop(TString fname){
 
    int n_jet ;
    int n_bjet ;
+   int pass_lepton_veto ;
+
    vector <float> jet_pt_out ;
    vector <float> jet_energy_out ;
    vector <float> jet_px_out ;
@@ -593,6 +601,10 @@ void reskim::Loop(TString fname){
    tree_out.Branch("w_WW_down", &w_WW_down  , "w_WW_down/F"       ) ;
    tree_out.Branch("w_TOP1_up"  , &w_TOP1_up    , "w_TOP1_up/F"     ) ;
    tree_out.Branch("w_TOP1_down", &w_TOP1_down  , "w_TOP1_down/F"       ) ;
+
+   tree_out.Branch("gen_mass"    , &gen_mass          , "gen_mass/F"        ) ;
+   tree_out.Branch("gen_leading_pt"    , &gen_leading_pt          , "gen_leading_pt/F"        ) ;
+   tree_out.Branch("gen_subleading_pt"    , &gen_subleading_pt          , "gen_subleading_pt/F"        ) ;
    
    tree_out.Branch("ele_px", &ele_px, "ele_px/F") ;
    tree_out.Branch("ele_py", &ele_py, "ele_py/F") ;
@@ -647,11 +659,12 @@ void reskim::Loop(TString fname){
    tree_out.Branch("jet_phi"	,&jet_phi_out) ;
    tree_out.Branch("jet_passed"	,&jet_passed_out) ;
    tree_out.Branch("jet_isbjet"	,&jet_isbjet_out) ;
+   tree_out.Branch("pass_lepton_veto"  ,&pass_lepton_veto   ,"pass_lepton_veto/I"    );
 
    tree_out.Branch("Muon50_trig_fire", &Muon50_trig_fire, "Muon50_trig_fire/I");
    tree_out.Branch("OldMu100_trig_fire", &OldMu100_trig_fire, "OldMu100_trig_fire/I");
    tree_out.Branch("TkMu100_trig_fire", &TkMu100_trig_fire, "TkMu100_trig_fire/I");
-   tree_out.Branch("Photon175_trig_fire", &Photon175_trig_fire, "Photon175_trig_fire/I");
+   tree_out.Branch("Photon200_trig_fire", &Photon200_trig_fire, "Photon200_trig_fire/I");
    tree_out.Branch("Ele115_trig_fire", &Ele115_trig_fire, "Ele115_trig_fire/I");
 
    tree_out.Branch("ev_prefiringweight", &ev_prefiringweight, "ev_prefiringweight/F");
@@ -695,6 +708,7 @@ void reskim::Loop(TString fname){
 
       n_jet = 0;
       n_bjet = 0;
+      pass_lepton_veto = 0;
 
       vector <float>().swap(jet_pt_out) ;
       vector <float>().swap(jet_energy_out) ;
@@ -721,6 +735,10 @@ void reskim::Loop(TString fname){
       w_WW_down = 1.0 ;
       w_TOP1_up = 1.0 ;
       w_TOP1_down = 1.0 ;
+
+      gen_mass = -1.0 ;
+      gen_leading_pt = -1.0 ;
+      gen_subleading_pt = -1.0 ;
 
       ele_MC_matched = false ;
       muon_MC_matched = false ;
@@ -846,6 +864,9 @@ void reskim::Loop(TString fname){
         w_PU_out       = w_sign*PU_2018::MC_pileup_weight(PU, mc_str, "Run_all");
         w_PU_up_out    = w_sign*PU_2018::MC_pileup_weight(PU, mc_str, "Run_all_scaleUp");
         w_PU_down_out  = w_sign*PU_2018::MC_pileup_weight(PU, mc_str, "Run_all_scaleDown");
+        //w_PU_out       = w_sign*PU_2018::MC_pileup_weight(PU, 0, "all");
+        //w_PU_up_out    = w_sign*PU_2018::MC_pileup_weight(PU, 1, "all");
+        //w_PU_down_out  = w_sign*PU_2018::MC_pileup_weight(PU, 2, "all");
       }
       std::vector<muon_candidate*> muons ;
       for(unsigned int iMu=0 ; iMu<mu_ibt_pt->size() ; ++iMu){
@@ -1010,7 +1031,7 @@ void reskim::Loop(TString fname){
 
         electron_candidate* el = new electron_candidate(Et, gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
         el->p4_sc.SetPtEtaPhiM(gsf_sc_energy->at(iEl)*sin(gsf_theta->at(iEl)), eta, phi, m_el) ;
-	float tmp_sc = 0.02;
+	       float tmp_sc = 0.02;
         if (el->region == 1) {
              tmp_sc = 0.02;
         } else if (el->region == 3) {
@@ -1026,28 +1047,32 @@ void reskim::Loop(TString fname){
            *el = electron_candidate(Et * (1.0 - tmp_sc), gsf_eta_in, gsf_phi_in, eta, phi, charge) ;
         }
 
-        
-
-//        if(!isFake_e) {
-//          el->pass_trigger = false;
-//        }
-//        else {
-//        if(isData) {
-//          TLorentzVector trigp4_dou33 ;
-//
-//          for(unsigned int itrig=0 ; itrig<trig_dou33MW_eta->size() ; ++itrig)
-//          {
-//            trigp4_dou33.SetPtEtaPhiM(100,trig_dou33MW_eta->at(itrig),trig_dou33MW_phi->at(itrig),10) ;
-//            if(trigp4_dou33.DeltaR(el->p4) < 0.1)
-//            {
-//              el->pass_trigger = true;
-//              break ;
-//            }  
-//          }  
+/*        vector<float> *tmp_trig_dou33_eta;
+        vector<float> *tmp_trig_dou33_phi;
+//        if(!isTTbar && ttbar_reweight){
+//          tmp_trig_dou33_eta = trig_dou33MW_eta;
+//          tmp_trig_dou33_phi = trig_dou33MW_phi;
+//        } else if (!isWW  && WW_shape){
+//          tmp_trig_dou33_eta = trig_dou33MW_eta;
+//          tmp_trig_dou33_phi = trig_dou33MW_phi;
 //        } else {
-//	        el->pass_trigger = trigEle33::passTrig(Et, eta);
-//	      }*/
-        el->pass_trigger = true;        
+          tmp_trig_dou33_eta = trig_dou25MW_eta;
+          tmp_trig_dou33_phi = trig_dou25MW_phi;
+//        }
+
+          TLorentzVector trigp4_dou33 ;
+          for(unsigned int itrig=0 ; itrig<tmp_trig_dou33_eta->size() ; ++itrig){
+            trigp4_dou33.SetPtEtaPhiM(100,tmp_trig_dou33_eta->at(itrig),tmp_trig_dou33_phi->at(itrig),10) ;
+            if(trigp4_dou33.DeltaR(el->p4_sc) < 0.1){
+              el->pass_trigger = true ;
+              break ;
+            }
+          }  
+//        } else {
+//          el->pass_trigger = trigEle25_2018::passTrig(el->Et, eta) ;
+//        }*/
+
+        el->pass_trigger = true ;           
         el->isHeep_online = gsf_isHeepV7->at(iEl);
         el->apply_ID_value(gsf_deltaPhiSuperClusterTrackAtVtx->at(iEl),
                            gsf_full5x5_sigmaIetaIeta->at(iEl),
@@ -1091,6 +1116,9 @@ void reskim::Loop(TString fname){
         muons.swap(muons);
         continue;
       }
+      
+      pass_lepton_veto = (electrons.size() == 1 && muons.size() == 1);
+      
       float lastIM=0.;
       int flg_z=-1;
       UInt_t i;
@@ -1277,11 +1305,12 @@ void reskim::Loop(TString fname){
 
       if(!isData) {
 
-        TLorentzVector mc_p4(1,0,0,1);
+        TLorentzVector mc_ele_p4(1,0,0,1);
+        TLorentzVector mc_muon_p4(1,0,0,1);
         for(unsigned iMC = 0; iMC<mc_n ; ++iMC) {
           if ( (abs(mc_pdgId->at(iMC)) == 11) && ( (abs(mc_status->at(iMC)) == 23) || (abs(mc_status->at(iMC)) == 1) ) ) {
-            mc_p4.SetPtEtaPhiM(1, mc_eta->at(iMC), mc_phi->at(iMC), 1);
-            if (mc_p4.DeltaR(ele->p4) < 0.3) {
+            mc_ele_p4.SetPtEtaPhiM(mc_pt->at(iMC), mc_eta->at(iMC), mc_phi->at(iMC), 0.000511);
+            if (mc_ele_p4.DeltaR(ele->p4) < 0.3) {
               ele_MC_matched = true;
               break;
             }
@@ -1289,11 +1318,21 @@ void reskim::Loop(TString fname){
         }
         for(unsigned iMC = 0; iMC<mc_n ; ++iMC) {
           if ( (abs(mc_pdgId->at(iMC)) == 13) && ( (abs(mc_status->at(iMC)) == 23) || (abs(mc_status->at(iMC)) == 1) ) ) {
-            mc_p4.SetPtEtaPhiM(1, mc_eta->at(iMC), mc_phi->at(iMC), 1);
-            if (mc_p4.DeltaR(muon->p4) < 0.3) {
+            mc_muon_p4.SetPtEtaPhiM(mc_pt->at(iMC), mc_eta->at(iMC), mc_phi->at(iMC), 0.10566);
+            if (mc_muon_p4.DeltaR(muon->p4) < 0.3) {
               muon_MC_matched = true;
               break;
             }
+          }
+        }
+        if (ele_MC_matched && muon_MC_matched) {
+          gen_mass = (mc_ele_p4 + mc_muon_p4).Mag();
+          if (mc_ele_p4.Pt()>mc_muon_p4.Pt()) {
+            gen_leading_pt = mc_ele_p4.Pt();
+            gen_subleading_pt = mc_muon_p4.Pt();
+          } else {            
+            gen_leading_pt = mc_muon_p4.Pt();
+            gen_subleading_pt = mc_ele_p4.Pt();
           }
         }
       } else {
