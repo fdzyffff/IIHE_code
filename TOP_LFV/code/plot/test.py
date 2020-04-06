@@ -343,16 +343,15 @@ def main_plot_part(input_class, path, plot_name):
 		
 	legend1.SetBorderSize(0)
 	legend1.Draw()
-	legend3=ROOT.TLegend(0.23,0.6,0.73,0.88)
-	for plot in input_class.plot_dic["compare_3"]:
-		input_class.plot_dic["compare_3"][plot]["hist"][path].SetFillColor(0)
-		input_class.plot_dic["compare_3"][plot]["hist"][path].SetLineWidth(3)
-		input_class.plot_dic["compare_3"][plot]["hist"][path].SetLineStyle(input_class.plot_dic["compare_3"][plot]["line_style"])
-		input_class.plot_dic["compare_3"][plot]["hist"][path].Draw("same:hist")
-		legend3.AddEntry(input_class.plot_dic["compare_3"][plot]["hist"][path],input_class.plot_dic["compare_3"][plot]["legend_title"],"l")
-	legend3.SetBorderSize(0)
-	legend3.Draw()	
-
+#	legend3=ROOT.TLegend(0.53,0.6,0.73,0.88)
+#	for plot in input_class.plot_dic["compare_3"]:
+#		input_class.plot_dic["compare_3"][plot]["hist"][path].SetFillColor(0)
+#		input_class.plot_dic["compare_3"][plot]["hist"][path].SetLineWidth(3)
+#		input_class.plot_dic["compare_3"][plot]["hist"][path].SetLineStyle(input_class.plot_dic["compare_3"][plot]["line_style"])
+#		input_class.plot_dic["compare_3"][plot]["hist"][path].Draw("same:hist")
+#		legend3.AddEntry(input_class.plot_dic["compare_3"][plot]["hist"][path],input_class.plot_dic["compare_3"][plot]["legend_title"],"l")
+#	legend3.SetBorderSize(0)
+#	legend3.Draw()	
 	tText_2 = ROOT.TPaveText(0.15,0.83,0.4,0.83,"NDC")
 	tText_2.SetLineColor(10)
 	tText_2.SetFillColor(10)
@@ -462,17 +461,17 @@ def init_class(input_class, input_sys_type, set_dir = True):
 	#Initialize hist for sample_dic and plot_dic
 	input_class.sys_type = input_sys_type
 	input_class.isSplit_mode = isSplit_mode
-	input_class.cut_str = global_cut
+	input_class.cut_str = cut_dic[cut]
 	input_class.set_value_dic(pre_value_dic)
 	if sys_dic[input_class.sys_type][1]:
-		input_class.hist_input_dir = os.path.join(global_cut,input_sys_type)
+		input_class.hist_input_dir = os.path.join(cut,input_sys_type)
 		input_class.set_plot_dic(pre_plot_dic,"23")
 		input_class.set_input_dic(pre_input_dic,"23")
 	else:
-		input_class.hist_input_dir = os.path.join(global_cut,"nominal")
+		input_class.hist_input_dir = os.path.join(cut,"nominal")
 		input_class.set_plot_dic(pre_plot_dic,"23")
 		input_class.set_input_dic(pre_input_dic,"23")
-	input_class.hist_output_dir = os.path.join(global_cut,input_sys_type)
+	input_class.hist_output_dir = os.path.join(cut,input_sys_type)
 	input_class.n_range_l = options.n_range_l
 	input_class.n_range_h = options.n_range_h
 	input_class.target_sample = options.sample_name
@@ -592,7 +591,7 @@ def main_plot(input_sys_type):
 	init_class(p_nominal, input_sys_type)
 	p_nominal.main_plot()
 	p_nominal.Store_hist_plot_total()
-	global_cutflow_table[global_cut] = p_nominal.get_plot_nevent()
+	global_cutflow_table[cut] = p_nominal.get_plot_nevent()
 
 	if GLOBAL_USE_SYS:
 		for tmp_sys_type in sys_dic:
@@ -609,13 +608,13 @@ def main_plot(input_sys_type):
 
 	global_sys_class_dic["nominal"] = p_nominal
 
-	plot_name = global_cut
+	plot_name = cut
 	Store_limit_plot2(plot_name, global_sys_class_dic)
 	#start plot
 
 	p_nominal.text_list = []
-	p_nominal.text_list.append(global_cut_dic[global_cut][0])
-	p_nominal.text_list.append(global_cut_dic[global_cut][1])
+	p_nominal.text_list.append(cut_name[cut][0])
+	p_nominal.text_list.append(cut_name[cut][1])
 
 
 	for path in p_nominal.value_dic:
@@ -633,7 +632,7 @@ def main_plot(input_sys_type):
 	pre_GLOBAL_USE_SYS = GLOBAL_USE_SYS
 	if QCD_JET_BKG_TYPE == "same sign":
 		GLOBAL_USE_SYS = False
-		plot_name_ss = "_SS"+global_cut
+		plot_name_ss = "_SS"+cut
 		p_nominal_ss = hist_make(GLOBAL_YEAR)
 		p_nominal_ss.sys_type = "nominal_ss"
 		p_nominal_ss.set_value_dic(pre_value_dic)
@@ -642,16 +641,16 @@ def main_plot(input_sys_type):
 		for tmp_sample in p_nominal_ss.input_dic:
 			if p_nominal_ss.input_dic[tmp_sample]["weight_factor"] < 0:
 				p_nominal_ss.input_dic[tmp_sample]["weight_factor"] *= -1
-		p_nominal_ss.cut_str = global_cut
-		p_nominal_ss.hist_input_dir = os.path.join(global_cut,"nominal")
+		p_nominal_ss.cut_str = cut_dic[cut]
+		p_nominal_ss.hist_input_dir = os.path.join(cut,"nominal")
 		p_nominal_ss.hist_output_dir = os.path.join(plot_name_ss)
 		p_nominal_ss.set_dir()
 		p_nominal_ss.total_lumi = p_nominal.Get_total_lumi(p_nominal.input_dic)
 	
 		p_nominal_ss.main_plot()
 		p_nominal_ss.text_list = []
-		p_nominal_ss.text_list.append(global_cut_dic[global_cut][0])
-		p_nominal_ss.text_list.append(global_cut_dic[global_cut][1])
+		p_nominal_ss.text_list.append(cut_name[cut][0])
+		p_nominal_ss.text_list.append(cut_name[cut][1])
 		p_nominal_ss.text_list.append("same sign")
 	
 		for path in p_nominal_ss.value_dic:
@@ -660,7 +659,7 @@ def main_plot(input_sys_type):
 	#~~~~~~~~~~~~~~fake rate electron
 	if QCD_JET_BKG_TYPE == "fake rate":
 		GLOBAL_USE_SYS = False
-		plot_name_fke = "_FKE"+global_cut
+		plot_name_fke = "_FKE"+cut
 		p_nominal_fke = hist_make(GLOBAL_YEAR)
 		p_nominal_fke.sys_type = "nominal_fke"
 		p_nominal_fke.set_value_dic(pre_value_dic)
@@ -668,16 +667,16 @@ def main_plot(input_sys_type):
 		p_nominal_fke.set_input_dic(pre_input_dic, "-1")
 		for tmp_sample in p_nominal_fke.input_dic:
 			p_nominal_fke.input_dic[tmp_sample]["weight_factor"] = 1
-		p_nominal_fke.cut_str = global_cut
-		p_nominal_fke.hist_input_dir = os.path.join(global_cut,"nominal")
+		p_nominal_fke.cut_str = cut_dic[cut]
+		p_nominal_fke.hist_input_dir = os.path.join(cut,"nominal")
 		p_nominal_fke.hist_output_dir = os.path.join(plot_name_fke)
 		p_nominal_fke.set_dir()
 		p_nominal_fke.total_lumi = p_nominal.Get_total_lumi(p_nominal.input_dic)
 	
 		p_nominal_fke.main_plot()
 		p_nominal_fke.text_list = []
-		p_nominal_fke.text_list.append(global_cut_dic[global_cut][0])
-		p_nominal_fke.text_list.append(global_cut_dic[global_cut][1])
+		p_nominal_fke.text_list.append(cut_name[cut][0])
+		p_nominal_fke.text_list.append(cut_name[cut][1])
 		p_nominal_fke.text_list.append("Fake electron")
 	
 		for path in p_nominal_fke.value_dic:
@@ -685,7 +684,7 @@ def main_plot(input_sys_type):
 			main_plot_part(p_nominal_fke, path, plot_name_fke)
 	#	#~~~~~~~~~~~~~~fake rate muon
 		GLOBAL_USE_SYS = False
-		plot_name_fkm = "_FKM"+global_cut
+		plot_name_fkm = "_FKM"+cut
 		p_nominal_fkm = hist_make(GLOBAL_YEAR)
 		p_nominal_fkm.sys_type = "nominal_fkm"
 		p_nominal_fkm.set_value_dic(pre_value_dic)
@@ -693,16 +692,16 @@ def main_plot(input_sys_type):
 		p_nominal_fkm.set_input_dic(pre_input_dic, "-1")
 		for tmp_sample in p_nominal_fkm.input_dic:
 			p_nominal_fkm.input_dic[tmp_sample]["weight_factor"] = 1
-		p_nominal_fkm.cut_str = global_cut
-		p_nominal_fkm.hist_input_dir = os.path.join(global_cut,"nominal")
+		p_nominal_fkm.cut_str = cut_dic[cut]
+		p_nominal_fkm.hist_input_dir = os.path.join(cut,"nominal")
 		p_nominal_fkm.hist_output_dir = os.path.join(plot_name_fkm)
 		p_nominal_fkm.set_dir()
 		p_nominal_fkm.total_lumi = p_nominal.Get_total_lumi(p_nominal.input_dic)
 	
 		p_nominal_fkm.main_plot()
 		p_nominal_fkm.text_list = []
-		p_nominal_fkm.text_list.append(global_cut_dic[global_cut][0])
-		p_nominal_fkm.text_list.append(global_cut_dic[global_cut][1])
+		p_nominal_fkm.text_list.append(cut_name[cut][0])
+		p_nominal_fkm.text_list.append(cut_name[cut][1])
 		p_nominal_fkm.text_list.append("Fake muon")
 	
 		for path in p_nominal_fkm.value_dic:
@@ -711,7 +710,7 @@ def main_plot(input_sys_type):
 	
 	#	#~~~~~~~~~~~~~~fake rate ele + muon
 		GLOBAL_USE_SYS = False
-		plot_name_fk = "_FK"+global_cut
+		plot_name_fk = "_FK"+cut
 		p_nominal_fk = hist_make(GLOBAL_YEAR)
 		p_nominal_fk.sys_type = "nominal_fk"
 		p_nominal_fk.set_value_dic(pre_value_dic)
@@ -719,16 +718,16 @@ def main_plot(input_sys_type):
 		p_nominal_fk.set_input_dic(pre_input_dic, "-1")
 		for tmp_sample in p_nominal_fk.input_dic:
 			p_nominal_fk.input_dic[tmp_sample]["weight_factor"] = 1
-		p_nominal_fk.cut_str = global_cut
-		p_nominal_fk.hist_input_dir = os.path.join(global_cut,"nominal")
+		p_nominal_fk.cut_str = cut_dic[cut]
+		p_nominal_fk.hist_input_dir = os.path.join(cut,"nominal")
 		p_nominal_fk.hist_output_dir = os.path.join(plot_name_fk)
 		p_nominal_fk.set_dir()
 		p_nominal_fk.total_lumi = p_nominal.Get_total_lumi(p_nominal.input_dic)
 	
 		p_nominal_fk.main_plot()
 		p_nominal_fk.text_list = []
-		p_nominal_fk.text_list.append(global_cut_dic[global_cut][0])
-		p_nominal_fk.text_list.append(global_cut_dic[global_cut][1])
+		p_nominal_fk.text_list.append(cut_name[cut][0])
+		p_nominal_fk.text_list.append(cut_name[cut][1])
 		p_nominal_fk.text_list.append("Fake rate")
 	
 		for path in p_nominal_fk.value_dic:
@@ -752,7 +751,7 @@ def print_table(mc_list, data_str):
 	data_row = "Data" + ";"
 	ratio_row = "Data/Pred." + ";"
 	for cut_str_tmp in global_cutflow_table:
-		title_row += (global_cut_dic[cut_str_tmp][1] + ";")
+		title_row += (cut_name[cut_str_tmp][1] + ";")
 		mc_total = 0
 		for mc_name in mc_row_dic:
 			mc_nevent = global_cutflow_table[cut_str_tmp][mc_name][0]
@@ -775,22 +774,9 @@ def print_table(mc_list, data_str):
 
 #main**************************************************************************
 
-global_cut = ""
-global_sys_class_dic = collections.OrderedDict()
-global_cutflow_table = collections.OrderedDict()
-for global_cut in global_cut_dic:
-	if options.sample_name == "null":
-		isSplit_mode = False
-		main_plot('nominal')
-	else:
-		isSplit_mode = True
-		print "Using split mode"
-		print "    Sample: %s"%(options.sample_name)
-		print "    Systematic uncertainty type: %s"%(options.sys_type)
-		if options.n_range_l<0 or options.n_range_h < 0:
-			print "Error, in correct entries range! set to default value"
-		main_plot_split(options.sys_type)
+for path in pre_input_dic:
+	print pre_input_dic[path].print_info()
 
-if options.print_table:
-	print_table(["qcd_jet","_others","_ZG_jets","_ttbar", "_tW"], "data")
+for path in pre_value_dic:
+	print pre_value_dic[path].print_info()
 ##########################################

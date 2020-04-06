@@ -48,43 +48,19 @@ pre_plot_dic_ss["compare_1"] = collections.OrderedDict()
 pre_plot_dic_ss["compare_2"] = collections.OrderedDict()
 
 pre_value_dic=collections.OrderedDict()
+pre_input_dic=collections.OrderedDict()
 
-pre_input_dic = {}
-pre_input_dic["data"] = {
-		"isFromRoot":True,
-		"input_file":"data_2018_EMu.root",
-		"isData":True,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":True,
-		"lumi":59970,
-		"Xsection":1000.0,
-		"N_total": 0.0,
-		"Raw_total":1.0,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":38,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
+tmp_sample_t = sample_t("data")
+tmp_sample_t.input_file = "data_2018_EMu.root"
+tmp_sample_t.isData = True
+tmp_sample_t.useToNorm = True
+tmp_sample_t.lumi = 59970
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
 
 if QCD_JET_BKG_TYPE == "same sign":
-	pre_input_dic["ss_data"] = {
-		"isFromRoot":True,
-		"input_file":"data_2018_EMu.root",
-		"isData":True,
-		"isFake":False,
-		"isSS":True,
-		"useToNorm":False,
-		"lumi":0,
-		"Xsection":1000.0,
-		"N_total": 0.0,
-		"Raw_total":1.0,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":38,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
+
+	tmp_sample_t = sample_t("ss_data")
+	tmp_sample_t.input_file = "data_2018_EMu.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.isData = True
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t

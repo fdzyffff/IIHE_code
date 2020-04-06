@@ -116,1602 +116,663 @@ pre_plot_dic_ss["compare_2"]["_others"] = {
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pre_input_dic["DYToLL_10to50"] = {
-		"isFromRoot":True,
-		"input_file":"80_DYToLL_10to50.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_DYToLL_10to50,
-		"N_total": 0.0,
-		"Raw_total":nevent_DYToLL_10to50,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":50,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["DYToLL_50"] = {
-		"isFromRoot":True,
-		"input_file":"80_DYToLL_50.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_DYToLL_50,
-		"N_total": 0.0,
-		"Raw_total":nevent_DYToLL_50,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":5,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["TTGJets"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTGJets.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTGJets,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTGJets,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["TTTo2L2Nu"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTTo2L2Nu.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTTo2L2Nu,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTTo2L2Nu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["TTWJetsToLNu"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTWJetsToLNu.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTWJetsToLNu,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTWJetsToLNu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["TTWJetsToQQ"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTWJetsToQQ.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTWJetsToQQ,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTWJetsToQQ,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["TTZToLLNuNu_10"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTZToLLNuNu_10.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTZToLLNuNu_10,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTZToLLNuNu_10,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["TTZToQQ"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTZToQQ.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTZToQQ,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTZToQQ,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["WGToLNuG"] = {
-		"isFromRoot":True,
-		"input_file":"80_WGToLNuG.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WGToLNuG,
-		"N_total": 0.0,
-		"Raw_total":nevent_WGToLNuG,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["WJetsToLNu"] = {
-		"isFromRoot":True,
-		"input_file":"80_WJetsToLNu.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WJetsToLNu,
-		"N_total": 0.0,
-		"Raw_total":nevent_WJetsToLNu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["WWTo2L2Nu"] = {
-		"isFromRoot":True,
-		"input_file":"80_WWTo2L2Nu.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WWTo2L2Nu,
-		"N_total": 0.0,
-		"Raw_total":nevent_WWTo2L2Nu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		}
-pre_input_dic["WZTo2L2Q"] = {
-		"isFromRoot":True,
-		"input_file":"80_WZTo2L2Q.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WZTo2L2Q,
-		"N_total": 0.0,
-		"Raw_total":nevent_WZTo2L2Q,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["WZTo3LNu"] = {
-		"isFromRoot":True,
-		"input_file":"80_WZTo3LNu.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WZTo3LNu,
-		"N_total": 0.0,
-		"Raw_total":nevent_WZTo3LNu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["ZZTo2L2Nu"] = {
-		"isFromRoot":True,
-		"input_file":"80_ZZTo2L2Nu.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_ZZTo2L2Nu,
-		"N_total": 0.0,
-		"Raw_total":nevent_ZZTo2L2Nu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["ZZTo4L"] = {
-		"isFromRoot":True,
-		"input_file":"80_ZZTo4L.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_ZZTo4L,
-		"N_total": 0.0,
-		"Raw_total":nevent_ZZTo4L,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["tW"] = {
-		"isFromRoot":True,
-		"input_file":"80_tW.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_tw,
-		"N_total": 0.0,
-		"Raw_total":nevent_tw,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-pre_input_dic["tW_anti"] = {
-		"isFromRoot":True,
-		"input_file":"80_tW_anti.root",
-		"isData":False,
-		"isFake":False,
-		"isSS":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_tw_anti,
-		"N_total": 0.0,
-		"Raw_total":nevent_tw_anti,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
+tmp_sample_t = sample_t("DYToLL_10to50")
+tmp_sample_t.input_file = "80_DYToLL_10to50.root"
+tmp_sample_t.Xsection = xsection_DYToLL_10to50
+tmp_sample_t.Raw_total = nevent_DYToLL_10to50
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("DYToLL_50")
+tmp_sample_t.input_file = "80_DYToLL_50.root"
+tmp_sample_t.Xsection = xsection_DYToLL_50
+tmp_sample_t.Raw_total = nevent_DYToLL_50
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("TTGJets")
+tmp_sample_t.input_file = "80_TTGJets.root"
+tmp_sample_t.Xsection = xsection_TTGJets
+tmp_sample_t.Raw_total = nevent_TTGJets
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("TTTo2L2Nu")
+tmp_sample_t.input_file = "80_TTTo2L2Nu.root"
+tmp_sample_t.Xsection = xsection_TTTo2L2Nu
+tmp_sample_t.Raw_total = nevent_TTTo2L2Nu
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("TTWJetsToLNu")
+tmp_sample_t.input_file = "80_TTWJetsToLNu.root"
+tmp_sample_t.Xsection = xsection_TTWJetsToLNu
+tmp_sample_t.Raw_total = nevent_TTWJetsToLNu
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("TTWJetsToQQ")
+tmp_sample_t.input_file = "80_TTWJetsToQQ.root"
+tmp_sample_t.Xsection = xsection_TTWJetsToQQ
+tmp_sample_t.Raw_total = nevent_TTWJetsToQQ
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("TTZToLLNuNu_10")
+tmp_sample_t.input_file = "80_TTZToLLNuNu_10.root"
+tmp_sample_t.Xsection = xsection_TTZToLLNuNu_10
+tmp_sample_t.Raw_total = nevent_TTZToLLNuNu_10
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("TTZToQQ")
+tmp_sample_t.input_file = "80_TTZToQQ.root"
+tmp_sample_t.Xsection = xsection_TTZToQQ
+tmp_sample_t.Raw_total = nevent_TTZToQQ
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("WGToLNuG")
+tmp_sample_t.input_file = "80_WGToLNuG.root"
+tmp_sample_t.Xsection = xsection_WGToLNuG
+tmp_sample_t.Raw_total = nevent_WGToLNuG
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("WJetsToLNu")
+tmp_sample_t.input_file = "80_WJetsToLNu.root"
+tmp_sample_t.Xsection = xsection_WJetsToLNu
+tmp_sample_t.Raw_total = nevent_WJetsToLNu
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("WWTo2L2Nu")
+tmp_sample_t.input_file = "80_WWTo2L2Nu.root"
+tmp_sample_t.Xsection = xsection_WWTo2L2Nu
+tmp_sample_t.Raw_total = nevent_WWTo2L2Nu
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("WZTo2L2Q")
+tmp_sample_t.input_file = "80_WZTo2L2Q.root"
+tmp_sample_t.Xsection = xsection_WZTo2L2Q
+tmp_sample_t.Raw_total = nevent_WZTo2L2Q
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("WZTo3LNu")
+tmp_sample_t.input_file = "80_WZTo3LNu.root"
+tmp_sample_t.Xsection = xsection_WZTo3LNu
+tmp_sample_t.Raw_total = nevent_WZTo3LNu
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("ZZTo2L2Nu")
+tmp_sample_t.input_file = "80_ZZTo2L2Nu.root"
+tmp_sample_t.Xsection = xsection_ZZTo2L2Nu
+tmp_sample_t.Raw_total = nevent_ZZTo2L2Nu
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("ZZTo4L")
+tmp_sample_t.input_file = "80_ZZTo4L.root"
+tmp_sample_t.Xsection = xsection_ZZTo4L
+tmp_sample_t.Raw_total = nevent_ZZTo4L
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("tW")
+tmp_sample_t.input_file = "80_tW.root"
+tmp_sample_t.Xsection = xsection_tw
+tmp_sample_t.Raw_total = nevent_tw
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
+tmp_sample_t = sample_t("tW_anti")
+tmp_sample_t.input_file = "80_tW_anti.root"
+tmp_sample_t.Xsection = xsection_tw_anti
+tmp_sample_t.Raw_total = nevent_tw_anti
+pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+
 
 if QCD_JET_BKG_TYPE == "same sign":
 
-	pre_input_dic["ss_DYToLL_10to50"] = {
-		"isFromRoot":True,
-		"input_file":"80_DYToLL_10to50.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_DYToLL_10to50,
-		"N_total": 0.0,
-		"Raw_total":nevent_DYToLL_10to50,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":50,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_DYToLL_50"] = {
-		"isFromRoot":True,
-		"input_file":"80_DYToLL_50.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_DYToLL_50,
-		"N_total": 0.0,
-		"Raw_total":nevent_DYToLL_50,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":5,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_TTGJets"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTGJets.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTGJets,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTGJets,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_TTTo2L2Nu"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTTo2L2Nu.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTTo2L2Nu,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTTo2L2Nu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_TTWJetsToLNu"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTWJetsToLNu.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTWJetsToLNu,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTWJetsToLNu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_TTWJetsToQQ"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTWJetsToQQ.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTWJetsToQQ,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTWJetsToQQ,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_TTZToLLNuNu_10"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTZToLLNuNu_10.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTZToLLNuNu_10,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTZToLLNuNu_10,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_TTZToQQ"] = {
-		"isFromRoot":True,
-		"input_file":"80_TTZToQQ.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_TTZToQQ,
-		"N_total": 0.0,
-		"Raw_total":nevent_TTZToQQ,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_WGToLNuG"] = {
-		"isFromRoot":True,
-		"input_file":"80_WGToLNuG.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WGToLNuG,
-		"N_total": 0.0,
-		"Raw_total":nevent_WGToLNuG,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_WJetsToLNu"] = {
-		"isFromRoot":True,
-		"input_file":"80_WJetsToLNu.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WJetsToLNu,
-		"N_total": 0.0,
-		"Raw_total":nevent_WJetsToLNu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_WWTo2L2Nu"] = {
-		"isFromRoot":True,
-		"input_file":"80_WWTo2L2Nu.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WWTo2L2Nu,
-		"N_total": 0.0,
-		"Raw_total":nevent_WWTo2L2Nu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_WZTo2L2Q"] = {
-		"isFromRoot":True,
-		"input_file":"80_WZTo2L2Q.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WZTo2L2Q,
-		"N_total": 0.0,
-		"Raw_total":nevent_WZTo2L2Q,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_WZTo3LNu"] = {
-		"isFromRoot":True,
-		"input_file":"80_WZTo3LNu.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_WZTo3LNu,
-		"N_total": 0.0,
-		"Raw_total":nevent_WZTo3LNu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_ZZTo2L2Nu"] = {
-		"isFromRoot":True,
-		"input_file":"80_ZZTo2L2Nu.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_ZZTo2L2Nu,
-		"N_total": 0.0,
-		"Raw_total":nevent_ZZTo2L2Nu,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_ZZTo4L"] = {
-		"isFromRoot":True,
-		"input_file":"80_ZZTo4L.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_ZZTo4L,
-		"N_total": 0.0,
-		"Raw_total":nevent_ZZTo4L,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_tW"] = {
-		"isFromRoot":True,
-		"input_file":"80_tW.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_tw,
-		"N_total": 0.0,
-		"Raw_total":nevent_tw,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
-	pre_input_dic["ss_tW_anti"] = {
-		"isFromRoot":True,
-		"input_file":"80_tW_anti.root",
-		"isData":False,
-		"isSS":True,
-		"isFake":False,
-		"useToNorm":False,
-		"lumi":0.0,
-		"Xsection":xsection_tw_anti,
-		"N_total": 0.0,
-		"Raw_total":nevent_tw_anti,
-		"N_norm":1.0,
-		"Norm_Factor":1,
-		"Fill_color":30,
-		"weight_factor":-1,
-		"hist":{},
-		"isUpdate":isUpdate
-		}
+	tmp_sample_t = sample_t("ss_DYToLL_10to50")
+	tmp_sample_t.input_file = "80_DYToLL_10to50.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_DYToLL_10to50
+	tmp_sample_t.Raw_total = nevent_DYToLL_10to50
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_DYToLL_50")
+	tmp_sample_t.input_file = "80_DYToLL_50.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_DYToLL_50
+	tmp_sample_t.Raw_total = nevent_DYToLL_50
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_TTGJets")
+	tmp_sample_t.input_file = "80_TTGJets.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_TTGJets
+	tmp_sample_t.Raw_total = nevent_TTGJets
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_TTTo2L2Nu")
+	tmp_sample_t.input_file = "80_TTTo2L2Nu.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_TTTo2L2Nu
+	tmp_sample_t.Raw_total = nevent_TTTo2L2Nu
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_TTWJetsToLNu")
+	tmp_sample_t.input_file = "80_TTWJetsToLNu.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_TTWJetsToLNu
+	tmp_sample_t.Raw_total = nevent_TTWJetsToLNu
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_TTWJetsToQQ")
+	tmp_sample_t.input_file = "80_TTWJetsToQQ.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_TTWJetsToQQ
+	tmp_sample_t.Raw_total = nevent_TTWJetsToQQ
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_TTZToLLNuNu_10")
+	tmp_sample_t.input_file = "80_TTZToLLNuNu_10.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_TTZToLLNuNu_10
+	tmp_sample_t.Raw_total = nevent_TTZToLLNuNu_10
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_TTZToQQ")
+	tmp_sample_t.input_file = "80_TTZToQQ.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_TTZToQQ
+	tmp_sample_t.Raw_total = nevent_TTZToQQ
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_WGToLNuG")
+	tmp_sample_t.input_file = "80_WGToLNuG.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_WGToLNuG
+	tmp_sample_t.Raw_total = nevent_WGToLNuG
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_WJetsToLNu")
+	tmp_sample_t.input_file = "80_WJetsToLNu.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_WJetsToLNu
+	tmp_sample_t.Raw_total = nevent_WJetsToLNu
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_WWTo2L2Nu")
+	tmp_sample_t.input_file = "80_WWTo2L2Nu.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_WWTo2L2Nu
+	tmp_sample_t.Raw_total = nevent_WWTo2L2Nu
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_WZTo2L2Q")
+	tmp_sample_t.input_file = "80_WZTo2L2Q.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_WZTo2L2Q
+	tmp_sample_t.Raw_total = nevent_WZTo2L2Q
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_WZTo3LNu")
+	tmp_sample_t.input_file = "80_WZTo3LNu.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_WZTo3LNu
+	tmp_sample_t.Raw_total = nevent_WZTo3LNu
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_ZZTo2L2Nu")
+	tmp_sample_t.input_file = "80_ZZTo2L2Nu.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_ZZTo2L2Nu
+	tmp_sample_t.Raw_total = nevent_ZZTo2L2Nu
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_ZZTo4L")
+	tmp_sample_t.input_file = "80_ZZTo4L.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_ZZTo4L
+	tmp_sample_t.Raw_total = nevent_ZZTo4L
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_tW")
+	tmp_sample_t.input_file = "80_tW.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_tw
+	tmp_sample_t.Raw_total = nevent_tw
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
+	
+	tmp_sample_t = sample_t("ss_tW_anti")
+	tmp_sample_t.input_file = "80_tW_anti.root"
+	tmp_sample_t.isSS = True
+	tmp_sample_t.Xsection = xsection_tw_anti
+	tmp_sample_t.Raw_total = nevent_tw_anti
+	tmp_sample_t.weight_factor = -1.0
+	pre_input_dic[tmp_sample_t.label] = tmp_sample_t
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-n_jet_bjet_dic = {
-"(0,0)":[0,1,"(0,0)"],
-"(1,0)":[1,2,"(1,0)"],
-"(1,1)":[2,3,"(1,1)"],
-"(2,0)":[3,4,"(2,0)"],
-"(2,1)":[4,5,"(2,1)"],
-"(2,2)":[5,6,"(2,2)"],
-"(3,0)":[6,7,"(3,0)"],
-"(3,1)":[7,8,"(3,1)"],
-"(3,2)":[8,9,"(3,2)"],
-"(3,3)":[9,10,"(3,3)"],
-"(4,0)":[10,11,"(4,0)"],
-"(4,1)":[11,12,"(4,1)"],
-"(4,2)":[12,13,"(4,2)"],
-"(4,3)":[13,14,"(4,3)"],
-"(4,4)":[14,15,"(4,4)"],
-"(>4,n)":[15,16,"(>4,n)"],
-}
-n_jet_bjet_dic2 = {
-"(1,0)":[0,1,"(1,0)"],
-"(1,1)":[1,2,"(1,1)"],
-"(2,1)":[2,3,"(2,1)"],
-"(>=3,1)":[3,4,"(>=3,1)"],
-"(>=3,>1)":[4,5,"(>=3,>1)"],
-}
+tmp_value_t = value_t("M_ll")
+tmp_value_t.branch_name = "M_ll"
+tmp_value_t.hist_name = "M_ll"
+tmp_value_t.hist_title = "Invirant mass(Di-lepton)"
+tmp_value_t.hist_para = [20,None,0,200]
+tmp_value_t.x_label = ['M_{ll} (GeV/c^{2})',0.1]
+tmp_value_t.y_label = ['Event / 10 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
 
-pre_value_dic["new_M_ll"] = {
-	"Data_value_dic":{"M_ll":True},
-	"MC_value_dic":{"M_ll":True},
-	"hist_name":"new_M_ll",
-	"hist_title":"Invirant mass(Di-lepton)",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['M_{ll} (GeV/c^{2})',0.1],
-	"y_label":['Event / 10 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["M_ll_zmass"] = {
-	"Data_value_dic":{"M_ll":True},
-	"MC_value_dic":{"M_ll":True},
-	"hist_name":"M_ll_zmass",
-	"hist_title":"Invirant mass(Di-lepton)",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[12,None,60,120],
-	"y_axis":["null","null"],
-	"x_label":['M_{ll} (GeV/c^{2})',0.1],
-	"y_label":['Event / 5 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["Pt_ll"] = {
-	"Data_value_dic":{"M_ll":True},
-	"MC_value_dic":{"M_ll":True},
-	"hist_name":"Pt_ll",
-	"hist_title":"Pt (Di-lepton)",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{ll} (GeV/c^{2})',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["phi_ll"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"phi_ll",
-	"hist_title":"Pt (Di-lepton)",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['#phi^{ll} ',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["deltaR_ll"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"deltaR_ll",
-	"hist_title":"Pt (Di-lepton)",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[15,None,0,6],
-	"y_axis":["null","null"],
-	"x_label":['#Delta R(l,l)',0.1],
-	"y_label":['Event / 0.4',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["rapidity_ll"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"rapidity_ll",
-	"hist_title":"Pt (Di-lepton)",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3,3],
-	"y_axis":["null","null"],
-	"x_label":['Rapidity^{ll}',0.1],
-	"y_label":['Event / 1',0.6],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["new_leading_pt"] = {
-	"Data_value_dic":{"leading_pt":True},
-	"MC_value_dic":{"leading_pt":True},
-	"hist_name":"new_leading_pt",
-	"hist_title":"Leading Lepton Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{leading lep} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["new_leading_pt_muon"] = {
-	"Data_value_dic":{"leading_pt":"getattr(event,'leading_isMu')"},
-	"MC_value_dic":{"leading_pt":"getattr(event,'leading_isMu')"},
-	"hist_name":"new_leading_pt_muon",
-	"hist_title":"Leading Lepton Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{leading muon} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["new_leading_pt_ele"] = {
-	"Data_value_dic":{"leading_pt":"getattr(event,'leading_isE')"},
-	"MC_value_dic":{"leading_pt":"getattr(event,'leading_isE')"},
-	"hist_name":"new_leading_pt_ele",
-	"hist_title":"Leading Lepton Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{leading ele} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["leading_eta_muon"] = {
-	"Data_value_dic":{"leading_eta":"getattr(event,'leading_isMu')"},
-	"MC_value_dic":{"leading_eta":"getattr(event,'leading_isMu')"},
-	"hist_name":"muon_leading_eta",
-	"hist_title":"Leading muon #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{leading muon}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["leading_eta_ele"] = {
-	"Data_value_dic":{"leading_eta":"getattr(event,'leading_isE')"},
-	"MC_value_dic":{"leading_eta":"getattr(event,'leading_isE')"},
-	"hist_name":"electron_leading_eta",
-	"hist_title":"Leading electron #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{leading electron}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["leading_eta"] = {
-	"Data_value_dic":{"leading_eta":True},
-	"MC_value_dic":{"leading_eta":True},
-	"hist_name":"leading_eta",
-	"hist_title":"Leading Lepton #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{leading lepton}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["leading_phi"] = {
-	"Data_value_dic":{"leading_phi":True},
-	"MC_value_dic":{"leading_phi":True},
-	 "hist_name":"leading_phi",
-	"hist_title":"Leading Lepton #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['#phi^{leading lepton}',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["new_sub_leading_pt"] = {
-	"Data_value_dic":{"sub_leading_pt":True},
-	"MC_value_dic":{"sub_leading_pt":True},
-	"hist_name":"new_sub_leading_pt",
-	"hist_title":"Sub-Leading Lepton Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{subleading lepton} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["new_sub_leading_pt_muon"] = {
-	"Data_value_dic":{"sub_leading_pt":"getattr(event,'sub_leading_isMu')"},
-	"MC_value_dic":{"sub_leading_pt":"getattr(event,'sub_leading_isMu')"},
-	"hist_name":"new_sub_leading_pt_muon",
-	"hist_title":"sub_leading Lepton Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{sub_leading muon} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["new_sub_leading_pt_ele"] = {
-	"Data_value_dic":{"sub_leading_pt":"getattr(event,'sub_leading_isE')"},
-	"MC_value_dic":{"sub_leading_pt":"getattr(event,'sub_leading_isE')"},
-	"hist_name":"new_sub_leading_pt_ele",
-	"hist_title":"sub_leading Lepton Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{sub_leading ele} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["sub_leading_eta"] = {
-	"Data_value_dic":{"sub_leading_eta":True},
-	"MC_value_dic":{"sub_leading_eta":True},
-	"hist_name":"sub_leading_eta",
-	"hist_title":"sub_Leading Lepton #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{subleading lepton}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["sub_leading_eta_muon"] = {
-	"Data_value_dic":{"sub_leading_eta":"getattr(event,'sub_leading_isMu')"},
-	"MC_value_dic":{"sub_leading_eta":"getattr(event,'sub_leading_isMu')"},
-	"hist_name":"muon_sub_leading_eta",
-	"hist_title":"sub_Leading muon #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{subleading muon}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["sub_leading_eta_ele"] = {
-	"Data_value_dic":{"sub_leading_eta":"getattr(event,'sub_leading_isE')"},
-	"MC_value_dic":{"sub_leading_eta":"getattr(event,'sub_leading_isE')"},
-	"hist_name":"electron_sub_leading_eta",
-	"hist_title":"sub_Leading electron #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{subleading electron}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["sub_leading_phi"] = {
-	"Data_value_dic":{"sub_leading_phi":True},
-	"MC_value_dic":{"sub_leading_phi":True},
-	"hist_name":"sub_leading_phi",
-	"hist_title":"sub-Leading Lepton #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['#phi^{subleading lepton}',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_pt"] = {
-	"Data_value_dic":{"MET_FinalCollection_Pt":True},
-	"MC_value_dic":{"MET_FinalCollection_Pt":True},
-	"hist_name":"MET_Pt",
-	"hist_title":"MET Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,120],
-	"y_axis":["null","null"],
-	"x_label":['MET (GeV/c)',0.1],
-	"y_label":['Event / 6 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_phi"] = {
-	"Data_value_dic":{"MET_FinalCollection_phi":True},
-	"MC_value_dic":{"MET_FinalCollection_phi":True},
-	"hist_name":"MET_phi",
-	"hist_title":"MET #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['MET_{#phi}',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_significance"] = {
-	"Data_value_dic":{"MET_FinalCollection_significance":True},
-	"MC_value_dic":{"MET_FinalCollection_significance":True},
-	"hist_name":"MET_significance",
-	"hist_title":"MET significance",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,20],
-	"y_axis":["null","null"],
-	"x_label":['MET_{significance}',0.1],
-	"y_label":['Event / 2',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_pt_corr"] = {
-	"Data_value_dic":{"MET_OfflineCorrect_Pt":True},
-	"MC_value_dic":{"MET_OfflineCorrect_Pt":True},
-	"hist_name":"MET_pt_corr",
-	"hist_title":"MET Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,120],
-	"y_axis":["null","null"],
-	"x_label":['MET Offline Corr (GeV/c)',0.1],
-	"y_label":['Event / 6 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_phi_corr"] = {
-	"Data_value_dic":{"MET_OfflineCorrect_phi":True},
-	"MC_value_dic":{"MET_OfflineCorrect_phi":True},
-	"hist_name":"MET_phi_corr",
-	"hist_title":"MET #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['MET_{#phi} Offline Corr',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_T1Txy_pt"] = {
-	"Data_value_dic":{"MET_T1Txy_Pt":True},
-	"MC_value_dic":{"MET_T1Txy_Pt":True},
-	"hist_name":"MET_T1Txy_Pt",
-	"hist_title":"MET T1Txy Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,120],
-	"y_axis":["null","null"],
-	"x_label":['MET^{T1Txy} (GeV/c)',0.1],
-	"y_label":['Event / 6 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_T1Txy_phi"] = {
-	"Data_value_dic":{"MET_T1Txy_phi":True},
-	"MC_value_dic":{"MET_T1Txy_phi":True},
-	"hist_name":"MET_T1Txy_phi",
-	"hist_title":"MET T1Txy #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['MET^{T1Txy}_{#phi}',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["Z_MET_T1Txy_delta_phi"] = {
-	"Data_value_dic":{"MET_T1Txy_phi":True},
-	"MC_value_dic":{"MET_T1Txy_phi":True},
-	"hist_name":"Z_MET_T1Txy_delta_phi",
-	"hist_title":"MET T1Txy #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,3.5],
-	"y_axis":["null","null"],
-	"x_label":['#delta #phi(MET^{T1Txy},ll)',0.1],
-	"y_label":['Event / 0.35',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["MET_T1Txy_significance"] = {
-	"Data_value_dic":{"MET_T1Txy_significance":True},
-	"MC_value_dic":{"MET_T1Txy_significance":True},
-	"hist_name":"MET_T1Txy_significance",
-	"hist_title":"MET T1Txy significance",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,20],
-	"y_axis":["null","null"],
-	"x_label":['MET^{T1Txy}_{significance}',0.1],
-	"y_label":['Event / 2',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["rho"] = {
-	"Data_value_dic":{"ev_fixedGridRhoAll":True},
-	"MC_value_dic":{"ev_fixedGridRhoAll":True},
-	"hist_name":"rho_all",
-	"hist_title":"ev_fixedGridRhoAll",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,50],
-	"y_axis":["null","null"],
-	"x_label":['#rho',0.1],
-	"y_label":['Event / 5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_jet"] = {
-	"Data_value_dic":{"n_jet":True},
-	"MC_value_dic":{"n_jet":True},
-	"hist_name":"n_jet",
-	"hist_title":"Jet Multiplicity",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,10],
-	"y_axis":["null","null"],
-	"x_label":['N_{jet}',0.1],
-	"y_label":['Event / 1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_bjet"] = {
-	"Data_value_dic":{"n_bjet":True},
-	"MC_value_dic":{"n_bjet":True},
-	"hist_name":"n_bjet",
-	"hist_title":"Jet Multiplicity",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[6,None,0,6],
-	"y_axis":["null","null"],
-	"x_label":['N_{b jet}',0.1],
-	"y_label":['Event / 1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_bjet2"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"n_bjet2",
-	"hist_title":"Jet Multiplicity",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[6,None,0,6],
-	"y_axis":["null","null"],
-	"x_label":['N_{b jet} (p_{T} in [20,30])',0.1],
-	"y_label":['Event / 1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_fjet1"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"n_fjet1",
-	"hist_title":"Jet Multiplicity",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[6,None,0,6],
-	"y_axis":["null","null"],
-	"x_label":['N_{jet} (p_{T} > 30, |#eta| in [2.4,5.2])',0.1],
-	"y_label":['Event / 1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_fjet2"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"n_fjet2",
-	"hist_title":"Jet Multiplicity",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[6,None,0,6],
-	"y_axis":["null","null"],
-	"x_label":['N_{jet} (p_{T} > 40, |#eta| in [2.4,5.2])',0.1],
-	"y_label":['Event / 1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_jet_bjet"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"n_jet_bjet",
-	"hist_title":"Jet Multiplicity",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[len(n_jet_bjet_dic),None,0,len(n_jet_bjet_dic)],
-	"y_axis":["null","null"],
-	"x_label":['N_{(jet, b jet)}',0.1],
-	"y_label":['Event / 1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_jet_bjet2"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"n_jet_bjet2",
-	"hist_title":"Jet Multiplicity",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[len(n_jet_bjet_dic2),None,0,len(n_jet_bjet_dic2)],
-	"y_axis":["null","null"],
-	"x_label":['N_{(jet, b jet)}',0.1],
-	"y_label":['Event / 1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_leading_pt"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_leading_pt",
-	"hist_title":"Leading Jet Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{leading jet} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_leading_eta"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_leading_eta",
-	"hist_title":"Leading Jet #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{leading jet}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_leading_phi"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_leading_phi",
-	"hist_title":"Leading Jet #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['#phi^{leading jet}',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_leading_CSV"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_leading_CSV",
-	"hist_title":"Leading Jet scv",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,1.0],
-	"y_axis":["null","null"],
-	"x_label":['CSV^{leading jet}',0.1],
-	"y_label":['Event / 0.1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_sub_leading_pt"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_sub_leading_pt",
-	"hist_title":"Sub-Leading Jet Pt",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,200],
-	"y_axis":["null","null"],
-	"x_label":['P_{T}^{subleading jet} (GeV/c)',0.1],
-	"y_label":['Event / 20 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_sub_leading_eta"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_sub_leading_eta",
-	"hist_title":"sub_Leading Jet #eta",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-2.5,2.5],
-	"y_axis":["null","null"],
-	"x_label":['#eta^{subleading jet}',0.1],
-	"y_label":['Event / 0.5',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_sub_leading_phi"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_sub_leading_phi",
-	"hist_title":"sub-Leading Jet #phi",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,-3.5,3.5],
-	"y_axis":["null","null"],
-	"x_label":['#phi^{subleading jet}',0.1],
-	"y_label":['Event / 0.7',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["jet_sub_leading_CSV"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"jet_sub_leading_CSV",
-	"hist_title":"sub-Leading Jet scv",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[10,None,0,1.0],
-	"y_axis":["null","null"],
-	"x_label":['CSV^{subleading jet}',0.1],
-	"y_label":['Event / 0.1',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["HT"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"Ht",
-	"hist_title":"Ht",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,2000],
-	"y_axis":["null","null"],
-	"x_label":['HT (GeV)',0.1],
-	"y_label":['Event / 10 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["HT_log"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"Ht_log",
-	"hist_title":"Ht",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,2000],
-	"y_axis":["null","null"],
-	"x_label":['HT (GeV)',0.1],
-	"y_label":['Event / 10 GeV',0.05],
-	"x_log":False,
-	"y_log":True,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["sys_HT"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"sys_Ht",
-	"hist_title":"sys Ht",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,2000],
-	"y_axis":["null","null"],
-	"x_label":['HT^{sys} (GeV)',0.1],
-	"y_label":['Event / 10 GeV',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["sys_HT_log"] = {
-	"Data_value_dic":{"":True},
-	"MC_value_dic":{"":True},
-	"hist_name":"sys_Ht_log",
-	"hist_title":"sys Ht",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[20,None,0,2000],
-	"y_axis":["null","null"],
-	"x_label":['HT^{sys} (GeV)',0.1],
-	"y_label":['Event / 10 GeV',0.05],
-	"x_log":False,
-	"y_log":True,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["pv_n"] = {
-	"Data_value_dic":{"pv_n":True},
-	"MC_value_dic":{"pv_n":True},
-	"hist_name":"N_vtx_PU",
-	"hist_title":"Number of vertex (with PU reweight)",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[100,None,0,100],
-	"y_axis":["null","null"],
-	"x_label":['N_{vtx}',0.1],
-	"y_label":['Event ',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["pv_n_noPU"] = {
-	"Data_value_dic":{"pv_n":True},
-	"MC_value_dic":{"pv_n":True},
-	"hist_name":"N_vtx_noPU",
-	"hist_title":"Number of vertex (without PU reweight)",
-	"use_array":False,
-	"PU_reweight":False,
-	"hist_para":[100,None,0,100],
-	"y_axis":["null","null"],
-	"x_label":['N_{vtx}^{no PU}',0.1],
-	"y_label":['Event ',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
-pre_value_dic["n_stat"] = {
-	"Data_value_dic":{"pv_n":True},
-	"MC_value_dic":{"pv_n":True},
-	"hist_name":"N_stat",
-	"hist_title":"",
-	"use_array":False,
-	"PU_reweight":True,
-	"hist_para":[1,None,0,1],
-	"y_axis":["null","null"],
-	"x_label":['N_stat',0.1],
-	"y_label":['Event ',0.05],
-	"x_log":False,
-	"y_log":False,
-	"lenend":{
-		"useLegend":True,
-		"position":[],
-		},
-	}
+tmp_value_t = value_t("M_ll_zmass")
+tmp_value_t.branch_name = "M_ll"
+tmp_value_t.hist_name = "M_ll_zmass"
+tmp_value_t.hist_title = "Invirant mass(Di-lepton)"
+tmp_value_t.hist_para = [12,None,60,120]
+tmp_value_t.x_label = ['M_{ll} (GeV/c^{2})',0.1]
+tmp_value_t.y_label = ['Event / 5 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def getP4(pt, eta, phi, isE, isMu):
-	p4 = ROOT.TLorentzVector()
-	if isE:
-		p4.SetPtEtaPhiM(pt,eta,phi,0.000511)
-	else:
-		p4.SetPtEtaPhiM(pt,eta,phi,0.10566)
-	return p4
+tmp_value_t = value_t("Pt_ll")
+tmp_value_t.hist_name = "Pt_ll"
+tmp_value_t.hist_title = "Pt (Di-lepton)"
+tmp_value_t.hist_para = [10,None,0,200]
+tmp_value_t.x_label = ['P_{T}^{ll} (GeV/c^{2})',0.1]
+tmp_value_t.y_label = ['Event / 20 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
 
-def getbinwidth(x,x1):
-	for i in range(len(x1)):
-		if x < x1[i] and i>0:
-			return (x1[i]-x1[i-1])
-		elif x < x1[i]:
-			return -1.0
-	return -1.0
+tmp_value_t = value_t("phi_ll")
+tmp_value_t.hist_name = "phi_ll"
+tmp_value_t.hist_title = "Pt (Di-lepton)"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['#phi^{ll} ',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("deltaR_ll")
+tmp_value_t.hist_name = "deltaR_ll"
+tmp_value_t.hist_title = "Pt (Di-lepton)"
+tmp_value_t.hist_para = [15,None,0,6]
+tmp_value_t.x_label = ['#Delta R(l,l)',0.1]
+tmp_value_t.y_label = ['Event / 0.4',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("rapidity_ll")
+tmp_value_t.hist_name = "rapidity_ll"
+tmp_value_t.hist_title = "Pt (Di-lepton)"
+tmp_value_t.hist_para = [10,None,-3,3]
+tmp_value_t.x_label = ['Rapidity^{ll}',0.1]
+tmp_value_t.y_label = ['Event / 1',0.6]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("leading_pt")
+tmp_value_t.branch_name = "leading_pt"
+tmp_value_t.hist_name = "leading_pt"
+tmp_value_t.hist_title = "Leading Lepton Pt"
+tmp_value_t.hist_para = [10,None,0,200]
+tmp_value_t.x_label = ['P_{T}^{leading lep} (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 20 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("pt_muon")
+tmp_value_t.hist_name = "muon_pt"
+tmp_value_t.hist_title = "Leading Lepton Pt"
+tmp_value_t.hist_para = [10,None,0,200]
+tmp_value_t.x_label = ['P_{T}^{leading muon} (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 20 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("pt_ele")
+tmp_value_t.hist_name = "ele_pt"
+tmp_value_t.hist_title = "Leading Lepton Pt"
+tmp_value_t.hist_para = [10,None,0,200]
+tmp_value_t.x_label = ['P_{T}^{leading ele} (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 20 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("eta_muon")
+tmp_value_t.hist_name = "muon_eta"
+tmp_value_t.hist_title = "Leading muon #eta"
+tmp_value_t.hist_para = [10,None,-2.5,2.5]
+tmp_value_t.x_label = ['#eta^{leading muon}',0.1]
+tmp_value_t.y_label = ['Event / 0.5',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("eta_ele")
+tmp_value_t.hist_name = "electron_eta"
+tmp_value_t.hist_title = "Leading electron #eta"
+tmp_value_t.hist_para = [10,None,-2.5,2.5]
+tmp_value_t.x_label = ['#eta^{leading electron}',0.1]
+tmp_value_t.y_label = ['Event / 0.5',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("leading_eta")
+tmp_value_t.branch_name = "leading_eta"
+tmp_value_t.hist_name = "leading_eta"
+tmp_value_t.hist_title = "Leading Lepton #eta"
+tmp_value_t.hist_para = [10,None,-2.5,2.5]
+tmp_value_t.x_label = ['#eta^{leading lepton}',0.1]
+tmp_value_t.y_label = ['Event / 0.5',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("leading_phi")
+tmp_value_t.branch_name = "leading_phi"
+tmp_value_t.hist_name = "leading_phi"
+tmp_value_t.hist_title = "Leading Lepton #phi"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['#phi^{leading lepton}',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("sub_leading_pt")
+tmp_value_t.branch_name = "sub_leading_pt"
+tmp_value_t.hist_name = "sub_leading_pt"
+tmp_value_t.hist_title = "Sub-Leading Lepton Pt"
+tmp_value_t.hist_para = [10,None,0,200]
+tmp_value_t.x_label = ['P_{T}^{subleading lepton} (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 20 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("sub_leading_eta")
+tmp_value_t.branch_name = "sub_leading_eta"
+tmp_value_t.hist_name = "sub_leading_eta"
+tmp_value_t.hist_title = "sub_Leading Lepton #eta"
+tmp_value_t.hist_para = [10,None,-2.5,2.5]
+tmp_value_t.x_label = ['#eta^{subleading lepton}',0.1]
+tmp_value_t.y_label = ['Event / 0.5',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("sub_leading_phi")
+tmp_value_t.branch_name = "sub_leading_phi"
+tmp_value_t.hist_name = "sub_leading_phi"
+tmp_value_t.hist_title = "sub-Leading Lepton #phi"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['#phi^{subleading lepton}',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_pt")
+tmp_value_t.branch_name = "MET_FinalCollection_Pt"
+tmp_value_t.hist_name = "MET_Pt"
+tmp_value_t.hist_title = "MET Pt"
+tmp_value_t.hist_para = [20,None,0,120]
+tmp_value_t.x_label = ['MET (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 6 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_phi")
+tmp_value_t.branch_name = "MET_FinalCollection_phi"
+tmp_value_t.hist_name = "MET_phi"
+tmp_value_t.hist_title = "MET #phi"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['MET_{#phi}',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_significance")
+tmp_value_t.branch_name = "MET_FinalCollection_significance"
+tmp_value_t.hist_name = "MET_significance"
+tmp_value_t.hist_title = "MET significance"
+tmp_value_t.hist_para = [10,None,0,20]
+tmp_value_t.x_label = ['MET_{significance}',0.1]
+tmp_value_t.y_label = ['Event / 2',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_pt_corr")
+tmp_value_t.branch_name = "MET_OfflineCorrect_Pt"
+tmp_value_t.hist_name = "MET_pt_corr"
+tmp_value_t.hist_title = "MET Pt"
+tmp_value_t.hist_para = [20,None,0,120]
+tmp_value_t.x_label = ['MET Offline Corr (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 6 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_phi_corr")
+tmp_value_t.branch_name = "MET_OfflineCorrect_phi"
+tmp_value_t.hist_name = "MET_phi_corr"
+tmp_value_t.hist_title = "MET #phi"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['MET_{#phi} Offline Corr',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_T1Txy_pt")
+tmp_value_t.branch_name = "MET_T1Txy_Pt"
+tmp_value_t.hist_name = "MET_T1Txy_Pt"
+tmp_value_t.hist_title = "MET T1Txy Pt"
+tmp_value_t.hist_para = [20,None,0,120]
+tmp_value_t.x_label = ['MET^{T1Txy} (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 6 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_T1Txy_phi")
+tmp_value_t.branch_name = "MET_T1Txy_phi"
+tmp_value_t.hist_name = "MET_T1Txy_phi"
+tmp_value_t.hist_title = "MET T1Txy #phi"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['MET^{T1Txy}_{#phi}',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("Z_MET_T1Txy_delta_phi")
+tmp_value_t.branch_name = "MET_T1Txy_phi"
+tmp_value_t.hist_name = "Z_MET_T1Txy_delta_phi"
+tmp_value_t.hist_title = "MET T1Txy #phi"
+tmp_value_t.hist_para = [10,None,0,3.5]
+tmp_value_t.x_label = ['#delta #phi(MET^{T1Txy},ll)',0.1]
+tmp_value_t.y_label = ['Event / 0.35',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("MET_T1Txy_significance")
+tmp_value_t.branch_name = "MET_T1Txy_significance"
+tmp_value_t.hist_name = "MET_T1Txy_significance"
+tmp_value_t.hist_title = "MET T1Txy significance"
+tmp_value_t.hist_para = [10,None,0,20]
+tmp_value_t.x_label = ['MET^{T1Txy}_{significance}',0.1]
+tmp_value_t.y_label = ['Event / 2',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("rho")
+tmp_value_t.branch_name = "ev_fixedGridRhoAll"
+tmp_value_t.hist_name = "rho_all"
+tmp_value_t.hist_title = "ev_fixedGridRhoAll"
+tmp_value_t.hist_para = [10,None,0,50]
+tmp_value_t.x_label = ['#rho',0.1]
+tmp_value_t.y_label = ['Event / 5',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_jet")
+tmp_value_t.branch_name = "n_jet"
+tmp_value_t.hist_name = "n_jet"
+tmp_value_t.hist_title = "Jet Multiplicity"
+tmp_value_t.hist_para = [10,None,0,10]
+tmp_value_t.x_label = ['N_{jet}',0.1]
+tmp_value_t.y_label = ['Event / 1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_bjet")
+tmp_value_t.branch_name = "n_bjet"
+tmp_value_t.hist_name = "n_bjet"
+tmp_value_t.hist_title = "Jet Multiplicity"
+tmp_value_t.hist_para = [6,None,0,6]
+tmp_value_t.x_label = ['N_{b jet}',0.1]
+tmp_value_t.y_label = ['Event / 1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_bjet2")
+tmp_value_t.hist_name = "n_bjet2"
+tmp_value_t.hist_title = "Jet Multiplicity"
+tmp_value_t.hist_para = [6,None,0,6]
+tmp_value_t.x_label = ['N_{b jet} (p_{T} in [20,30])',0.1]
+tmp_value_t.y_label = ['Event / 1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_fjet1")
+tmp_value_t.hist_name = "n_fjet1"
+tmp_value_t.hist_title = "Jet Multiplicity"
+tmp_value_t.hist_para = [6,None,0,6]
+tmp_value_t.x_label = ['N_{jet} (p_{T} > 30, |#eta| in [2.4,5.2])',0.1]
+tmp_value_t.y_label = ['Event / 1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_fjet2")
+tmp_value_t.hist_name = "n_fjet2"
+tmp_value_t.hist_title = "Jet Multiplicity"
+tmp_value_t.hist_para = [6,None,0,6]
+tmp_value_t.x_label = ['N_{jet} (p_{T} > 40, |#eta| in [2.4,5.2])',0.1]
+tmp_value_t.y_label = ['Event / 1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_jet_bjet")
+tmp_value_t.hist_name = "n_jet_bjet"
+tmp_value_t.hist_title = "Jet Multiplicity"
+tmp_value_t.hist_para = [len(n_jet_bjet_dic),None,0,len(n_jet_bjet_dic)]
+tmp_value_t.x_label = ['N_{(jet, b jet)}',0.1]
+tmp_value_t.y_label = ['Event / 1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_jet_bjet2")
+tmp_value_t.hist_name = "n_jet_bjet2"
+tmp_value_t.hist_title = "Jet Multiplicity"
+tmp_value_t.hist_para = [len(n_jet_bjet_dic2),None,0,len(n_jet_bjet_dic2)]
+tmp_value_t.x_label = ['N_{(jet, b jet)}',0.1]
+tmp_value_t.y_label = ['Event / 1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_leading_pt")
+tmp_value_t.hist_name = "jet_leading_pt"
+tmp_value_t.hist_title = "Leading Jet Pt"
+tmp_value_t.hist_para = [10,None,0,200]
+tmp_value_t.x_label = ['P_{T}^{leading jet} (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 20 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_leading_eta")
+tmp_value_t.hist_name = "jet_leading_eta"
+tmp_value_t.hist_title = "Leading Jet #eta"
+tmp_value_t.hist_para = [10,None,-2.5,2.5]
+tmp_value_t.x_label = ['#eta^{leading jet}',0.1]
+tmp_value_t.y_label = ['Event / 0.5',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_leading_phi")
+tmp_value_t.hist_name = "jet_leading_phi"
+tmp_value_t.hist_title = "Leading Jet #phi"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['#phi^{leading jet}',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_leading_CSV")
+tmp_value_t.hist_name = "jet_leading_CSV"
+tmp_value_t.hist_title = "Leading Jet scv"
+tmp_value_t.hist_para = [10,None,0,1.0]
+tmp_value_t.x_label = ['CSV^{leading jet}',0.1]
+tmp_value_t.y_label = ['Event / 0.1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_sub_leading_pt")
+tmp_value_t.hist_name = "jet_sub_leading_pt"
+tmp_value_t.hist_title = "Sub-Leading Jet Pt"
+tmp_value_t.hist_para = [10,None,0,200]
+tmp_value_t.x_label = ['P_{T}^{subleading jet} (GeV/c)',0.1]
+tmp_value_t.y_label = ['Event / 20 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_sub_leading_eta")
+tmp_value_t.hist_name = "jet_sub_leading_eta"
+tmp_value_t.hist_title = "sub_Leading Jet #eta"
+tmp_value_t.hist_para = [10,None,-2.5,2.5]
+tmp_value_t.x_label = ['#eta^{subleading jet}',0.1]
+tmp_value_t.y_label = ['Event / 0.5',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_sub_leading_phi")
+tmp_value_t.hist_name = "jet_sub_leading_phi"
+tmp_value_t.hist_title = "sub-Leading Jet #phi"
+tmp_value_t.hist_para = [10,None,-3.5,3.5]
+tmp_value_t.x_label = ['#phi^{subleading jet}',0.1]
+tmp_value_t.y_label = ['Event / 0.7',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("jet_sub_leading_CSV")
+tmp_value_t.hist_name = "jet_sub_leading_CSV"
+tmp_value_t.hist_title = "sub-Leading Jet scv"
+tmp_value_t.hist_para = [10,None,0,1.0]
+tmp_value_t.x_label = ['CSV^{subleading jet}',0.1]
+tmp_value_t.y_label = ['Event / 0.1',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("HT")
+tmp_value_t.hist_name = "Ht"
+tmp_value_t.hist_title = "Ht"
+tmp_value_t.hist_para = [20,None,0,2000]
+tmp_value_t.x_label = ['HT (GeV)',0.1]
+tmp_value_t.y_label = ['Event / 10 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("HT_log")
+tmp_value_t.hist_name = "Ht_log"
+tmp_value_t.hist_title = "Ht"
+tmp_value_t.hist_para = [20,None,0,2000]
+tmp_value_t.x_label = ['HT (GeV)',0.1]
+tmp_value_t.y_label = ['Event / 10 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("sys_HT")
+tmp_value_t.hist_name = "sys_Ht"
+tmp_value_t.hist_title = "sys Ht"
+tmp_value_t.hist_para = [20,None,0,2000]
+tmp_value_t.x_label = ['HT^{sys} (GeV)',0.1]
+tmp_value_t.y_label = ['Event / 10 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("sys_HT_log")
+tmp_value_t.hist_name = "sys_Ht_log"
+tmp_value_t.hist_title = "sys Ht"
+tmp_value_t.hist_para = [20,None,0,2000]
+tmp_value_t.x_label = ['HT^{sys} (GeV)',0.1]
+tmp_value_t.y_label = ['Event / 10 GeV',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("pv_n")
+tmp_value_t.branch_name = "pv_n"
+tmp_value_t.hist_name = "N_vtx_PU"
+tmp_value_t.hist_title = "Number of vertex (with PU reweight)"
+tmp_value_t.hist_para = [100,None,0,100]
+tmp_value_t.x_label = ['N_{vtx}',0.1]
+tmp_value_t.y_label = ['Event ',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("pv_n_noPU")
+tmp_value_t.branch_name = "pv_n"
+tmp_value_t.hist_name = "N_vtx_noPU"
+tmp_value_t.hist_title = "Number of vertex (without PU reweight)"
+tmp_value_t.PU_reweight= False
+tmp_value_t.hist_para = [100,None,0,100]
+tmp_value_t.x_label = ['N_{vtx}^{no PU}',0.1]
+tmp_value_t.y_label = ['Event ',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+
+tmp_value_t = value_t("n_stat")
+tmp_value_t.branch_name = "pv_n"
+tmp_value_t.hist_name = "N_stat"
+tmp_value_t.hist_title = ""
+tmp_value_t.hist_para = [1,None,0,1]
+tmp_value_t.x_label = ['N_stat',0.1]
+tmp_value_t.y_label = ['Event ',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t
+# put TMVA in the last, make sure all needed variables are constructed correctly in each event loop
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tmp_value_t = value_t("TMVA_MLP")
+tmp_value_t.hist_name = "TMVA_MLP"
+tmp_value_t.hist_title = ""
+tmp_value_t.hist_para = [10,None,0,1]
+tmp_value_t.x_label = ['MLP',0.1]
+tmp_value_t.y_label = ['Event ',0.05]
+pre_value_dic[tmp_value_t.label] = tmp_value_t

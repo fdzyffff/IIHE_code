@@ -35,7 +35,7 @@ class hist_make():
 		self.target_sample = "null"
 		self.hist_input_dir = ""
 		self.hist_output_dir = ""
-		self.cut_str = "True"
+		self.cut_str = "none"
 		self.total_lumi = 0.0
 		if self.ana_2016:
 			self.lumi_sys = 0.024
@@ -51,6 +51,13 @@ class hist_make():
 		self.store_hist_plot_list = []
 		self.SFs = SFs()
 
+		if (GLOBAL_USE_MVA):
+			self.MVA_reader = my_TMVA_reader("MLP","TMVA/MLP/weights/TMVA_MLP_1b_MLP.weights.xml")
+
+	def close(self):
+		if (GLOBAL_USE_MVA):
+			self.MVA_reader.close()
+
 	def init_2016(self):
 		#self.MuonTriggerSF_dic		= self.Load_json("SF_json/SF_json_2016/Muon/Trigger/Muon_Trigger_2018_SF.json")
 		return
@@ -60,26 +67,8 @@ class hist_make():
 		return
 
 	def init_2018(self):
-		self.MuonTriggerSF_dic		= self.Load_json("SF_json/SF_json_2018/Muon/Trigger/Muon_Trigger_2018_SF.json")
-		self.MuonISOSF_dic			= self.Load_json("SF_json/SF_json_2018/Muon/Iso/Muon_ISO_2018_SF_ISO.json")
-		self.MuonIDSF_dic			= self.Load_json("SF_json/SF_json_2018/Muon/ID/Muon_ID_2018_SF_ID.json")
 
-		self.MuonTriggerSF_sysu_dic		= self.Load_json("SF_json/SF_json_2018/Muon/Trigger/sysu_Muon_Trigger_2018_SF.json")
-		self.MuonISOSF_sysu_dic			= self.Load_json("SF_json/SF_json_2018/Muon/Iso/sysu_Muon_ISO_2018_SF_ISO.json")
-		self.MuonIDSF_sysu_dic			= self.Load_json("SF_json/SF_json_2018/Muon/ID/sysu_Muon_ID_2018_SF_ID.json")
-	
-		self.MuonTriggerSF_sysd_dic		= self.Load_json("SF_json/SF_json_2018/Muon/Trigger/sysd_Muon_Trigger_2018_SF.json")
-		self.MuonISOSF_sysd_dic			= self.Load_json("SF_json/SF_json_2018/Muon/Iso/sysd_Muon_ISO_2018_SF_ISO.json")
-		self.MuonIDSF_sysd_dic			= self.Load_json("SF_json/SF_json_2018/Muon/ID/sysd_Muon_ID_2018_SF_ID.json")
-
-
-		self.dic_Ele_reco_pt_eta	= self.Load_json("SF_json/SF_json_2018/Electron/reco/Electron_reco_run2018_json.txt")
-		self.ElectronIDSF_dic = {
-				(0,1.4442):0.969,
-				(1.566,2.5):0.9692,
-			}
-
-		self.dic_ttbar_gen_mass         = self.Load_json("SF_json/SF_json_2018/ttbar/ttbar_NNPDF31to30_json.txt")
+		return
 
 	def constrain_float(self, float_in, float_l, float_u):
 		if float_l >= float_u:
@@ -242,10 +231,10 @@ class hist_make():
 			return 0
 
 	def DYNNPDF_weight_2017_2018(self, event):
-		Gen_Led_Et = getattr(event, "gen_leading_pt")
-		Gen_Z_mass = getattr(event, "gen_mass")
-		region_ele = getattr(event, "ele_region")
-		region_muon = getattr(event, "muon_region")
+		Gen_Led_Et = t1.gen_leading_pt
+		Gen_Z_mass = t1.gen_mass
+		region_ele = t1.ele_region
+		region_muon = t1.muon_region
 		NNPDF_weight = 1.0
 		region = 0
 
@@ -307,7 +296,7 @@ class hist_make():
 			ret = False
 		return ret
 
-	def pass_MET_filters_2017(self, event, leaf_name_list, isData):
+	def pass_MET_filters_2017(self, t1, leaf_name_list, isData):
 		trig_Flag_goodVertices_accept = False
 		trig_Flag_globalSuperTightHalo2016Filter_accept = False
 		trig_Flag_HBHENoiseFilter_accept = False
@@ -316,21 +305,21 @@ class hist_make():
 		trig_Flag_BadPFMuonFilter_accept = False
 		trig_Flag_eeBadScFilter_accept = False
 		trig_Flag_ecalBadCalibReduced = False
-		if ( ('trig_Flag_goodVertices_accept' in leaf_name_list) and getattr(event, 'trig_Flag_goodVertices_accept') ):
+		if ( ('trig_Flag_goodVertices_accept' in leaf_name_list) and t1.trig_Flag_goodVertices_accept ):
 			trig_Flag_goodVertices_accept = True
-		if ( ('trig_Flag_globalSuperTightHalo2016Filter_accept' in leaf_name_list) and getattr(event, 'trig_Flag_globalSuperTightHalo2016Filter_accept') ):
+		if ( ('trig_Flag_globalSuperTightHalo2016Filter_accept' in leaf_name_list) and t1.trig_Flag_globalSuperTightHalo2016Filter_accept ):
 			trig_Flag_globalSuperTightHalo2016Filter_accept = True
-		if ( ('trig_Flag_HBHENoiseFilter_accept' in leaf_name_list) and getattr(event, 'trig_Flag_HBHENoiseFilter_accept') ):
+		if ( ('trig_Flag_HBHENoiseFilter_accept' in leaf_name_list) and t1.trig_Flag_HBHENoiseFilter_accept ):
 			trig_Flag_HBHENoiseFilter_accept = True
-		if ( ('trig_Flag_HBHENoiseIsoFilter_accept' in leaf_name_list) and getattr(event, 'trig_Flag_HBHENoiseIsoFilter_accept') ):
+		if ( ('trig_Flag_HBHENoiseIsoFilter_accept' in leaf_name_list) and t1.trig_Flag_HBHENoiseIsoFilter_accept ):
 			trig_Flag_HBHENoiseIsoFilter_accept = True
-		if ( ('trig_Flag_EcalDeadCellTriggerPrimitiveFilter_accept' in leaf_name_list) and getattr(event, 'trig_Flag_EcalDeadCellTriggerPrimitiveFilter_accept') ):
+		if ( ('trig_Flag_EcalDeadCellTriggerPrimitiveFilter_accept' in leaf_name_list) and t1.trig_Flag_EcalDeadCellTriggerPrimitiveFilter_accept ):
 			trig_Flag_EcalDeadCellTriggerPrimitiveFilter_accept = True
-		if ( ('trig_Flag_BadPFMuonFilter_accept' in leaf_name_list) and getattr(event, 'trig_Flag_BadPFMuonFilter_accept') ):
+		if ( ('trig_Flag_BadPFMuonFilter_accept' in leaf_name_list) and t1.trig_Flag_BadPFMuonFilter_accept ):
 			trig_Flag_BadPFMuonFilter_accept = True
-		if ( ('trig_Flag_eeBadScFilter_accept' in leaf_name_list) and getattr(event, 'trig_Flag_eeBadScFilter_accept') ):
+		if ( ('trig_Flag_eeBadScFilter_accept' in leaf_name_list) and t1.trig_Flag_eeBadScFilter_accept ):
 			trig_Flag_eeBadScFilter_accept = True
-		if ( ('trig_Flag_ecalBadCalibReduced' in leaf_name_list) and getattr(event, 'trig_Flag_ecalBadCalibReduced') ):
+		if ( ('trig_Flag_ecalBadCalibReduced' in leaf_name_list) and t1.trig_Flag_ecalBadCalibReduced ):
 			trig_Flag_ecalBadCalibReduced = True
 
 		ret = False
@@ -354,7 +343,7 @@ class hist_make():
 #							and trig_Flag_eeBadScFilter_accept \
 		return ret
 
-	def pass_MET_filters_2018(self, event, leaf_name_list, isData):
+	def pass_MET_filters_2018(self, t1, leaf_name_list, isData):
 		ret = False
 		if isData:
 			ret = False
@@ -362,7 +351,7 @@ class hist_make():
 			ret = False
 		return ret
 
-	def get_MC_weight_2016(self, event):
+	def get_MC_weight_2016(self, t1):
 		MuonSF_weight = 1.0
 		ElectronSF_weight = 1.0
 		top_weight = 1.0
@@ -372,19 +361,19 @@ class hist_make():
 			
 		#sys top case
 		if self.sys_type == "top1_u":
-			top_weight = getattr(event,"w_ts1_up")
+			top_weight = t1.w_ts1_up
 		elif self.sys_type == "top1_d":
-			top_weight = getattr(event,"w_ts1_down")
+			top_weight = t1.w_ts1_down
 		else:
-			top_weight = getattr(event,"w_top")
+			top_weight = t1.w_top
 
-		if getattr(event, "n_bjet") > 0:
-			jet_BtagSF_medium_weight = getattr(event, "w_Btag_offline")
+		if t1.n_bjet > 0:
+			jet_BtagSF_medium_weight = t1.w_Btag_offline
 		#print "w_Btag_medium : %s"%(jet_BtagSF_medium_weight)
 
-		tmp_leading_p4 = getP4(getattr(event,"leading_pt"),getattr(event,"leading_eta"),getattr(event,"leading_phi"),getattr(event,"leading_isE"),getattr(event,"leading_isMu"))
-		tmp_subleading_p4 = getP4(getattr(event,"sub_leading_pt"),getattr(event,"sub_leading_eta"),getattr(event,"sub_leading_phi"),getattr(event,"sub_leading_isE"),getattr(event,"sub_leading_isMu"))
-		if (getattr(event, "leading_isE")):
+		tmp_leading_p4 = getP4(t1.leading_pt,t1.leading_eta,t1.leading_phi,t1.leading_isE,t1.leading_isMu)
+		tmp_subleading_p4 = getP4(t1.sub_leading_pt,t1.sub_leading_eta,t1.sub_leading_phi,t1.sub_leading_isE,t1.sub_leading_isMu)
+		if (t1.leading_isE):
 			Ele_p4 = tmp_leading_p4
 			Muon_p4 = tmp_subleading_p4
 		else:
@@ -402,35 +391,35 @@ class hist_make():
 		MuonSF_weight *= muon_sf_iso
 
 		#sys trigger sf
-		Trigger_SF *= self.SFs.get_trigger_sf("2016", "TTT",getattr(event,"leading_pt"),abs(getattr(event,"sub_leading_pt")))
+		Trigger_SF *= self.SFs.get_trigger_sf("2016", "TTT",t1.leading_pt,abs(t1.sub_leading_pt))
 
-		#print "event :%s , sf_ele_reco : %0.6f , sf_ele_id : %0.6f , sf_mu_id : %0.6f , sf_mu_iso : %0.6f sf_trig : %0.6f , PU_w : %0.6f"%(getattr(event,"ev_event"), ele_sf_reco, ele_sf_id, muon_sf_id, muon_sf_iso, Trigger_SF, getattr(event, "w_PU"))
+		#print "event :%s , sf_ele_reco : %0.6f , sf_ele_id : %0.6f , sf_mu_id : %0.6f , sf_mu_iso : %0.6f sf_trig : %0.6f , PU_w : %0.6f"%(t1.ev_event, ele_sf_reco, ele_sf_id, muon_sf_id, muon_sf_iso, Trigger_SF, t1.w_PU)
 		return MuonSF_weight * ElectronSF_weight * top_weight * prefiring_weight * Trigger_SF * jet_BtagSF_medium_weight
 
-	def get_MC_weight_2017(self, event, pass_trigger_onlyMuon, isDY, isTTbar):
+	def get_MC_weight_2017(self, t1, pass_trigger_onlyMuon, isDY, isTTbar):
 		MuonSF_weight = 1.0
 		ElectronSF_weight = 1.0
 		top_weight = 1.0
 		prefiring_weight = 1.0
 		Trigger_SF = 1.0
 		jet_BtagSF_medium_weight = 1.0
-		prefiring_weight = getattr(event, "ev_prefiringweight")
+		prefiring_weight = t1.ev_prefiringweight
 			
 		#sys top case
 		if self.sys_type == "top1_u":
-			top_weight = getattr(event,"w_ts1_up")
+			top_weight = t1.w_ts1_up
 		elif self.sys_type == "top1_d":
-			top_weight = getattr(event,"w_ts1_down")
+			top_weight = t1.w_ts1_down
 		else:
-			top_weight = getattr(event,"w_top")
+			top_weight = t1.w_top
 
-		if getattr(event, "n_bjet") > 0:
-			jet_BtagSF_medium_weight = getattr(event, "w_Btag_medium")
+		if t1.n_bjet > 0:
+			jet_BtagSF_medium_weight = t1.w_Btag_medium
 		#print "w_Btag_medium : %s"%(jet_BtagSF_medium_weight)
 
-		tmp_leading_p4 = getP4(getattr(event,"leading_pt"),getattr(event,"leading_eta"),getattr(event,"leading_phi"),getattr(event,"leading_isE"),getattr(event,"leading_isMu"))
-		tmp_subleading_p4 = getP4(getattr(event,"sub_leading_pt"),getattr(event,"sub_leading_eta"),getattr(event,"sub_leading_phi"),getattr(event,"sub_leading_isE"),getattr(event,"sub_leading_isMu"))
-		if (getattr(event, "leading_isE")):
+		tmp_leading_p4 = getP4(t1.leading_pt,t1.leading_eta,t1.leading_phi,t1.leading_isE,t1.leading_isMu)
+		tmp_subleading_p4 = getP4(t1.sub_leading_pt,t1.sub_leading_eta,t1.sub_leading_phi,t1.sub_leading_isE,t1.sub_leading_isMu)
+		if (t1.leading_isE):
 			Ele_p4 = tmp_leading_p4
 			Muon_p4 = tmp_subleading_p4
 		else:
@@ -448,18 +437,69 @@ class hist_make():
 		MuonSF_weight *= muon_sf_iso
 
 		#sys trigger sf
-		Trigger_SF *= self.SFs.get_trigger_sf("2017", "TTT",getattr(event,"leading_pt"),abs(getattr(event,"sub_leading_pt")))
+		Trigger_SF *= self.SFs.get_trigger_sf("2017", "TTT",t1.leading_pt,abs(t1.sub_leading_pt))
 
-		#print "event :%s , sf_ele_reco : %0.6f , sf_ele_id : %0.6f , sf_mu_id : %0.6f , sf_mu_iso : %0.6f sf_trig : %0.6f , PU_w : %0.6f"%(getattr(event,"ev_event"), ele_sf_reco, ele_sf_id, muon_sf_id, muon_sf_iso, Trigger_SF, getattr(event, "w_PU"))
+		#print "event :%s , sf_ele_reco : %0.6f , sf_ele_id : %0.6f , sf_mu_id : %0.6f , sf_mu_iso : %0.6f sf_trig : %0.6f , PU_w : %0.6f"%(t1.ev_event, ele_sf_reco, ele_sf_id, muon_sf_id, muon_sf_iso, Trigger_SF, t1.w_PU)
 		return MuonSF_weight * ElectronSF_weight * top_weight * prefiring_weight * Trigger_SF * jet_BtagSF_medium_weight
-		return 1.0
 
-	def get_MC_weight_2018(self, event, pass_trigger_onlyMuon, isDY, isTTbar):
+	def get_MC_weight_2018(self, t1, pass_trigger_onlyMuon, isDY, isTTbar):
+		MuonSF_weight = 1.0
+		ElectronSF_weight = 1.0
+		top_weight = 1.0
+		prefiring_weight = 1.0
+		Trigger_SF = 1.0
+		jet_BtagSF_medium_weight = 1.0
+		prefiring_weight = t1.ev_prefiringweight
+			
+		#sys top case
+		if self.sys_type == "top1_u":
+			top_weight = t1.w_ts1_up
+		elif self.sys_type == "top1_d":
+			top_weight = t1.w_ts1_down
+		else:
+			top_weight = t1.w_top
 
-		return 1.0
+		if t1.n_bjet > 0:
+			jet_BtagSF_medium_weight = t1.w_Btag_medium
+		#print "w_Btag_medium : %s"%(jet_BtagSF_medium_weight)
+
+		tmp_leading_p4 = getP4(t1.leading_pt,t1.leading_eta,t1.leading_phi,t1.leading_isE,t1.leading_isMu)
+		tmp_subleading_p4 = getP4(t1.sub_leading_pt,t1.sub_leading_eta,t1.sub_leading_phi,t1.sub_leading_isE,t1.sub_leading_isMu)
+		if (t1.leading_isE):
+			Ele_p4 = tmp_leading_p4
+			Muon_p4 = tmp_subleading_p4
+		else:
+			Muon_p4 = tmp_leading_p4
+			Ele_p4 = tmp_subleading_p4
+
+		ele_sf_reco = self.SFs.get_ele_reco_sf("2018", "EleSFReco", Ele_p4.Pt(), Ele_p4.Eta())
+		ElectronSF_weight *= ele_sf_reco
+		ele_sf_id = self.SFs.get_ele_ID_sf("2018", "EleSFID", Ele_p4.Pt(), Ele_p4.Eta())
+		ElectronSF_weight *= ele_sf_id
+
+		muon_sf_id = self.SFs.get_mu_ID_sf("2018", "MuonSFID",Muon_p4.Pt(), Muon_p4.Eta() )
+		MuonSF_weight *= muon_sf_id
+		muon_sf_iso = self.SFs.get_mu_Iso_sf("2018", "MuonSFIso",Muon_p4.Pt(), Muon_p4.Eta() )
+		MuonSF_weight *= muon_sf_iso
+
+		#sys trigger sf
+		Trigger_SF *= self.SFs.get_trigger_sf("2018", "TTT",t1.leading_pt,abs(t1.sub_leading_pt))
+
+		#print "event :%s , sf_ele_reco : %0.6f , sf_ele_id : %0.6f , sf_mu_id : %0.6f , sf_mu_iso : %0.6f sf_trig : %0.6f , PU_w : %0.6f"%(t1.ev_event, ele_sf_reco, ele_sf_id, muon_sf_id, muon_sf_iso, Trigger_SF, t1.w_PU)
+		return MuonSF_weight * ElectronSF_weight * top_weight * prefiring_weight * Trigger_SF * jet_BtagSF_medium_weight
+
+	def	fill_value_hist(self, h1, final_info, final_value_max_constrain):
+		final_value = final_info[0]
+		final_weight = final_info[1]
+		for value_i in range(len(final_value)):
+			h1_nbin = h1.GetXaxis().GetNbins()
+			if (final_value_max_constrain):
+				if final_value[value_i] >= h1.GetXaxis().GetBinUpEdge(h1_nbin):
+					final_value[value_i] = h1.GetXaxis().GetBinCenter(h1_nbin)
+			h1.Fill(final_value[value_i], final_weight)
 
 	def Fill_hist(self, sample_name, sample_dic, value_dic, cut_str):
-		root_file = sample_dic["input_file"]
+		root_file = sample_dic.input_file
 	
 		f1 = ROOT.TFile(root_file,"read")
 		t1 = f1.Get("tap")
@@ -470,67 +510,53 @@ class hist_make():
 		isTTbar = False
 		isDY = False
 	
-		if "isData" in sample_dic:
-			isData = sample_dic["isData"]
-		if "isFake" in sample_dic:
-			isFake = sample_dic["isFake"]
-		if "isSS" in sample_dic:
-			isSS = sample_dic["isSS"]
+		isData = sample_dic.isData
+		isFake = sample_dic.isFake
+		isSS = sample_dic.isSS
 
 		if "_DYToLL" in sample_name:
 			isDY = True
 		if "_ttbar2l2u" in sample_name:
 			isTTbar = True
 	
-		print "(%s)Fill hist from file : %s, isData: %s, isFake: %s, isSS: %s, nEvent: %d"%(self.global_year_label,root_file,isData,isFake,isSS,t1.GetEntries())
-		n_process = 0
+		event_i = 0
+		event_nl = self.n_range_l
+		event_nh = self.n_range_h
 		if self.isSplit_mode:
-			if (self.n_range_l<0):self.n_range_l=1
-			if (self.n_range_h<0):self.n_range_h=t1.GetEntries()
+			if (event_nl<0):event_nl=1
+			if (event_nh<0):event_nh=t1.GetEntries()
 			print "### using split mode, get event from %d to %d"%(self.n_range_l,self.n_range_h)
+
+		event_nl = max(event_nl-1, 0)
+		event_nh = min(event_nh, t1.GetEntries())
+		process_bar_t1 = ShowProcess(event_nh-event_nl)
 
 		leaf_name_list = []
 		for leaf in t1.GetListOfLeaves():
 			leaf_name_list.append(leaf.GetName())
 
-		for event in t1:
-			n_process += 1
-			if(n_process%50000==0):print n_process,'processed\n'
-			if self.isSplit_mode:
-				if (self.n_range_l > n_process):
-					continue
-				elif (self.n_range_h < n_process):
-					break
-			#if n_process >100:break
+		print "(%s)Fill hist from file : %s, isData: %s, isFake: %s, isSS: %s, nEvent: [%d - %d]"%(self.global_year_label,root_file,isData,isFake,isSS,event_nl, event_nh)
+		for event_i in range(event_nl, event_nh):
+			t1.GetEntry(event_i)
+			process_bar_t1.show_process()
 			#check same sign event
-			if (isSS and getattr(event,"leading_charge") != getattr(event,"sub_leading_charge")): continue
-			elif ((not isSS) and (getattr(event,"leading_charge") == getattr(event,"sub_leading_charge"))): continue
-			exec 'passed = (%s)'%(cut_str)
+			if (isSS and t1.leading_charge != t1.sub_leading_charge): continue
+			elif ((not isSS) and (t1.leading_charge == t1.sub_leading_charge)): continue
+			passed = global_cut_func(cut_str, t1)
 			if not passed: continue 
 
 			pass_trigger = False
 			pass_trigger_onlyMuon = False
 
 			if self.ana_2016:
-				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2016(event,leaf_name_list)
+				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2016(t1,leaf_name_list)
 			if self.ana_2017:
-				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2017(event,leaf_name_list)
+				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2017(t1,leaf_name_list)
 			if self.ana_2018:
-				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2018(event,leaf_name_list)
+				pass_trigger,pass_trigger_onlyMuon = self.check_trigger_2018(t1,leaf_name_list)
 
 			if not pass_trigger:
 				continue
-
-#			if pass_MET_filters:
-#				MET_ret = False
-#				if self.ana_2016:
-#					MET_ret = self.pass_MET_filters_2016(event, leaf_name_list, isData)
-#				if self.ana_2017:
-#					MET_ret = self.pass_MET_filters_2017(event, leaf_name_list, isData)
-#				if self.ana_2018:
-#					MET_ret = self.pass_MET_filters_2018(event, leaf_name_list, isData)
-#				if not MET_ret:
-#					continue
 
 			MC_weight = 0.0
 			pu_weight = 1.0
@@ -538,281 +564,95 @@ class hist_make():
 
 			if not isData:
 				if self.ana_2016:
-					MC_weight = self.get_MC_weight_2016(event)
+					MC_weight = self.get_MC_weight_2016(t1)
 				if self.ana_2017:
-					MC_weight = self.get_MC_weight_2017(event, pass_trigger_onlyMuon, isDY, isTTbar)
+					MC_weight = self.get_MC_weight_2017(t1, pass_trigger_onlyMuon, isDY, isTTbar)
 				if self.ana_2018:
-					MC_weight = self.get_MC_weight_2018(event, pass_trigger_onlyMuon, isDY, isTTbar)
+					MC_weight = self.get_MC_weight_2018(t1, pass_trigger_onlyMuon, isDY, isTTbar)
 			else:
 				MC_weight = 1.0
 			
 			if isFake:
-				fake_weight = getattr(event,"w_fake")
+				fake_weight = t1.w_fake
+
+			tmp_path_value_dic = collections.OrderedDict()
 	
 			for path in value_dic:
 				if not isData:
-					w_PU_str = "w_PU"
+					pu_weight = t1.w_PU
 					#sys case
 					if self.sys_type == "pu_u":
-						w_PU_str = "w_PU_up"
+						pu_weight = t1.w_PU_up
 					if self.sys_type == "pu_d":
-						w_PU_str = "w_PU_down"
+						pu_weight = t1.w_PU_down
 
-					if value_dic[path]["PU_reweight"]:
-						pu_weight = getattr(event,w_PU_str)
-					else:
-						pu_weight = self.pm(getattr(event,w_PU_str))
+					if not value_dic[path].PU_reweight:
+						pu_weight = self.pm(pu_weight)
 	
-				tmp_value_dic = {}
-				if isData:
-					tmp_value_dic = value_dic[path]["Data_value_dic"]
-				else:
-					tmp_value_dic = value_dic[path]["MC_value_dic"]
-	
-				event_weight = MC_weight * pu_weight * fake_weight
-				self.global_map_value(path, event, sample_dic["hist"][path],tmp_value_dic,event_weight)
-	
-	def global_map_value(self, path, event, h1, tmp_value_dic, event_weight_factor):
-		final_value = []
-		final_weight = event_weight_factor
-		final_value_max_constrain = True
-		bin_weight = 1.0
-		pi = 3.1415926
-		jet_pt_vector = getattr(event,"jet_pt")
-		jet_eta_vector = getattr(event,"jet_eta")
-		jet_phi_vector = getattr(event,"jet_phi")
-		jet_ID_vector = getattr(event,"jet_IDLoose")
-		jet_CSVv2_vector = getattr(event,"jet_DeepCSV")
-		leading_jet_id = -1
-		sub_leading_jet_id = -1
-		tmp_jet_pt_1 = -1.0
-		tmp_jet_pt_2 = -1.0
-		for i in range(len(jet_pt_vector)):
-			if jet_pt_vector[i] > 30 and fabs(jet_eta_vector[i])<2.4 and jet_ID_vector[i]:
-				if jet_pt_vector[i] > tmp_jet_pt_1:
-					sub_leading_jet_id = leading_jet_id
-					tmp_jet_pt_2 = tmp_jet_pt_1
-					tmp_jet_pt_1 = jet_pt_vector[i]
-					leading_jet_id = i
-				elif jet_pt_vector[i] > tmp_jet_pt_2:
-					tmp_jet_pt_2 = jet_pt_vector[i]
-					sub_leading_jet_id = i
-		# Get value and weight to Fill the hist
-		if path == "new_M_ll":
-			for value in tmp_value_dic:
-				exec 'passed = (%s)'%(tmp_value_dic[value])
-				if not passed: continue 			
-				final_value.append(getattr(event,value))
-	
-		elif path == "Pt_ll":
-			tmp_leading_p4 = getP4(getattr(event,"leading_pt"),getattr(event,"leading_eta"),getattr(event,"leading_phi"),getattr(event,"leading_isE"),getattr(event,"leading_isMu"))
-			tmp_subleading_p4 = getP4(getattr(event,"sub_leading_pt"),getattr(event,"sub_leading_eta"),getattr(event,"sub_leading_phi"),getattr(event,"sub_leading_isE"),getattr(event,"sub_leading_isMu"))
-			tmp_pt = (tmp_leading_p4 + tmp_subleading_p4).Pt()
-			final_value.append(tmp_pt)
-	
-		elif path == "phi_ll":
-			tmp_leading_p4 = getP4(getattr(event,"leading_pt"),getattr(event,"leading_eta"),getattr(event,"leading_phi"),getattr(event,"leading_isE"),getattr(event,"leading_isMu"))
-			tmp_subleading_p4 = getP4(getattr(event,"sub_leading_pt"),getattr(event,"sub_leading_eta"),getattr(event,"sub_leading_phi"),getattr(event,"sub_leading_isE"),getattr(event,"sub_leading_isMu"))
-			tmp_phi = (tmp_leading_p4 + tmp_subleading_p4).Phi()
-			final_value.append(tmp_phi)
-	
-		elif path == "deltaR_ll":
-			tmp_leading_p4 = getP4(getattr(event,"leading_pt"),getattr(event,"leading_eta"),getattr(event,"leading_phi"),getattr(event,"leading_isE"),getattr(event,"leading_isMu"))
-			tmp_subleading_p4 = getP4(getattr(event,"sub_leading_pt"),getattr(event,"sub_leading_eta"),getattr(event,"sub_leading_phi"),getattr(event,"sub_leading_isE"),getattr(event,"sub_leading_isMu"))
-			tmp_dR = tmp_leading_p4.DeltaR(tmp_subleading_p4)
-			final_value.append(tmp_dR)
-	
-		elif path == "rapidity_ll":
-			tmp_leading_p4 = getP4(getattr(event,"leading_pt"),getattr(event,"leading_eta"),getattr(event,"leading_phi"),getattr(event,"leading_isE"),getattr(event,"leading_isMu"))
-			tmp_subleading_p4 = getP4(getattr(event,"sub_leading_pt"),getattr(event,"sub_leading_eta"),getattr(event,"sub_leading_phi"),getattr(event,"sub_leading_isE"),getattr(event,"sub_leading_isMu"))
-			tmp_rapidity = (tmp_leading_p4 + tmp_subleading_p4).Rapidity()
-			final_value.append(tmp_rapidity)
-	
-		elif path == "Z_MET_T1Txy_delta_phi":
-			tmp_leading_p4 = getP4(getattr(event,"leading_pt"),getattr(event,"leading_eta"),getattr(event,"leading_phi"),getattr(event,"leading_isE"),getattr(event,"leading_isMu"))
-			tmp_subleading_p4 = getP4(getattr(event,"sub_leading_pt"),getattr(event,"sub_leading_eta"),getattr(event,"sub_leading_phi"),getattr(event,"sub_leading_isE"),getattr(event,"sub_leading_isMu"))
-			tmp_phi = (tmp_leading_p4 + tmp_subleading_p4).Phi()
-			delta_phi = fabs(tmp_phi - getattr(event,"MET_T1Txy_phi"))
-			if delta_phi > pi:delta_phi = 2*pi - delta_phi
-			final_value.append(fabs(delta_phi))
-	
-		elif path == "n_jet_bjet2":
-			final_value_max_constrain = False
-			n_jet = getattr(event,"n_jet")
-			n_bjet = getattr(event,"n_bjet")
-			if n_jet == 1 and n_bjet == 0:
-				final_value.append(n_jet_bjet_dic2["(1,0)"][0])
-			elif n_jet == 1 and n_bjet == 1:
-				final_value.append(n_jet_bjet_dic2["(1,1)"][0])
-			elif n_jet == 2 and n_bjet == 1:
-				final_value.append(n_jet_bjet_dic2["(2,1)"][0])
-			elif n_jet >= 3 and n_bjet == 1:
-				final_value.append(n_jet_bjet_dic2["(>=3,1)"][0])
-			elif n_jet >= 3 and n_bjet > 1:
-				final_value.append(n_jet_bjet_dic2["(>=3,>1)"][0])
-	
-		elif path == "n_jet_bjet":
-			final_value_max_constrain = False
-			n_jet = getattr(event,"n_jet")
-			n_bjet = getattr(event,"n_bjet")
-			if n_jet <=4:
-				final_value.append(n_jet_bjet_dic["(%s,%s)"%(n_jet,n_bjet)][0])
-			else:
-				final_value.append(n_jet_bjet_dic["(>4,n)"][0])
-	
-		elif path == "n_bjet2":
-			final_value_max_constrain = False
-			tmp_n_bjet = 0
-			for i in range(len(jet_pt_vector)):
-				if jet_pt_vector[i] > 20 and jet_pt_vector[i] < 30 and fabs(jet_eta_vector[i])<2.4 and jet_ID_vector[i] and jet_CSVv2_vector[i] > 0.4941:
-					tmp_n_bjet += 1
-			final_value.append(tmp_n_bjet)
-	
-		elif path == "n_fjet1":
-			final_value_max_constrain = False
-			tmp_n_fjet = 0
-			for i in range(len(jet_pt_vector)):
-				if jet_pt_vector[i] > 30 and fabs(jet_eta_vector[i])>2.4 and fabs(jet_eta_vector[i])<5.2 and jet_ID_vector[i]:
-					tmp_n_fjet += 1
-			final_value.append(tmp_n_fjet)
-	
-		elif path == "n_fjet2":
-			final_value_max_constrain = False
-			tmp_n_fjet = 0
-			for i in range(len(jet_pt_vector)):
-				if jet_pt_vector[i] > 40 and fabs(jet_eta_vector[i])>2.4 and fabs(jet_eta_vector[i])<5.2 and jet_ID_vector[i]:
-					tmp_n_fjet += 1
-			final_value.append(tmp_n_fjet)
-	
-		elif path == "jet_leading_pt":
-			tmp_value = 0
-			if leading_jet_id >= 0:
-				tmp_value = jet_pt_vector[leading_jet_id]
-				final_value.append(tmp_value)
-	
-		elif path == "jet_leading_eta":
-			tmp_value = 0
-			if leading_jet_id >= 0:
-				tmp_value = jet_eta_vector[leading_jet_id]
-				final_value.append(tmp_value)
-	
-		elif path == "jet_leading_phi":
-			tmp_value = 0
-			if leading_jet_id >= 0:
-				tmp_value = jet_phi_vector[leading_jet_id]
-				final_value.append(tmp_value)
-	
-		elif path == "jet_leading_CSV":
-			tmp_value = 0
-			if leading_jet_id >= 0:
-				tmp_value = jet_CSVv2_vector[leading_jet_id]
-				final_value.append(tmp_value)
-	
-		elif path == "jet_sub_leading_pt":
-			tmp_value = 0
-			if sub_leading_jet_id >= 0:
-				tmp_value = jet_pt_vector[sub_leading_jet_id]
-				final_value.append(tmp_value)
-	
-		elif path == "jet_sub_leading_eta":
-			tmp_value = 0
-			if sub_leading_jet_id >= 0:
-				tmp_value = jet_eta_vector[sub_leading_jet_id]
-				final_value.append(tmp_value)
-	
-		elif path == "jet_sub_leading_phi":
-			tmp_value = 0
-			if sub_leading_jet_id >= 0:
-				tmp_value = jet_phi_vector[sub_leading_jet_id]
-				final_value.append(tmp_value)
-	
-		elif path == "jet_sub_leading_CSV":
-			tmp_value = 0
-			if sub_leading_jet_id >= 0:
-				tmp_value = jet_CSVv2_vector[sub_leading_jet_id]
-				final_value.append(tmp_value)
-	
-	#	elif path == "MET_T1Txy_pt_new":
-	#		px = getattr(event,"leading_px") + getattr(event,"sub_leading_px") - getattr(event,"leading_2nd_px") - getattr(event,"sub_leading_2nd_px")
-	#		py = getattr(event,"leading_py") + getattr(event,"sub_leading_py") - getattr(event,"leading_2nd_py") - getattr(event,"sub_leading_2nd_py")
-	#		MET_x = getattr(event,"MET_T1Txy_Pt") * cos(getattr(event,"MET_T1Txy_phi")) + px
-	#		MET_y = getattr(event,"MET_T1Txy_Pt") * sin(getattr(event,"MET_T1Txy_phi")) + py
-	#		MET_new = sqrt(MET_x * MET_x + MET_y * MET_y)
-	#		h1.Fill(MET_new,event_weight_factor)
-		elif path == "HT" or path == "HT_log":
-			tmp_HT = 0
-			for i in range(len(jet_pt_vector)):
-				if jet_pt_vector[i] > 30 and fabs(jet_eta_vector[i])<2.4 and jet_ID_vector[i]:
-					tmp_HT += jet_pt_vector[i]
-			#if tmp_HT == 0:return
-			final_value.append(tmp_HT)
-		elif path == "sys_HT" or path == "sys_HT_log":
-			tmp_HT = 0
-			for i in range(len(jet_pt_vector)):
-				if jet_pt_vector[i] > 30 and fabs(jet_eta_vector[i])<2.4 and jet_ID_vector[i]:
-					tmp_HT += jet_pt_vector[i]
-			tmp_HT += getattr(event,"leading_pt") + getattr(event,"sub_leading_pt")
-			#if tmp_HT == 0:return
-			final_value.append(tmp_HT)
-		elif path == "n_stat":
-			h1.Fill(0.5,event_weight_factor)
-		else:
-			for value in tmp_value_dic:
-				exec 'passed = (%s)'%(tmp_value_dic[value])
-				if not passed: continue 
-				#print "passed"
+				event_weight = MC_weight * fake_weight * pu_weight
+
 				bin_weight = 1.0
-				if self.value_dic[path]["use_array"]:
-					bin_weight = 1.0/getbinwidth(getattr(event,value),value_dic[path]["hist_para"][1])
-				final_weight = event_weight_factor * bin_weight
-				final_value.append(getattr(event,value))
+				if self.value_dic[path].use_array:
+					bin_weight = 1.0/getbinwidth(t1.aluevalue_dic[path].hist_para[1])
+				final_weight = event_weight * bin_weight
+				
+				# Fill hist
+				if ("TMVA" in path):
+					tmp_path_value_dic[path] = ([], final_weight)
+				else:
+					final_value, final_value_max_constrain = global_map_value(path, t1, leaf_name_list, value_dic[path])
+					tmp_path_value_dic[path] = [final_value, final_weight]
+					self.fill_value_hist(sample_dic.hist[path], tmp_path_value_dic[path], final_value_max_constrain)
+
+			if (GLOBAL_USE_MVA):
+				self.MVA_reader.update_variables(tmp_path_value_dic)
+				for path in value_dic:
+					if "TMVA" in path:
+						tmp_path_value_dic[path][0].append(self.MVA_reader.evaluateMVA())
+						self.fill_value_hist(sample_dic.hist[path], tmp_path_value_dic[path], final_value_max_constrain)
+
+		process_bar_t1.close('done')
 	
-		# Fill hist
-		for i in range(len(final_value)):
-			h1_nbin = h1.GetXaxis().GetNbins()
-			if (final_value_max_constrain):
-				if final_value[i] >= h1.GetXaxis().GetBinUpEdge(h1_nbin):
-					final_value[i] = h1.GetXaxis().GetBinCenter(h1_nbin)
-			h1.Fill(final_value[i], final_weight)
+
 
 	def Get_hist_from_together(self, sample, sample_dic, value_dic, cut):
 		root_file = "%s/%s_hist.root"%(cut,cut)
 		f1 = ROOT.TFile(root_file,"read")
-		isData = sample_dic["isData"]
-		isFake = sample_dic["isFake"]
+		isData = sample_dic.isData
+		isFake = sample_dic.isFake
 		if self.log_level > 0: print "Get hist from file : %s, isData: %s, isFake: %s"%(root_file,isData,isFake)
 		for path in value_dic:
-			sample_dic["hist"][path] = f1.Get("%s_%s_out"%(sample,value_dic[path]["hist_name"]))
+			sample_dic.hist[path] = f1.Get("%s_%s_out"%(sample,value_dic[path].hist_name))
 		f1.Close()
 	
 	def Get_hist_from_tmp(self, sample, sample_dic, value_dic, hist_input_dir):
 		root_file = "%s/hist_%s.root"%(hist_input_dir,sample)
 		f1 = ROOT.TFile(root_file,"Read")
-		isData = sample_dic["isData"]
-		isFake = sample_dic["isFake"]
+		isData = sample_dic.isData
+		isFake = sample_dic.isFake
 		if self.log_level > 0: print "%s: Get hist from file : %s, isData: %s, isFake: %s"%(self.sys_type,root_file,isData,isFake)
 		for path in value_dic:
-			sample_dic["hist"][path] = f1.Get("%s_%s_out"%(sample,value_dic[path]["hist_name"]))
+			sample_dic.hist[path] = f1.Get("%s_%s_out"%(sample,value_dic[path].hist_name))
 		f1.Close()
 	
 	def Get_hist_from_split(self, sample, sample_dic, value_dic, cut):
 		root_file = "%s/%s_hist_%s.root"%(cut,cut,sample)
 		f1 = ROOT.TFile(root_file,"Read")
-		isData = sample_dic["isData"]
-		isFake = sample_dic["isFake"]
+		isData = sample_dic.isData
+		isFake = sample_dic.isFake
 		if self.log_level > 0: print "Get hist from file : %s, isData: %s, isFake: %s"%(root_file,isData,isFake)
 		for path in value_dic:
-			sample_dic["hist"][path] = f1.Get("%s_%s_out"%(sample,value_dic[path]["hist_name"]))
+			sample_dic.hist[path] = f1.Get("%s_%s_out"%(sample,value_dic[path].hist_name))
 		f1.Close()
 	
 	def Get_hist_from_file(self, sample,sample_dic,value_dic):
-		root_file = sample_dic["input_file"]
+		root_file = sample_dic.input_file
 		f1 = ROOT.TFile(root_file,"read")
-		isData = sample_dic["isData"]
-		isFake = sample_dic["isFake"]
+		isData = sample_dic.isData
+		isFake = sample_dic.isFake
 		if self.log_level > 0: print "Read hist from file : %s, isData: %s, isFake: %s"%(root_file,isData,isFake)
 		for path in value_dic:
-			sample_dic["hist"][path] = f1.Get("%s_%s_out"%(sample,value_dic[path]["hist_name"]))
+			sample_dic.hist[path] = f1.Get("%s_%s_out"%(sample,value_dic[path].hist_name))
 		f1.Close()
 	
 	def Get_hist(self, input_dic, value_dic, cut_str):
@@ -821,26 +661,26 @@ class hist_make():
 			if self.isSplit_mode:
 				if sample == self.target_sample:
 					self.Fill_hist(sample, sample_dic, value_dic, cut_str)
-			#elif (sample_dic["isFromRoot"] and sample_dic["isUpdate"]):
+			#elif (sample_dic.isFromRoot and sample_dic.isUpdate):
 			#	self.Fill_hist(sample_dic, value_dic, cut)
-			elif sample_dic["isFromRoot"]:
+			elif sample_dic.isFromRoot:
 				self.Get_hist_from_tmp(sample, sample_dic, value_dic, self.hist_input_dir)
-			elif not sample_dic["isFromRoot"]:
+			elif not sample_dic.isFromRoot:
 				self.Get_hist_from_file(sample, sample_dic, value_dic)
 			if "n_stat" in value_dic :
-				sample_dic["N_total"] = sample_dic["hist"]["n_stat"].Integral()
+				sample_dic.N_total = sample_dic.hist["n_stat"].Integral()
 	
 	def Store_hist_together(self, input_dic, value_dic, cut):
 		root_file = "%s/%s_hist.root"%(cut,cut)
 		f1 = ROOT.TFile(root_file,"RECREATE")
 		for sample in input_dic:
 			for path in value_dic:
-					if "_out" in input_dic[sample]["hist"][path].GetName()[-4:]:
-						input_dic[sample]["hist"][path].SetName(input_dic[sample]["hist"][path].GetName()[:-4])
-					tmp_name = input_dic[sample]["hist"][path].GetName()
-					input_dic[sample]["hist"][path].SetName("%s_out"%(input_dic[sample]["hist"][path].GetName()))
-					input_dic[sample]["hist"][path].Write()
-					input_dic[sample]["hist"][path].SetName(tmp_name)
+					if "_out" in input_dic[sample].hist[path].GetName()[-4:]:
+						input_dic[sample].hist[path].SetName(input_dic[sample].hist[path].GetName()[:-4])
+					tmp_name = input_dic[sample].hist[path].GetName()
+					input_dic[sample].hist[path].SetName("%s_out"%(input_dic[sample].hist[path].GetName()))
+					input_dic[sample].hist[path].Write()
+					input_dic[sample].hist[path].SetName(tmp_name)
 		f1.Close()
 	
 	def Store_hist_plot_total(self, option = "2"):
@@ -876,12 +716,12 @@ class hist_make():
 			root_file = "%s/hist_%s.root"%(hist_output_dir,sample)
 			f1 = ROOT.TFile(root_file,"RECREATE")
 			for path in value_dic:
-					if "_out" in input_dic[sample]["hist"][path].GetName()[-4:]:
-						input_dic[sample]["hist"][path].SetName(input_dic[sample]["hist"][path].GetName()[:-4])
-					tmp_name = input_dic[sample]["hist"][path].GetName()
-					input_dic[sample]["hist"][path].SetName("%s_out"%(input_dic[sample]["hist"][path].GetName()))
-					input_dic[sample]["hist"][path].Write()
-					input_dic[sample]["hist"][path].SetName(tmp_name)
+					if "_out" in input_dic[sample].hist[path].GetName()[-4:]:
+						input_dic[sample].hist[path].SetName(input_dic[sample].hist[path].GetName()[:-4])
+					tmp_name = input_dic[sample].hist[path].GetName()
+					input_dic[sample].hist[path].SetName("%s_out"%(input_dic[sample].hist[path].GetName()))
+					input_dic[sample].hist[path].Write()
+					input_dic[sample].hist[path].SetName(tmp_name)
 			f1.Close()
 	
 	def Store_hist_split(self, input_dic, value_dic, hist_output_dir):
@@ -894,12 +734,12 @@ class hist_make():
 			root_file = "%s/split/%s/hist_%s_%s_%s.root"%(hist_output_dir,sample,sample,self.n_range_l,self.n_range_h)
 			f1 = ROOT.TFile(root_file,"RECREATE")
 			for path in value_dic:
-					if "_out" in input_dic[sample]["hist"][path].GetName()[-4:]:
-						input_dic[sample]["hist"][path].SetName(input_dic[sample]["hist"][path].GetName()[:-4])
-					tmp_name = input_dic[sample]["hist"][path].GetName()
-					input_dic[sample]["hist"][path].SetName("%s_out"%(input_dic[sample]["hist"][path].GetName()))
-					input_dic[sample]["hist"][path].Write()
-					input_dic[sample]["hist"][path].SetName(tmp_name)
+					if "_out" in input_dic[sample].hist[path].GetName()[-4:]:
+						input_dic[sample].hist[path].SetName(input_dic[sample].hist[path].GetName()[:-4])
+					tmp_name = input_dic[sample].hist[path].GetName()
+					input_dic[sample].hist[path].SetName("%s_out"%(input_dic[sample].hist[path].GetName()))
+					input_dic[sample].hist[path].Write()
+					input_dic[sample].hist[path].SetName(tmp_name)
 			f1.Close()
 	
 	
@@ -907,83 +747,83 @@ class hist_make():
 		total_lumi = self.Get_total_lumi(input_dic)
 		# sys case
 		if self.sys_type == "xs_ttbar_u":
-			input_dic["_ttbar2l2u"]["Xsection"] *= (1.0 + 0.05)
-			input_dic["_ttbar2l2u_M500to800"]["Xsection"] *= (1.0 + 0.05)
-			input_dic["_ttbar2l2u_M800to1200"]["Xsection"] *= (1.0 + 0.05)
-			input_dic["_ttbar2l2u_M1200to1800"]["Xsection"] *= (1.0 + 0.05)
-			input_dic["_ttbar2l2u_M1800toInf"]["Xsection"] *= (1.0 + 0.05)
+			input_dic["_ttbar2l2u"].Xsection *= (1.0 + 0.05)
+			input_dic["_ttbar2l2u_M500to800"].Xsection *= (1.0 + 0.05)
+			input_dic["_ttbar2l2u_M800to1200"].Xsection *= (1.0 + 0.05)
+			input_dic["_ttbar2l2u_M1200to1800"].Xsection *= (1.0 + 0.05)
+			input_dic["_ttbar2l2u_M1800toInf"].Xsection *= (1.0 + 0.05)
 		if self.sys_type == "xs_ttbar_d":
-			input_dic["_ttbar2l2u"]["Xsection"] *= (1.0 - 0.05)
-			input_dic["_ttbar2l2u_M500to800"]["Xsection"] *= (1.0 - 0.05)
-			input_dic["_ttbar2l2u_M800to1200"]["Xsection"] *= (1.0 - 0.05)
-			input_dic["_ttbar2l2u_M1200to1800"]["Xsection"] *= (1.0 - 0.05)
-			input_dic["_ttbar2l2u_M1800toInf"]["Xsection"] *= (1.0 - 0.05)
+			input_dic["_ttbar2l2u"].Xsection *= (1.0 - 0.05)
+			input_dic["_ttbar2l2u_M500to800"].Xsection *= (1.0 - 0.05)
+			input_dic["_ttbar2l2u_M800to1200"].Xsection *= (1.0 - 0.05)
+			input_dic["_ttbar2l2u_M1200to1800"].Xsection *= (1.0 - 0.05)
+			input_dic["_ttbar2l2u_M1800toInf"].Xsection *= (1.0 - 0.05)
 		if self.sys_type == "xs_ww_u":
-			input_dic["_WW2l2u"]["Xsection"] *= (1.0 + 0.03)
-			input_dic["_WW2l2u_M200to600"]["Xsection"] *= (1.0 + 0.03)
-			input_dic["_WW2l2u_M600to1200"]["Xsection"] *= (1.0 + 0.03)
-			input_dic["_WW2l2u_M1200to2500"]["Xsection"] *= (1.0 + 0.03)
-			input_dic["_WW2l2u_M2500toInf"]["Xsection"] *= (1.0 + 0.03)
+			input_dic["_WW2l2u"].Xsection *= (1.0 + 0.03)
+			input_dic["_WW2l2u_M200to600"].Xsection *= (1.0 + 0.03)
+			input_dic["_WW2l2u_M600to1200"].Xsection *= (1.0 + 0.03)
+			input_dic["_WW2l2u_M1200to2500"].Xsection *= (1.0 + 0.03)
+			input_dic["_WW2l2u_M2500toInf"].Xsection *= (1.0 + 0.03)
 		if self.sys_type == "xs_ww_d":
-			input_dic["_WW2l2u"]["Xsection"] *= (1.0 - 0.03)
-			input_dic["_WW2l2u_M200to600"]["Xsection"] *= (1.0 - 0.03)
-			input_dic["_WW2l2u_M600to1200"]["Xsection"] *= (1.0 - 0.03)
-			input_dic["_WW2l2u_M1200to2500"]["Xsection"] *= (1.0 - 0.03)
-			input_dic["_WW2l2u_M2500toInf"]["Xsection"] *= (1.0 - 0.03)
+			input_dic["_WW2l2u"].Xsection *= (1.0 - 0.03)
+			input_dic["_WW2l2u_M200to600"].Xsection *= (1.0 - 0.03)
+			input_dic["_WW2l2u_M600to1200"].Xsection *= (1.0 - 0.03)
+			input_dic["_WW2l2u_M1200to2500"].Xsection *= (1.0 - 0.03)
+			input_dic["_WW2l2u_M2500toInf"].Xsection *= (1.0 - 0.03)
 		if self.sys_type == "xs_st_u":
-			input_dic["_ST"]["Xsection"] *= (1.0 + 0.05)
+			input_dic["_ST"].Xsection *= (1.0 + 0.05)
 		if self.sys_type == "xs_st_d":
-			input_dic["_ST"]["Xsection"] *= (1.0 - 0.05)
+			input_dic["_ST"].Xsection *= (1.0 - 0.05)
 		if self.sys_type == "xs_dy_u":
-			input_dic["_DYToLL"]["Xsection"] *= (1.0 + 0.02)
+			input_dic["_DYToLL"].Xsection *= (1.0 + 0.02)
 		if self.sys_type == "xs_dy_d":
-			input_dic["_DYToLL"]["Xsection"] *= (1.0 - 0.02)
+			input_dic["_DYToLL"].Xsection *= (1.0 - 0.02)
 		if self.sys_type == "xs_wz_u":
-			#input_dic["_WZ"]["Xsection"] *= (1.0 + 0.04)
-			input_dic["_WZTo2L2Q"]["Xsection"] *= (1.0 + 0.04)
-			input_dic["_WZTo3LNu"]["Xsection"] *= (1.0 + 0.04)
+			#input_dic["_WZ"].Xsection *= (1.0 + 0.04)
+			input_dic["_WZTo2L2Q"].Xsection *= (1.0 + 0.04)
+			input_dic["_WZTo3LNu"].Xsection *= (1.0 + 0.04)
 		if self.sys_type == "xs_wz_d":
-			#input_dic["_WZ"]["Xsection"] *= (1.0 - 0.04)
-			input_dic["_WZTo2L2Q"]["Xsection"] *= (1.0 - 0.04)
-			input_dic["_WZTo3LNu"]["Xsection"] *= (1.0 - 0.04)
+			#input_dic["_WZ"].Xsection *= (1.0 - 0.04)
+			input_dic["_WZTo2L2Q"].Xsection *= (1.0 - 0.04)
+			input_dic["_WZTo3LNu"].Xsection *= (1.0 - 0.04)
 		if self.sys_type == "xs_zz_u":
-			#input_dic["_ZZ"]["Xsection"] *= (1.0 + 0.04)
-			input_dic["_ZZTo2L2Nu"]["Xsection"] *= (1.0 + 0.04)
-			input_dic["_ZZTo2L2Q"]["Xsection"] *= (1.0 + 0.04)
-			input_dic["_ZZTo4L"]["Xsection"] *= (1.0 + 0.04)
+			#input_dic["_ZZ"].Xsection *= (1.0 + 0.04)
+			input_dic["_ZZTo2L2Nu"].Xsection *= (1.0 + 0.04)
+			input_dic["_ZZTo2L2Q"].Xsection *= (1.0 + 0.04)
+			input_dic["_ZZTo4L"].Xsection *= (1.0 + 0.04)
 		if self.sys_type == "xs_zz_d":
-			#input_dic["_ZZ"]["Xsection"] *= (1.0 - 0.04)
-			input_dic["_ZZTo2L2Nu"]["Xsection"] *= (1.0 - 0.04)
-			input_dic["_ZZTo2L2Q"]["Xsection"] *= (1.0 - 0.04)
-			input_dic["_ZZTo4L"]["Xsection"] *= (1.0 - 0.04)
+			#input_dic["_ZZ"].Xsection *= (1.0 - 0.04)
+			input_dic["_ZZTo2L2Nu"].Xsection *= (1.0 - 0.04)
+			input_dic["_ZZTo2L2Q"].Xsection *= (1.0 - 0.04)
+			input_dic["_ZZTo4L"].Xsection *= (1.0 - 0.04)
 		if self.sys_type == "lumi_u":
 			for sample in input_dic:
-				input_dic[sample]["Xsection"] *= (1.0 + self.lumi_sys)
+				input_dic[sample].Xsection *= (1.0 + self.lumi_sys)
 		if self.sys_type == "lumi_d":
 			for sample in input_dic:
-				input_dic[sample]["Xsection"] *= (1.0 - self.lumi_sys)
+				input_dic[sample].Xsection *= (1.0 - self.lumi_sys)
 
 		
 		for sample in input_dic:
 			if not input_dic[sample]["isData"]:
-				input_dic[sample]["Norm_Factor"] = total_lumi * input_dic[sample]["Xsection"] / float(input_dic[sample]["Raw_total"])
+				input_dic[sample].Norm_Factor = total_lumi * input_dic[sample].Xsection / float(input_dic[sample].Raw_total)
 				for path in value_dic:
-					self.my_abs(input_dic[sample]["hist"][path])
-					input_dic[sample]["hist"][path].Scale(input_dic[sample]["Norm_Factor"])
-			input_dic[sample]["N_norm"] = input_dic[sample]["N_total"] * input_dic[sample]["Norm_Factor"] * input_dic[sample]["weight_factor"]
+					self.my_abs(input_dic[sample].hist[path])
+					input_dic[sample].hist[path].Scale(input_dic[sample].Norm_Factor)
+			input_dic[sample].N_norm = input_dic[sample].N_total * input_dic[sample].Norm_Factor * input_dic[sample].weight_factor
 	
 	def Print_table(self, input_dic):
 		total_lumi = self.Get_total_lumi(input_dic)
 		total_num = self.Get_total_num(input_dic)
 		for sample in input_dic:
-			if input_dic[sample]["isData"] and input_dic[sample]["useToNorm"]:
-				print "%s :  %s  ;  %s  ;  %0.2f%%  "%(sample, input_dic[sample]["Norm_Factor"], input_dic[sample]["N_norm"], 100.0*input_dic[sample]["N_norm"]/total_num)
+			if input_dic[sample]["isData"] and input_dic[sample].useToNorm:
+				print "%s :  %s  ;  %s  ;  %0.2f%%  "%(sample, input_dic[sample].Norm_Factor, input_dic[sample].N_norm, 100.0*input_dic[sample].N_norm/total_num)
 		print "#"*50
 	
 		for sample in input_dic:
 			if self.check_sys_sample(sample, "3f"):continue
-			if not (input_dic[sample]["isData"] and input_dic[sample]["useToNorm"]):
-				print "%s :  %s  ;  %s  ;  %0.2f%%  "%(sample, input_dic[sample]["Norm_Factor"], input_dic[sample]["N_norm"], 100.0*input_dic[sample]["N_norm"]/total_num)
+			if not (input_dic[sample]["isData"] and input_dic[sample].useToNorm):
+				print "%s :  %s  ;  %s  ;  %0.2f%%  "%(sample, input_dic[sample].Norm_Factor, input_dic[sample].N_norm, 100.0*input_dic[sample].N_norm/total_num)
 		print "#"*50
 	
 	def Get_part_hist(self, input_dic, value_dic, plot_dic):
@@ -993,7 +833,7 @@ class hist_make():
 					if (self.sys_type != "nominal") and (plot in self.plot_list_common_sys): continue
 					hist_list = plot_dic[part][plot]["data_list"]
 					for sample in hist_list:
-						plot_dic[part][plot]["hist"][path].Add(plot_dic[part][plot]["hist"][path], input_dic[sample]["hist"][path], 1, input_dic[sample]["weight_factor"])
+						plot_dic[part][plot]["hist"][path].Add(plot_dic[part][plot]["hist"][path], input_dic[sample].hist[path], 1, input_dic[sample].weight_factor)
 					if plot_dic[part][plot]["ABS"]: 
 						#print path
 						self.my_abs(plot_dic[part][plot]["hist"][path])
@@ -1007,14 +847,14 @@ class hist_make():
 				if (self.sys_type != "nominal") and (plot in self.plot_list_common_sys): continue
 				hist_list = plot_dic[part][plot]["data_list"]
 				for sample in hist_list:
-					plot_dic[part][plot]["N_total"]+=input_dic[sample]["N_norm"]
+					plot_dic[part][plot]["N_total"]+=input_dic[sample].N_norm
 	
 	def Get_total_lumi(self, input_dic):
 		if self.sys_type == "nominal":
 			total_lumi = 0.0
 			for sample in input_dic:
-				if input_dic[sample]["useToNorm"]:
-					total_lumi += input_dic[sample]["lumi"]
+				if input_dic[sample].useToNorm:
+					total_lumi += input_dic[sample].lumi
 			return total_lumi
 		else:
 			return self.total_lumi
@@ -1022,8 +862,8 @@ class hist_make():
 	def Get_total_num(self, input_dic):
 		total_num = 0.0
 		for sample in input_dic:
-			if input_dic[sample]["useToNorm"]:
-				total_num += input_dic[sample]["N_total"]
+			if input_dic[sample].useToNorm:
+				total_num += input_dic[sample].N_total
 		return total_num
 	
 	def set_dir(self):
@@ -1041,30 +881,32 @@ class hist_make():
 
 	def Init_hist_sample(self, input_dic, value_dic):
 		for path in value_dic:
-			if value_dic[path]["use_array"]:
+			if value_dic[path].use_array:
 				for sample in input_dic:
-					input_dic[sample]["hist"][path] = ROOT.TH1F("%s_%s"%(sample,value_dic[path]["hist_name"]), "", value_dic[path]["hist_para"][0], value_dic[path]["hist_para"][1])
+					print value_dic[path].hist_para[0]
+					print value_dic[path].hist_para[1]
+					input_dic[sample].hist[path] = ROOT.TH1F("%s_%s"%(sample,value_dic[path].hist_name), "", value_dic[path].hist_para[0], value_dic[path].hist_para[1])
 			else:
 				for sample in input_dic:
-					input_dic[sample]["hist"][path] = ROOT.TH1F("%s_%s"%(sample,value_dic[path]["hist_name"]), "", value_dic[path]["hist_para"][0], value_dic[path]["hist_para"][2], value_dic[path]["hist_para"][3])
+					input_dic[sample].hist[path] = ROOT.TH1F("%s_%s"%(sample,value_dic[path].hist_name), "", value_dic[path].hist_para[0], value_dic[path].hist_para[2], value_dic[path].hist_para[3])
 	
 	def Init_hist_plot(self, value_dic, plot_dic, specific_path = "null"):
 		for path in value_dic:
-			if value_dic[path]["use_array"]:
+			if value_dic[path].use_array:
 				for part in plot_dic:
 					for plot in plot_dic[part]:
 						if (specific_path != "null" and plot != specific_path):continue
-						plot_dic[part][plot]["hist"][path] = ROOT.TH1F("%s_%s"%(plot,value_dic[path]["hist_name"]), "", value_dic[path]["hist_para"][0], value_dic[path]["hist_para"][1])
+						plot_dic[part][plot]["hist"][path] = ROOT.TH1F("%s_%s"%(plot,value_dic[path].hist_name), "", value_dic[path].hist_para[0], value_dic[path].hist_para[1])
 			else:
 				for part in plot_dic:
 					for plot in plot_dic[part]:
 						if (specific_path != "null" and plot != specific_path):continue
-						plot_dic[part][plot]["hist"][path] = ROOT.TH1F("%s_%s"%(plot,value_dic[path]["hist_name"]), "", value_dic[path]["hist_para"][0], value_dic[path]["hist_para"][2], value_dic[path]["hist_para"][3])
+						plot_dic[part][plot]["hist"][path] = ROOT.TH1F("%s_%s"%(plot,value_dic[path].hist_name), "", value_dic[path].hist_para[0], value_dic[path].hist_para[2], value_dic[path].hist_para[3])
 	
 	def Set_hist_sample(self, input_dic, value_dic):
 		for path in value_dic:
 			for sample in input_dic:
-				input_dic[sample]["hist"][path].Sumw2()
+				input_dic[sample].hist[path].Sumw2()
 	
 	def Set_hist_plot(self, value_dic, plot_dic):
 		for path in value_dic:
@@ -1079,8 +921,8 @@ class hist_make():
 		for error_range in error_range_dic:
 			print "%s print sum table %s %s"%("#"*20,error_range, "#"*20)
 			for sample in input_dic:
-				tmp_N = input_dic[sample]["hist"]["mass_err_stat"].GetBinContent(error_range_dic[error_range][0]) * error_range_dic[error_range][1]
-				tmp_err = input_dic[sample]["hist"]["mass_err_stat"].GetBinError(error_range_dic[error_range][0]) * error_range_dic[error_range][1]
+				tmp_N = input_dic[sample].hist["mass_err_stat"].GetBinContent(error_range_dic[error_range][0]) * error_range_dic[error_range][1]
+				tmp_err = input_dic[sample].hist["mass_err_stat"].GetBinError(error_range_dic[error_range][0]) * error_range_dic[error_range][1]
 				print "%s,%s,%s"%(sample,tmp_N,tmp_err)
 			print "%s finish %s"%("#"*20,"#"*20)
 	
@@ -1126,34 +968,34 @@ class hist_make():
 			for part in tmp_dic:
 				if self.check_sys_sample(part,option):
 					self.input_dic[part] = deepcopy(tmp_dic[part])
-					self.input_dic[part]["input_file"] = self.input_dic[part]["input_file"][:-5] + "_muptu" + self.input_dic[part]["input_file"][-5:]
+					self.input_dic[part].input_file = self.input_dic[part].input_file[:-5] + "_muptu" + self.input_dic[part].input_file[-5:]
 		elif self.sys_type == "muptscald":
 			for part in tmp_dic:
 				if self.check_sys_sample(part,option):
 					self.input_dic[part] = deepcopy(tmp_dic[part])
-					self.input_dic[part]["input_file"] = self.input_dic[part]["input_file"][:-5] + "_muptd" + self.input_dic[part]["input_file"][-5:]
+					self.input_dic[part].input_file = self.input_dic[part].input_file[:-5] + "_muptd" + self.input_dic[part].input_file[-5:]
 		elif self.sys_type == "muptresu":
 			for part in tmp_dic:
 				if self.check_sys_sample(part,option):
 					self.input_dic[part] = deepcopy(tmp_dic[part])
-					self.input_dic[part]["input_file"] = self.input_dic[part]["input_file"][:-5] + "_muresu" + self.input_dic[part]["input_file"][-5:]
+					self.input_dic[part].input_file = self.input_dic[part].input_file[:-5] + "_muresu" + self.input_dic[part].input_file[-5:]
 		elif self.sys_type == "eletscalu":
 			for part in tmp_dic:
 				if self.check_sys_sample(part,option):
 					self.input_dic[part] = deepcopy(tmp_dic[part])
-					self.input_dic[part]["input_file"] = self.input_dic[part]["input_file"][:-5] + "_eletu" + self.input_dic[part]["input_file"][-5:]
+					self.input_dic[part].input_file = self.input_dic[part].input_file[:-5] + "_eletu" + self.input_dic[part].input_file[-5:]
 		elif self.sys_type == "eletscald":
 			for part in tmp_dic:
 				if self.check_sys_sample(part,option):
 					self.input_dic[part] = deepcopy(tmp_dic[part])
-					self.input_dic[part]["input_file"] = self.input_dic[part]["input_file"][:-5] + "_eletd" + self.input_dic[part]["input_file"][-5:]
+					self.input_dic[part].input_file = self.input_dic[part].input_file[:-5] + "_eletd" + self.input_dic[part].input_file[-5:]
 		else :
 			for part in tmp_dic:
 				if self.check_sys_sample(part,option):
 					self.input_dic[part] = deepcopy(tmp_dic[part])
 		#redirect dir to input file:
 		for part in self.input_dic:
-			self.input_dic[part]["input_file"] = os.path.join("MC_data",self.input_dic[part]["input_file"])
+			self.input_dic[part].input_file = os.path.join("MC_data",self.input_dic[part].input_file)
 
 
 
@@ -1195,10 +1037,10 @@ class hist_make():
 			self.plot_dic[part] = deepcopy(tmp_dic[part])
 
 	def get_sys_sum(self, path):
-		if self.value_dic[path]["use_array"]:
-			tmp_sum = ROOT.TH1F("sum_%s"%(self.value_dic[path]["hist_name"]), "", self.value_dic[path]["hist_para"][0], self.value_dic[path]["hist_para"][1])
+		if self.value_dic[path].use_array:
+			tmp_sum = ROOT.TH1F("sum_%s"%(self.value_dic[path].hist_name), "", self.value_dic[path].hist_para[0], self.value_dic[path].hist_para[1])
 		else:
-			tmp_sum = ROOT.TH1F("sum_%s"%(self.value_dic[path]["hist_name"]), "", self.value_dic[path]["hist_para"][0], self.value_dic[path]["hist_para"][2], self.value_dic[path]["hist_para"][3])
+			tmp_sum = ROOT.TH1F("sum_%s"%(self.value_dic[path].hist_name), "", self.value_dic[path].hist_para[0], self.value_dic[path].hist_para[2], self.value_dic[path].hist_para[3])
 		tmp_sum.Sumw2()
 	
 		for i in range(len(self.plot_list)):
@@ -1254,3 +1096,4 @@ class hist_make():
 		self.Store_hist_split(self.input_dic, self.value_dic, self.hist_output_dir)
 	
 	##########################################
+
