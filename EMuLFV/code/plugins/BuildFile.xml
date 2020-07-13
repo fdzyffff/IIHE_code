@@ -1,0 +1,12 @@
+<use name="root"/>
+<use name="FWCore/Framework"/>
+<use name="FWCore/PluginManager"/>
+<use name="FWCore/ParameterSet"/>
+<use name="FWCore/ServiceRegistry"/>
+<use name="CommonTools/UtilAlgos"/>           
+<use name="CondFormats/JetMETObjects"/>
+<use name="CondFormats/BTauObjects"/>
+<use name="CondTools/BTau"/>
+<use name="lhapdf"/>
+<Flags CXXFLAGS="-O3 -fPIC -Wno-reorder" />
+<flags EDM_PLUGIN="1"/>
